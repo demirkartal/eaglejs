@@ -88,7 +88,7 @@ class EagleJS extends Array {
 	public trigger ( string type [, array data ] ) : EagleJS
 	public unshift ( Node elements... ) : EagleJS
 
-	/* Variables */
+	/* Properties */
 	public prototype fn
 }
 ```
