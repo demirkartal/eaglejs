@@ -38,7 +38,7 @@ Download script file and include on top of other script which require EagleJS.
 
 ## Class Schema
 
-```js
+```php
 class EagleJS extends Array {
 	public constructor ( mixed selector [, mixed selector = document ] )
 
