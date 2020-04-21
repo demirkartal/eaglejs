@@ -5,6 +5,7 @@ EagleJS is a new generation jQuery alternative for modern browsers.
 - Lightweight (~6,00KB minified)
 - Hand-coded with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
+- Supports all CSS selectors
 - [JavaScript Standard Style](https://standardjs.com "JavaScript Standard Style") codes
 - Documented with [JSDoc](https://jsdoc.app "JSDoc")
 
@@ -42,11 +43,14 @@ Download script file and include on top of other script which require EagleJS.
 class EagleJS extends Array {
 	public constructor ( mixed selector [, mixed selector = document ] )
 
+	/* Members */
+	public prototype fn
+
 	/* Methods */
 	public addClass ( string name ) : EagleJS
 	public after ( mixed content ) : EagleJS
 	public append ( mixed content ) : EagleJS
-	public attr ( string name [, mixed value ]a ) : string|EagleJS
+	public attr ( string name [, mixed value ] ) : string|EagleJS
 	public before ( mixed content ) : EagleJS
 	public children ( [ string selector = "*" ] ) : EagleJS
 	public clone ( void ) : EagleJS
@@ -61,7 +65,7 @@ class EagleJS extends Array {
 	public first ( void ) : EagleJS
 	public forEach ( function callback ) : EagleJS
 	public hasClass ( string name ) : boolean
-	public html ( [ string value ] ) : string|undefined|EagleJS
+	public html ( [ string value ] ) : string|EagleJS
 	public is ( mixed selector ) : boolean
 	public static isNode ( mixed value ) : boolean
 	public last ( void ) : EagleJS
@@ -87,9 +91,6 @@ class EagleJS extends Array {
 	public toggleClass ( string name [, boolean force ] ) : EagleJS
 	public trigger ( string type [, array data ] ) : EagleJS
 	public unshift ( Node elements... ) : EagleJS
-
-	/* Properties */
-	public prototype fn
 }
 ```
 
