@@ -2,7 +2,7 @@
 /* global document, Element, Node, CustomEvent, window */
 /* element-qsa-scope v1.1.0 */
 try {
-// test for scope support
+  // test for scope support
   document.querySelector(':socpe *');
 } catch (error) {
   (function (ElementPrototype) {
@@ -61,7 +61,7 @@ try {
 /**
  * EagleJS
  *
- * @version   0.2.1
+ * @version   0.2.2
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -72,20 +72,21 @@ class EagleJS extends Array {
    * Return a collection of matched elements or created elements by HTML string
    *
    * @example
-   * <caption>$ ( string selector ) : EagleJS</caption>
+   * <caption>$(selector: string): EagleJS</caption>
    * $( 'selector' );
    * $( 'htmlString' ); // Create HTML tag
    *
    * @example
-   * <caption>$ ( Node selector ) : EagleJS</caption>
+   * <caption>$(selector: Node): EagleJS</caption>
    * $( Node );
    *
    * @example
-   * <caption>$ ( Node[] selector ) : EagleJS</caption>
+   * <caption>$(selector: Node[]): EagleJS</caption>
    * $( Node[] );
    *
    * @example
-   * <caption>$ ( string selector , mixed content ) : EagleJS</caption>
+   * <caption>$(selector: string, context: string | Node | Node[]): EagleJS
+   * </caption>
    * $( 'selector', 'selector' );
    * $( 'selector', Node );
    * $( 'selector', Node[] );
@@ -143,15 +144,15 @@ class EagleJS extends Array {
    * Insert content or element after each element in the collection
    *
    * @example
-   * <caption>after ( string content ) : EagleJS</caption>
+   * <caption>after(content: string): EagleJS</caption>
    * $(element).after( 'htmlString' ); // Create HTML tag
    *
    * @example
-   * <caption>after ( Node content ) : EagleJS</caption>
+   * <caption>after(content: Node): EagleJS</caption>
    * $(element).after( Node );
    *
    * @example
-   * <caption>after ( Node[] content ) : EagleJS</caption>
+   * <caption>after(content: Node[]): EagleJS</caption>
    * $(element).after( Node[] );
    * $(element).after( EagleJS );
    *
@@ -179,15 +180,15 @@ class EagleJS extends Array {
    * Insert content or element to the end of each element in the collection
    *
    * @example
-   * <caption>append ( string content ) : EagleJS</caption>
+   * <caption>append(content: string): EagleJS</caption>
    * $(element).append( 'htmlString' ); // Create HTML tag
    *
    * @example
-   * <caption>append ( Node content ) : EagleJS</caption>
+   * <caption>append(content: Node): EagleJS</caption>
    * $(element).append( Node );
    *
    * @example
-   * <caption>append ( Node[] content ) : EagleJS</caption>
+   * <caption>append(content: Node[]): EagleJS</caption>
    * $(element).append( Node[] );
    * $(element).append( EagleJS );
    *
@@ -213,11 +214,11 @@ class EagleJS extends Array {
    * Get or set attribute value for elements of the collection
    *
    * @example
-   * <caption>attr ( string name ) : string</caption>
+   * <caption>attr(name: string): string</caption>
    * $(element).attr( 'name' );
    *
    * @example
-   * <caption>attr ( string name, mixed value ) : EagleJS</caption>
+   * <caption>attr(name: string, value: string | number): EagleJS</caption>
    * $(element).attr( 'name', 'string' );
    * $(element).attr( 'name', 100 );
    *
@@ -253,15 +254,15 @@ class EagleJS extends Array {
    * Insert content or element before each element in the collection
    *
    * @example
-   * <caption>before ( string content ) : EagleJS</caption>
+   * <caption>before(content: string): EagleJS</caption>
    * $(element).before( 'htmlString' ); // Create HTML tag
    *
    * @example
-   * <caption>before ( Node content ) : EagleJS</caption>
+   * <caption>before(content: Node): EagleJS</caption>
    * $(element).before( Node );
    *
    * @example
-   * <caption>before ( Node[] content ) : EagleJS</caption>
+   * <caption>before(content: Node[]): EagleJS</caption>
    * $(element).before( Node[] );
    * $(element).before( EagleJS );
    *
@@ -344,7 +345,7 @@ class EagleJS extends Array {
    * $(element).concat( Node[] );
    * $(element).concat( EagleJS );
    *
-   * @param  {...Node[]} elements Collections to join
+   * @param  {Node[]} elements Collections to join
    * @return {EagleJS} A new collection
    */
   concat (...elements) {
@@ -414,11 +415,11 @@ class EagleJS extends Array {
    * Reduce the elements of the collection with the given filter
    *
    * @example
-   * <caption>filter ( string selector ) : EagleJS</caption>
+   * <caption>filter(selector: string): EagleJS</caption>
    * $(element).filter( '.classname' );
    *
    * @example
-   * <caption>filter ( Function selector ) : EagleJS</caption>
+   * <caption>filter(selector: Function): EagleJS</caption>
    * $(element).filter(function ( index, element ) {
    *  return this.val > 0;
    * });
@@ -450,11 +451,11 @@ class EagleJS extends Array {
    * Returns the matched descendants of elements with the filter
    *
    * @example
-   * <caption>find ( string selector ) : EagleJS</caption>
+   * <caption>find(selector: string): EagleJS</caption>
    * $(element).find( '.classname' );
    *
    * @example
-   * <caption>find ( Function selector ) : EagleJS</caption>
+   * <caption>find(selector: Function): EagleJS</caption>
    * $(element).find(function ( index, element ) {
    *  return this.val > 0;
    * });
@@ -544,11 +545,11 @@ class EagleJS extends Array {
    * Get or set the HTML contents of elements of the collection
    *
    * @example
-   * <caption>html ( void ) : string</caption>
+   * <caption>html(): string</caption>
    * $(element).html( );
    *
    * @example
-   * <caption>html ( string value ) : EagleJS</caption>
+   * <caption>html(value: string): EagleJS</caption>
    * $(element).html( 'htmlString' ); // Create HTML tag
    *
    * @param  {string} [value] The html string to set
@@ -568,20 +569,20 @@ class EagleJS extends Array {
    * Check any collection elements matches selector
    *
    * @example
-   * <caption>is ( string selector ) : boolean</caption>
+   * <caption>is(selector: string): boolean</caption>
    * $(element).is( '.clasname' );
    *
    * @example
-   * <caption>is ( Node selector ) : boolean</caption>
+   * <caption>is(selector: Node): boolean</caption>
    * $(element).is( Node );
    *
    * @example
-   * <caption>is ( Node[] selector ) : boolean</caption>
+   * <caption>is(selector: Node[]): boolean</caption>
    * $(element).is( Node[] );
    * $(element).is( EagleJS );
    *
    * @example
-   * <caption>is ( Function selector ) : boolean</caption>
+   * <caption>is(selector: Function): boolean</caption>
    * $(element).is(function ( index, element ) {
    *  return this.val == 0;
    * });
@@ -695,20 +696,20 @@ class EagleJS extends Array {
    * Remove matched elements from the collection
    *
    * @example
-   * <caption>not ( string selector ) : EagleJS</caption>
+   * <caption>not(selector: string): EagleJS</caption>
    * $(element).not( '.clasname' );
    *
    * @example
-   * <caption>not ( Node selector ) : EagleJS</caption>
+   * <caption>not(selector: Node): EagleJS</caption>
    * $(element).not( Node );
    *
    * @example
-   * <caption>not ( Node[] selector ) : EagleJS</caption>
+   * <caption>not(selector: Node[]): EagleJS</caption>
    * $(element).not( Node[] );
    * $(element).not( EagleJS );
    *
    * @example
-   * <caption>not ( Function selector ) : EagleJS</caption>
+   * <caption>not(selector: Function): EagleJS</caption>
    * $(element).not(function ( index, element ) {
    *  return this.val > 0;
    * });
@@ -822,15 +823,15 @@ class EagleJS extends Array {
    * Insert content or element to the beginning each element in the collection
    *
    * @example
-   * <caption>prepend ( string content ) : EagleJS</caption>
+   * <caption>prepend(content: string): EagleJS</caption>
    * $(element).prepend( 'htmlString' ); // Create HTML tag
    *
    * @example
-   * <caption>prepend ( Node content ) : EagleJS</caption>
+   * <caption>prepend(content: Node): EagleJS</caption>
    * $(element).prepend( Node );
    *
    * @example
-   * <caption>prepend ( Node[] content ) : EagleJS</caption>
+   * <caption>prepend(content: Node[]): EagleJS</caption>
    * $(element).prepend( Node[] );
    * $(element).prepend( EagleJS );
    *
@@ -896,7 +897,7 @@ class EagleJS extends Array {
    * @example
    * $(element).push( Node, Node, Node... );
    *
-   * @param  {...Node} elements The elements to add
+   * @param  {Node} elements The elements to add
    * @return {EagleJS} The current collection
    */
   push (...elements) {
@@ -1001,7 +1002,7 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).some(function ( index, element ) {
-   *  return this.val == 0;
+   *   return this.val == 0;
    * });
    *
    * @param  {Function} callback The handler
@@ -1018,11 +1019,11 @@ class EagleJS extends Array {
    * Get or set the text contents of elements of the collection
    *
    * @example
-   * <caption>text ( void ) : string</caption>
+   * <caption>text(): string</caption>
    * $(element).text( );
    *
    * @example
-   * <caption>text ( mixed value ) : EagleJS</caption>
+   * <caption>text(value: string | number | boolean): EagleJS</caption>
    * $(element).text( 'string' );
    * $(element).text( 100 );
    * $(element).text( true );
@@ -1072,7 +1073,7 @@ class EagleJS extends Array {
    * $(element).trigger( 'click', data );
    *
    * @param  {string} type   One or more event names
-   * @param  {array}  [data] Additional data to pass along to the event handler
+   * @param  {Array}  [data] Additional data to pass along to the event handler
    * @return {EagleJS} The current collection
    */
   trigger (type, data) {
@@ -1095,7 +1096,7 @@ class EagleJS extends Array {
    * @example
    * $(element).unshift( Node, Node, Node... );
    *
-   * @param  {...Node} elements The elements to add
+   * @param  {Node} elements The elements to add
    * @return {EagleJS} The current collection
    */
   unshift (...elements) {

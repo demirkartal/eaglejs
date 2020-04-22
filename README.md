@@ -55,7 +55,7 @@ class EagleJS extends Array {
 	public children(selector?: string): EagleJS
 	public clone(): EagleJS
 	public closest(selector: string): EagleJS
-	public concat(...elements: Node[][]): EagleJS
+	public concat(...elements: Node[]): EagleJS
 	public each(callback: Function): EagleJS
 	public empty(): EagleJS
 	public eq(index: number): EagleJS
@@ -80,7 +80,7 @@ class EagleJS extends Array {
 	public prepend(content: string | Node | Node[]): EagleJS
 	public prev(selector?: string): EagleJS
 	public prevAll(selector?: string): EagleJS
-	public push(...elements: Node[]): EagleJS
+	public push(...elements: Node): EagleJS
 	public ready(handler: Function): EagleJS
 	public remove(): EagleJS
 	public removeAttr(name: string): EagleJS
@@ -90,7 +90,7 @@ class EagleJS extends Array {
 	public text(value?: string | number | boolean): string | EagleJS
 	public toggleClass(name: string, force?: boolean): EagleJS
 	public trigger(type: string, data?: any[]): EagleJS
-	public unshift(...elements: Node[]): EagleJS
+	public unshift(...elements: Node): EagleJS
 }
 ```
 
