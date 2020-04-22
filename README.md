@@ -37,60 +37,60 @@ Download script file and include on top of other script which require EagleJS.
 - Firefox
 - iOS 10.3+
 
-## Class Schema
+## Class Map
 
 ```js
 class EagleJS extends Array {
-	public constructor ( mixed selector [, mixed selector = document ] )
+	public constructor(selector: string | Node | Node[], context?: string | Node | Node[]): EagleJS
 
 	/* Members */
 	public prototype fn
 
 	/* Methods */
-	public addClass ( string name ) : EagleJS
-	public after ( mixed content ) : EagleJS
-	public append ( mixed content ) : EagleJS
-	public attr ( string name [, mixed value ] ) : string|EagleJS
-	public before ( mixed content ) : EagleJS
-	public children ( [ string selector = "*" ] ) : EagleJS
-	public clone ( void ) : EagleJS
-	public closest ( string selector ) : EagleJS
-	public concat ( Node[] elements... ) : EagleJS
-	public each ( function callback ) : EagleJS
-	public empty ( void ) : EagleJS
-	public eq ( number index ) : EagleJS
-	public every ( function callback ) : boolean
-	public filter ( mixed selector ) : EagleJS
-	public find ( mixed selector ) : EagleJS
-	public first ( void ) : EagleJS
-	public forEach ( function callback ) : EagleJS
-	public hasClass ( string name ) : boolean
-	public html ( [ string value ] ) : string|EagleJS
-	public is ( mixed selector ) : boolean
-	public static isNode ( mixed value ) : boolean
-	public last ( void ) : EagleJS
-	public map ( function callback ) : EagleJS
-	public next ( [ string selector = "*" ] ) : EagleJS
-	public nextAll ( [ string selector = "*" ] ) : EagleJS
-	public not ( mixed selector ) : EagleJS
-	public off ( string events , function handler ) : EagleJS
-	public on ( string events , function handler ) : EagleJS
-	public parent ( [ string selector = "*" ] ) : EagleJS
-	public parents ( [ string selector = "*" ] ) : EagleJS
-	public prepend ( mixed content ) : EagleJS
-	public prev ( [ string selector = "*" ] ) : EagleJS
-	public prevAll ( [ string selector = "*" ] ) : EagleJS
-	public push ( Node elements... ) : EagleJS
-	public ready ( function handler ) : EagleJS
-	public remove ( void ) : EagleJS
-	public removeAttr ( string name ) : EagleJS
-	public removeClass ( string name ) : EagleJS
-	public siblings ( [ string selector = "*" ] ) : EagleJS
-	public some ( function callback ) : boolean
-	public text ( [ mixed value ] ) : string|EagleJS
-	public toggleClass ( string name [, boolean force ] ) : EagleJS
-	public trigger ( string type [, array data ] ) : EagleJS
-	public unshift ( Node elements... ) : EagleJS
+	public addClass(name: string): EagleJS
+	public after(content: string | Node | Node[]): EagleJS
+	public append(content: string | Node | Node[]): EagleJS
+	public attr(name: string, value?: string | number): string | EagleJS
+	public before(content: string | Node | Node[]): EagleJS
+	public children(selector?: string): EagleJS
+	public clone(): EagleJS
+	public closest(selector: string): EagleJS
+	public concat(...elements: Node[][]): EagleJS
+	public each(callback: Function): EagleJS
+	public empty(): EagleJS
+	public eq(index: number): EagleJS
+	public every(callback: Function): boolean
+	public filter(selector: string | Function): EagleJS
+	public find(selector: string | Function): EagleJS
+	public first(): EagleJS
+	public forEach(callback: Function): EagleJS
+	public hasClass(name: string): boolean
+	public html(value?: string): string | EagleJS
+	public is(selector: string | Function | Node | Node[]): boolean
+	public isNode(value: any): boolean
+	public last(): EagleJS
+	public map(callback: Function): EagleJS
+	public next(selector?: string): EagleJS
+	public nextAll(selector?: string): EagleJS
+	public not(selector: string | Function | Node | Node[]): EagleJS
+	public off(events: string, handler: Function): EagleJS
+	public on(events: string, handler: Function): EagleJS
+	public parent(selector?: string): EagleJS
+	public parents(selector?: string): EagleJS
+	public prepend(content: string | Node | Node[]): EagleJS
+	public prev(selector?: string): EagleJS
+	public prevAll(selector?: string): EagleJS
+	public push(...elements: Node[]): EagleJS
+	public ready(handler: Function): EagleJS
+	public remove(): EagleJS
+	public removeAttr(name: string): EagleJS
+	public removeClass(name: string): EagleJS
+	public siblings(selector?: string): EagleJS
+	public some(callback: Function): boolean
+	public text(value?: string | number | boolean): string | EagleJS
+	public toggleClass(name: string, force?: boolean): EagleJS
+	public trigger(type: string, data?: any[]): EagleJS
+	public unshift(...elements: Node[]): EagleJS
 }
 ```
 
