@@ -17,9 +17,11 @@ Download script file and include on top of other script which require EagleJS.
 
 ```html
 <script src="eaglejs.min.js"></script>
+<script>
 $(document).ready(function () {
   // Call when DOM is loaded
 });
+</script>
 ```
 
 ##### ES6 Module
