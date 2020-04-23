@@ -1,6 +1,6 @@
 # EagleJS
 
-EagleJS is a new generation jQuery alternative for modern browsers.
+EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
 - Lightweight (~6,00KB minified)
 - Hand-coded with EcmaScript 6 and Modern DOM functions
@@ -17,6 +17,9 @@ Download script file and include on top of other script which require EagleJS.
 
 ```html
 <script src="eaglejs.min.js"></script>
+$(document).ready(function () {
+  // Call when DOM is loaded
+});
 ```
 
 ##### ES6 Module
@@ -60,7 +63,7 @@ class EagleJS extends Array {
 	public empty(): EagleJS
 	public eq(index: number): EagleJS
 	public every(callback: Function): boolean
-	public filter(selector: string | Function): EagleJS
+	public filter(selector: string | Node | Node[] | Function): EagleJS
 	public find(selector: string | Function): EagleJS
 	public first(): EagleJS
 	public forEach(callback: Function): EagleJS
@@ -75,6 +78,7 @@ class EagleJS extends Array {
 	public not(selector: string | Function | Node | Node[]): EagleJS
 	public off(events: string, handler: Function): EagleJS
 	public on(events: string, handler: Function): EagleJS
+	public one(events: string, handler: Function): EagleJS
 	public parent(selector?: string): EagleJS
 	public parents(selector?: string): EagleJS
 	public prepend(content: string | Node | Node[]): EagleJS

@@ -59,9 +59,9 @@ try {
 }
 
 /**
- * EagleJS
+ * EagleJS is a jQuery-Like DOM manipulation class for modern browsers
  *
- * @version   0.2.2
+ * @version   0.2.3
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -419,12 +419,21 @@ class EagleJS extends Array {
    * $(element).filter( '.classname' );
    *
    * @example
+   * <caption>filter(selector: Node): EagleJS</caption>
+   * $(element).filter( Node );
+   *
+   * @example
+   * <caption>filter(selector: Node[]): EagleJS</caption>
+   * $(element).filter( Node[] );
+   * $(element).filter( EagleJS );
+   *
+   * @example
    * <caption>filter(selector: Function): EagleJS</caption>
    * $(element).filter(function ( index, element ) {
    *  return this.val > 0;
    * });
    *
-   * @param  {string|Function} selector The selector to filter
+   * @param  {string|Node|Node[]|Function} selector The selector to filter
    * @return {EagleJS} A new collection
    */
   filter (selector) {
@@ -443,12 +452,19 @@ class EagleJS extends Array {
       return super.filter((element, index) => {
         return selector.call(element, index, element);
       });
+    } else {
+      const $selector = new EagleJS(selector);
+      return this.filter((index, element) => {
+        return $selector.includes(element);
+      });
     }
     return new EagleJS();
   }
 
   /**
-   * Returns the matched descendants of elements with the filter
+   * Returns the matched descendants of elements with the filter.<br>
+   * Be aware: If the parameter is a function, the method acts as
+   * "Array.prototype.find" function
    *
    * @example
    * <caption>find(selector: string): EagleJS</caption>
@@ -456,6 +472,7 @@ class EagleJS extends Array {
    *
    * @example
    * <caption>find(selector: Function): EagleJS</caption>
+   * // See: Array.prototype.find()
    * $(element).find(function ( index, element ) {
    *  return this.val > 0;
    * });
@@ -761,7 +778,7 @@ class EagleJS extends Array {
    * Attach an event handler to elements of the collection
    *
    * @example
-   * $(element).on( 'hover', function() {
+   * $(element).on( 'hover', function(event) {
    *   console.log( $( this ).text() );
    * });
    *
@@ -777,6 +794,30 @@ class EagleJS extends Array {
           element.addEventListener(event, handler, false);
         });
       });
+    }
+    return this;
+  }
+
+  /**
+   * Attach an event handler to elements of the collection. The handler is
+   * executed at most once per element per event type.
+   *
+   * @example
+   * $(element).one( 'hover', function(event) {
+   *   console.log( $( this ).text() );
+   * });
+   *
+   * @param  {string}   events  One or more event names
+   * @param  {Function} handler The handler funcion for event
+   * @return {EagleJS} The current collection
+   */
+  one (events, handler) {
+    if (typeof handler === 'function') {
+      const callbackHandler = function (event) {
+        handler(event);
+        new EagleJS(event.target).off(events, callbackHandler);
+      };
+      return this.on(events, callbackHandler);
     }
     return this;
   }
@@ -1110,6 +1151,13 @@ class EagleJS extends Array {
 
 /**
  * Proxy for EagleJS Class to use without a "new" keyword
+ *
+ * @example
+ * <caption>Usage (Classic Style)</caption>
+ * // Defining the dollar symbol to use like jQuery library
+ * if (typeof $ === 'undefined') {
+ *   window.$ = EagleJSProxy;
+ * }
  *
  * @type {EagleJS}
  */
