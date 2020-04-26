@@ -2,7 +2,7 @@
 
 EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
-- Lightweight (~6,00KB minified)
+- Lightweight (~7KB minified)
 - Hand-coded with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
 - Supports all CSS selectors
@@ -57,8 +57,8 @@ class EagleJS extends Array {
 	public append(content: string | Node | Node[]): EagleJS
 	public attr(name: string, value?: string | number): string | EagleJS
 	public before(content: string | Node | Node[]): EagleJS
-	public children(selector?: string): EagleJS
-	public clone(): EagleJS
+	public children(selector?: string | Function | Node | Node[]): EagleJS
+	public clone(deep?: boolean): EagleJS
 	public closest(selector: string): EagleJS
 	public concat(...elements: Node[]): EagleJS
 	public each(callback: Function): EagleJS
@@ -72,26 +72,29 @@ class EagleJS extends Array {
 	public hasClass(name: string): boolean
 	public html(value?: string): string | EagleJS
 	public is(selector: string | Function | Node | Node[]): boolean
-	public isNode(value: any): boolean
+	public static isDocument(value: any): boolean
+	public static isElement(value: any): boolean
+	public static isNode(value: any): boolean
 	public last(): EagleJS
 	public map(callback: Function): EagleJS
-	public next(selector?: string): EagleJS
-	public nextAll(selector?: string): EagleJS
+	public next(selector?: string | Function | Node | Node[]): EagleJS
+	public nextAll(selector?: string | Function | Node | Node[]): EagleJS
+	public static normalizeSelector(selector: any): string
 	public not(selector: string | Function | Node | Node[]): EagleJS
 	public off(events: string, handler: Function): EagleJS
 	public on(events: string, handler: Function): EagleJS
 	public one(events: string, handler: Function): EagleJS
-	public parent(selector?: string): EagleJS
-	public parents(selector?: string): EagleJS
+	public parent(selector?: string | Function | Node | Node[]): EagleJS
+	public parents(selector?: string | Function | Node | Node[]): EagleJS
 	public prepend(content: string | Node | Node[]): EagleJS
-	public prev(selector?: string): EagleJS
-	public prevAll(selector?: string): EagleJS
+	public prev(selector?: string | Function | Node | Node[]): EagleJS
+	public prevAll(selector?: string | Function | Node | Node[]): EagleJS
 	public push(...elements: Node): EagleJS
 	public ready(handler: Function): EagleJS
 	public remove(): EagleJS
 	public removeAttr(name: string): EagleJS
 	public removeClass(name: string): EagleJS
-	public siblings(selector?: string): EagleJS
+	public siblings(selector?: string | Function | Node | Node[]): EagleJS
 	public some(callback: Function): boolean
 	public text(value?: string | number | boolean): string | EagleJS
 	public toggleClass(name: string, force?: boolean): EagleJS
