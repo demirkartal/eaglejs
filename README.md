@@ -10,7 +10,7 @@ EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
 ## Usage
 
-##### Classic Style
+#### Classic Style
 
 Download script file and include on top of other script which require EagleJS.
 
@@ -23,9 +23,8 @@ $(document).ready(function () {
 </script>
 ```
 
-##### ES6 Module
+#### ES6 Module
 
-###### on Javascript File
 ```js
 import $ from "eaglejs.module.js";
 
@@ -34,26 +33,15 @@ $(document).ready(function () {
 });
 ```
 
-###### on HTML File
-```html
-<script type="module">
-import $ from "eaglejs.module.js";
-
-$(document).ready(function () {
-  // Call when DOM is loaded
-});
-</script>
-```
-
 ## Browser Support
 
-##### Desktop (Last two major versions)
+#### Desktop (Last two major versions)
 - Chrome
 - Edge
 - Firefox
 - Safari 10.1+
 
-##### Mobil (Latest versions)
+#### Mobil (Latest versions)
 - Chrome
 - Firefox
 - iOS 10.3+
@@ -119,7 +107,7 @@ class EagleJS extends Array {
 }
 ```
 
-#### Methods avoid adding to this project for better performance
+### Methods avoid adding to this project for better performance
 
 - CSS Manipulation
   - Use addClass, toggleClass and removeClass
