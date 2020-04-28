@@ -2,10 +2,9 @@
 
 EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
-- Lightweight (~7KB minified)
 - Hand-coded with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
-- Supports all CSS selectors
+- Supports CSS3 selectors
 - [JavaScript Standard Style](https://standardjs.com "JavaScript Standard Style") codes
 - Documented with [JSDoc](https://jsdoc.app "JSDoc")
 
@@ -26,8 +25,25 @@ $(document).ready(function () {
 
 ##### ES6 Module
 
-(Will be added)
+###### on Javascript File
+```js
+import $ from "eaglejs.module.js";
 
+$(document).ready(function () {
+  // Call when DOM is loaded
+});
+```
+
+###### on HTML File
+```html
+<script type="module">
+import $ from "eaglejs.module.js";
+
+$(document).ready(function () {
+  // Call when DOM is loaded
+});
+</script>
+```
 
 ## Browser Support
 

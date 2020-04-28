@@ -1260,7 +1260,6 @@ const EagleJSProxy = new Proxy(EagleJS, {
   }
 });
 
-// Define $
-if (typeof $ === 'undefined') {
-  window.$ = EagleJSProxy;
-}
+// Export
+export default EagleJSProxy;
+export { EagleJS, EagleJSProxy };
