@@ -46,7 +46,15 @@ $(document).ready(function () {
 - Firefox
 - iOS 10.3+
 
-## Class Map
+## Documentation
+
+- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/ "https://eagleframework.github.io/EagleJS/")
+- You can read from javascript file
+- IDE which supports JSDOC can help dynamically by code. Like;
+  - Apache NetBeans IDE
+  - Visual Studio Code
+
+### Class Map
 
 ```js
 class EagleJS extends Array {
