@@ -1,0 +1,40 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["./README.md"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    }
+  },
+  "opts": {
+    "template": "./node_modules/docdash",
+    "encoding": "utf8",      
+    "destination": "./docs/"
+  },
+  "docdash": {
+    "sort": true,
+    "search": true,
+    "collapse": true,
+    "sectionOrder": [
+      "Modules",
+      "Classes"
+    ],
+    "menu": {
+      "Github repo": {
+        "href": "https://github.com/EagleFramework/EagleJS",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "website_link"
+      }
+    }
+  }
+}

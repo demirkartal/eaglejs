@@ -37,18 +37,19 @@ $(document).ready(function () {
 
 #### Desktop (Last two major versions)
 - Chrome
-- Edge
+- Edge (Requires: queryselectorall :scope polyfill [https://github.com/jonathantneal/element-qsa-scope](https://github.com/jonathantneal/element-qsa-scope))
+- Edge (Chromium)
 - Firefox
 - Safari 10.1+
 
-#### Mobil (Latest versions)
+#### Mobile (Latest versions)
 - Chrome
 - Firefox
 - iOS 10.3+
 
 ## Documentation
 
-- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/ "https://eagleframework.github.io/EagleJS/")
+- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/)
 - You can read from javascript file
 - IDE which supports JSDOC can help dynamically by code. Like;
   - Apache NetBeans IDE
@@ -61,7 +62,13 @@ class EagleJS extends Array {
 	public constructor(selector: string | Node | Node[], context?: string | Node | Node[]): EagleJS
 
 	/* Members */
-	public prototype fn
+	public static const prototype fn
+
+	/* Methods Static */
+	public static isDocument(value: any): boolean
+	public static isElement(value: any): boolean
+	public static isNode(value: any): boolean
+	public static normalizeSelector(selector: any): string
 
 	/* Methods */
 	public addClass(name: string): EagleJS
@@ -84,14 +91,10 @@ class EagleJS extends Array {
 	public hasClass(name: string): boolean
 	public html(value?: string): string | EagleJS
 	public is(selector: string | Function | Node | Node[]): boolean
-	public static isDocument(value: any): boolean
-	public static isElement(value: any): boolean
-	public static isNode(value: any): boolean
 	public last(): EagleJS
 	public map(callback: Function): EagleJS
 	public next(selector?: string | Function | Node | Node[]): EagleJS
 	public nextAll(selector?: string | Function | Node | Node[]): EagleJS
-	public static normalizeSelector(selector: any): string
 	public not(selector: string | Function | Node | Node[]): EagleJS
 	public off(events: string, handler: Function): EagleJS
 	public on(events: string, handler: Function): EagleJS

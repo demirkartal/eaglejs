@@ -1,0 +1,15 @@
+{
+  "name": "EagleJS",
+  "description": "EagleJS is a jQuery-Like DOM manipulation class for modern browsers",
+  "version": "0.3.1",
+  "license": "MIT",
+  "author": "Cem Demirkartal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EagleFramework/EagleJS"
+  },
+  "dependencies": {
+    "jsdoc": "3.6.4",
+    "docdash": "1.2.0"
+  }
+}

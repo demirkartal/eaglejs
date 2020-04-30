@@ -1,68 +1,9 @@
 /* eslint semi: "error", no-param-reassign: "error" */
 /* eslint-env es6, browser */
-/* element-qsa-scope v1.1.0 */
-try {
-  // test for scope support
-  document.querySelector(':socpe *');
-} catch (error) {
-  (function (ElementPrototype) {
-    // scope regex
-    var scope = /:scope(?![\w-])/gi;
-    // polyfill Element#querySelector
-    var querySelectorWithScope = polyfill(ElementPrototype.querySelector);
-    ElementPrototype.querySelector = function querySelector (selectors) {
-      return querySelectorWithScope.apply(this, arguments);
-    };
-    // polyfill Element#querySelectorAll
-    var querySelectorAllWithScope = polyfill(ElementPrototype.querySelectorAll);
-    ElementPrototype.querySelectorAll = function querySelectorAll (selectors) {
-      return querySelectorAllWithScope.apply(this, arguments);
-    };
-
-    // polyfill Element#matches
-    if (ElementPrototype.matches) {
-      var matchesWithScope = polyfill(ElementPrototype.matches);
-      ElementPrototype.matches = function matches (selectors) {
-        return matchesWithScope.apply(this, arguments);
-      };
-    }
-    // polyfill Element#closest
-    if (ElementPrototype.closest) {
-      var closestWithScope = polyfill(ElementPrototype.closest);
-      ElementPrototype.closest = function closest (selectors) {
-        return closestWithScope.apply(this, arguments);
-      };
-    }
-    function polyfill (qsa) {
-      return function (selectors) {
-        // whether the selectors contain :scope
-        var hasScope = selectors && scope.test(selectors);
-        if (hasScope) {
-          // fallback attribute
-          var attr = 'q' + Math.floor(Math.random() * 9000000) + 1000000;
-          // replace :scope with the fallback attribute
-          arguments[0] = selectors.replace(scope, '[' + attr + ']');
-          // add the fallback attribute
-          this.setAttribute(attr, '');
-          // results of the qsa
-          var elementOrNodeList = qsa.apply(this, arguments);
-          // remove the fallback attribute
-          this.removeAttribute(attr);
-          // return the results of the qsa
-          return elementOrNodeList;
-        } else {
-          // return the results of the qsa
-          return qsa.apply(this, arguments);
-        }
-      };
-    }
-  })(Element.prototype);
-}
-
 /**
  * EagleJS is a jQuery-Like DOM manipulation class for modern browsers
  *
- * @version   0.3.0
+ * @version   0.3.1
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -110,7 +51,7 @@ class EagleJS extends Array {
       }
     } else if (selector) {
       if (selector.length) { // Array or Array-Like Object
-        elements = [...new Set(selector)];
+        elements = [...new Set(selector)]; // Remove duplicated items
       } else { // Others
         elements = [selector];
       }
@@ -550,7 +491,16 @@ class EagleJS extends Array {
   /**
    * Alias to EagleJS.prototype
    *
-   * @return {EagleJS.prototype} The prototype of object
+   * @example
+   * <caption>Adds a new method (plugin) to the library</caption>
+   * $.fn.newPlugin = function () {
+   *   return this.each(function () {
+   *     // Do something to each element here.
+   *   });
+   * };
+   *
+   * @constant
+   * @type {EagleJS.prototype}
    */
   static get fn () {
     return this.prototype;
