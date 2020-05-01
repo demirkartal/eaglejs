@@ -67,13 +67,13 @@ class EagleJS extends Array {
 	/* Methods Static */
 	public static isDocument(value: any): boolean
 	public static isElement(value: any): boolean
-	public static isNode(value: any): boolean
 	public static normalizeSelector(selector: any): string
 
 	/* Methods */
 	public addClass(name: string): EagleJS
 	public after(content: string | Node | Node[]): EagleJS
 	public append(content: string | Node | Node[]): EagleJS
+	public appendTo(target: string | Node | Node[]): EagleJS
 	public attr(name: string, value?: string | number): string | EagleJS
 	public before(content: string | Node | Node[]): EagleJS
 	public children(selector?: string | Function | Node | Node[]): EagleJS
@@ -91,6 +91,10 @@ class EagleJS extends Array {
 	public hasClass(name: string): boolean
 	public html(value?: string): string | EagleJS
 	public is(selector: string | Function | Node | Node[]): boolean
+	public insertAfter(target: string | Node | Node[]): EagleJS
+	public insertBefore(target: string | Node | Node[]): EagleJS
+	protected insertElement(content: string | Node | Node[], insertMethod: string, returnContent?: boolean): EagleJS
+	protected insertElementTo(target: string | Node | Node[], insertMethod: string): EagleJS
 	public last(): EagleJS
 	public map(callback: Function): EagleJS
 	public next(selector?: string | Function | Node | Node[]): EagleJS
@@ -102,6 +106,7 @@ class EagleJS extends Array {
 	public parent(selector?: string | Function | Node | Node[]): EagleJS
 	public parents(selector?: string | Function | Node | Node[]): EagleJS
 	public prepend(content: string | Node | Node[]): EagleJS
+	public prependTo(target: string | Node | Node[]): EagleJS
 	public prev(selector?: string | Function | Node | Node[]): EagleJS
 	public prevAll(selector?: string | Function | Node | Node[]): EagleJS
 	public push(...elements: Node): EagleJS
