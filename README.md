@@ -10,7 +10,7 @@ EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
 ## Usage
 
-#### Classic Style
+### Classic Style
 
 Download script file and include on top of other script which require EagleJS.
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
 </script>
 ```
 
-#### ES6 Module
+### ES6 Module
 
 ```js
 import $ from "eaglejs.module.js";
@@ -35,22 +35,41 @@ $(document).ready(function () {
 
 ## Browser Support
 
-#### Desktop (Last two major versions)
+### Desktop (Last two major versions)
 - Chrome
-- Edge (Requires: queryselectorall :scope polyfill [https://github.com/jonathantneal/element-qsa-scope](https://github.com/jonathantneal/element-qsa-scope))
-- Edge (Chromium)
+- Edge
 - Firefox
 - Safari 10.1+
 
-#### Mobile (Latest versions)
+### Mobile (Latest versions)
 - Chrome
 - Firefox
-- iOS 10.3+
+- iOS Safari 10.3+
+
+### Detailed View on Browser Support
+- Minimum required versions do not mean tested versions.
+- Partially requirements do not affect the main functions.
+
+| Required Features                                     |    Use by    |            Partially Use by            |  Edge  | Firefox | Chrome | Safari | iOS Safari |
+|-------------------------------------------------------|:------------:|:--------------------------------------:|:------:|:-------:|:------:|:------:|:----------:|
+| EcmaScript 2015 (ES6)                                 |    EagleJS   |                    -                   |   15   |    54   |   51   |   10   |     10     |
+| EcmaScript 2016 (ES7)<br>- Array.prototype.includes() |    EagleJS   |                    -                   |   14   |    43   |   47   |    9   |      9     |
+| addEventListener()<br>- options.once parameter        |     one()    |           on() options param           |   16   |    50   |   55   |   10   |     10     |
+| querySelectorAll()<br>- :scope selector               |       -      | Selectors starts<br>with “>", "+", "~" | 79 [1] |    32   |   27   |    7   |      7     |
+| **Minimum Required Versions**                         |              |                                        | **16** |  **54** | **55** | **10** |   **10**   |
+
+*Source: [MDN Web Docs](https://developer.mozilla.org/), [www.caniuse.com](https://caniuse.com/)*
+
+[1] Polyfill for querySelectorAll() :scope selector 
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/element-qsa-scope@1.1.0/index.js"></script>
+```
 
 ## Documentation
 
-- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/)
-- You can read from javascript file
+- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/).
+- You can read from javascript file.
 - IDE which supports JSDOC can help dynamically by code. Like;
   - Apache NetBeans IDE
   - Visual Studio Code
@@ -59,67 +78,72 @@ $(document).ready(function () {
 
 ```js
 class EagleJS extends Array {
-	public constructor(selector: string | Node | Node[], context?: string | Node | Node[]): EagleJS
+	constructor(selector?: string | Node | Node[], context?: string | Node | Node[]): EagleJS
 
 	/* Members */
-	public static const prototype fn
+	static const prototype fn
 
 	/* Methods Static */
-	public static isDocument(value: any): boolean
-	public static isElement(value: any): boolean
-	public static normalizeSelector(selector: any): string
+	static isDocument(value: any): boolean
+	static isElement(value: any): boolean
+	static normalizeSelector(selector: any): string
 
 	/* Methods */
-	public addClass(name: string): EagleJS
-	public after(content: string | Node | Node[]): EagleJS
-	public append(content: string | Node | Node[]): EagleJS
-	public appendTo(target: string | Node | Node[]): EagleJS
-	public attr(name: string, value?: string | number): string | EagleJS
-	public before(content: string | Node | Node[]): EagleJS
-	public children(selector?: string | Function | Node | Node[]): EagleJS
-	public clone(deep?: boolean): EagleJS
-	public closest(selector: string): EagleJS
-	public concat(...elements: Node[]): EagleJS
-	public each(callback: Function): EagleJS
-	public empty(): EagleJS
-	public eq(index: number): EagleJS
-	public every(callback: Function): boolean
-	public filter(selector: string | Node | Node[] | Function): EagleJS
-	public find(selector: string | Function): EagleJS
-	public first(): EagleJS
-	public forEach(callback: Function): EagleJS
-	public hasClass(name: string): boolean
-	public html(value?: string): string | EagleJS
-	public is(selector: string | Function | Node | Node[]): boolean
-	public insertAfter(target: string | Node | Node[]): EagleJS
-	public insertBefore(target: string | Node | Node[]): EagleJS
+	addClass(name: string): EagleJS
+	after(content: string | Node | Node[]): EagleJS
+	append(content: string | Node | Node[]): EagleJS
+	appendTo(target: string | Node | Node[]): EagleJS
+	attr(name: string, value?: any): string | EagleJS
+	before(content: string | Node | Node[]): EagleJS
+	children(selector?: string | Function | Node | Node[]): EagleJS
+	clone(deep?: boolean): EagleJS
+	closest(selector: string): EagleJS
+	concat(...elements: Node[]): EagleJS
+	each(callback: Function): EagleJS
+	empty(): EagleJS
+	eq(index: number): EagleJS
+	every(callback: Function): boolean
+	filter(selector: string | Node | Node[] | Function): EagleJS
+	find(selector: string | Function): EagleJS
+	first(): EagleJS
+	forEach(callback: Function): EagleJS
+	hasClass(name: string): boolean
+	html(value?: string): string | EagleJS
+	is(selector: string | Function | Node | Node[]): boolean
+	insertAfter(target: string | Node | Node[]): EagleJS
+	insertBefore(target: string | Node | Node[]): EagleJS
 	protected insertElement(content: string | Node | Node[], insertMethod: string, returnContent?: boolean): EagleJS
 	protected insertElementTo(target: string | Node | Node[], insertMethod: string): EagleJS
-	public last(): EagleJS
-	public map(callback: Function): EagleJS
-	public next(selector?: string | Function | Node | Node[]): EagleJS
-	public nextAll(selector?: string | Function | Node | Node[]): EagleJS
-	public not(selector: string | Function | Node | Node[]): EagleJS
-	public off(events: string, handler: Function): EagleJS
-	public on(events: string, handler: Function): EagleJS
-	public one(events: string, handler: Function): EagleJS
-	public parent(selector?: string | Function | Node | Node[]): EagleJS
-	public parents(selector?: string | Function | Node | Node[]): EagleJS
-	public prepend(content: string | Node | Node[]): EagleJS
-	public prependTo(target: string | Node | Node[]): EagleJS
-	public prev(selector?: string | Function | Node | Node[]): EagleJS
-	public prevAll(selector?: string | Function | Node | Node[]): EagleJS
-	public push(...elements: Node): EagleJS
-	public ready(handler: Function): EagleJS
-	public remove(): EagleJS
-	public removeAttr(name: string): EagleJS
-	public removeClass(name: string): EagleJS
-	public siblings(selector?: string | Function | Node | Node[]): EagleJS
-	public some(callback: Function): boolean
-	public text(value?: string | number | boolean): string | EagleJS
-	public toggleClass(name: string, force?: boolean): EagleJS
-	public trigger(type: string, data?: any[]): EagleJS
-	public unshift(...elements: Node): EagleJS
+	last(): EagleJS
+	map(callback: Function): EagleJS
+	protected mapProperty(name: string, selector?: string | Function | Node | Node[]): EagleJS
+	protected mapPropertyUntil(name: string, selector?: string | Function | Node | Node[], until?: string | Function | Node | Node[]): EagleJS
+	next(selector?: string | Function | Node | Node[]): EagleJS
+	nextAll(selector?: string | Function | Node | Node[]): EagleJS
+	nextUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
+	not(selector: string | Function | Node | Node[]): EagleJS
+	off(events: string, handler: Function, options?: boolean | Object): EagleJS
+	on(events: string, handler: Function, options?: boolean | Object): EagleJS
+	one(events: string, handler: Function): EagleJS
+	parent(selector?: string | Function | Node | Node[]): EagleJS
+	parents(selector?: string | Function | Node | Node[]): EagleJS
+	parentsUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
+	prepend(content: string | Node | Node[]): EagleJS
+	prependTo(target: string | Node | Node[]): EagleJS
+	prev(selector?: string | Function | Node | Node[]): EagleJS
+	prevAll(selector?: string | Function | Node | Node[]): EagleJS
+	prevUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
+	push(...elements: Node): EagleJS
+	ready(handler: Function): EagleJS
+	remove(): EagleJS
+	removeAttr(name: string): EagleJS
+	removeClass(name: string): EagleJS
+	siblings(selector?: string | Function | Node | Node[]): EagleJS
+	some(callback: Function): boolean
+	text(value?: any): string | EagleJS
+	toggleClass(name: string, force?: boolean): EagleJS
+	trigger(type: string, data?: any[]): EagleJS
+	unshift(...elements: Node): EagleJS
 }
 ```
 
@@ -136,4 +160,3 @@ class EagleJS extends Array {
 
 ## Be aware
 - This project is **still under development**
-- This project is **being maintained by required needs**
