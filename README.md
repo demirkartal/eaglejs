@@ -60,9 +60,10 @@ $(document).ready(function () {
 
 *Source: [MDN Web Docs](https://developer.mozilla.org/), [www.caniuse.com](https://caniuse.com/)*
 
-[1] Polyfill for querySelectorAll() :scope selector 
+#### Polyfill
 
 ```html
+<!-- [1] querySelectorAll() :scope selector -->
 <script src="https://cdn.jsdelivr.net/npm/element-qsa-scope@1.1.0/index.js"></script>
 ```
 
@@ -74,80 +75,7 @@ $(document).ready(function () {
   - Apache NetBeans IDE
   - Visual Studio Code
 
-### Class Map
-
-```js
-class EagleJS extends Array {
-	constructor(selector?: string | Node | Node[], context?: string | Node | Node[]): EagleJS
-
-	/* Members */
-	static const prototype fn
-
-	/* Methods Static */
-	static isDocument(value: any): boolean
-	static isElement(value: any): boolean
-	static normalizeSelector(selector: any): string
-
-	/* Methods */
-	addClass(name: string): EagleJS
-	after(content: string | Node | Node[]): EagleJS
-	append(content: string | Node | Node[]): EagleJS
-	appendTo(target: string | Node | Node[]): EagleJS
-	attr(name: string, value?: any): string | EagleJS
-	before(content: string | Node | Node[]): EagleJS
-	children(selector?: string | Function | Node | Node[]): EagleJS
-	clone(deep?: boolean): EagleJS
-	closest(selector: string): EagleJS
-	concat(...elements: Node[]): EagleJS
-	each(callback: Function): EagleJS
-	empty(): EagleJS
-	eq(index: number): EagleJS
-	every(callback: Function): boolean
-	filter(selector: string | Node | Node[] | Function): EagleJS
-	find(selector: string | Function): EagleJS
-	first(): EagleJS
-	forEach(callback: Function): EagleJS
-	hasClass(name: string): boolean
-	html(value?: string): string | EagleJS
-	is(selector: string | Function | Node | Node[]): boolean
-	insertAfter(target: string | Node | Node[]): EagleJS
-	insertBefore(target: string | Node | Node[]): EagleJS
-	protected insertElement(content: string | Node | Node[], insertMethod: string, returnContent?: boolean): EagleJS
-	protected insertElementTo(target: string | Node | Node[], insertMethod: string): EagleJS
-	last(): EagleJS
-	map(callback: Function): EagleJS
-	protected mapProperty(name: string, selector?: string | Function | Node | Node[]): EagleJS
-	protected mapPropertyUntil(name: string, selector?: string | Function | Node | Node[], until?: string | Function | Node | Node[]): EagleJS
-	next(selector?: string | Function | Node | Node[]): EagleJS
-	nextAll(selector?: string | Function | Node | Node[]): EagleJS
-	nextUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
-	not(selector: string | Function | Node | Node[]): EagleJS
-	off(events: string, handler: Function, options?: boolean | Object): EagleJS
-	on(events: string, handler: Function, options?: boolean | Object): EagleJS
-	one(events: string, handler: Function): EagleJS
-	parent(selector?: string | Function | Node | Node[]): EagleJS
-	parents(selector?: string | Function | Node | Node[]): EagleJS
-	parentsUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
-	prepend(content: string | Node | Node[]): EagleJS
-	prependTo(target: string | Node | Node[]): EagleJS
-	prev(selector?: string | Function | Node | Node[]): EagleJS
-	prevAll(selector?: string | Function | Node | Node[]): EagleJS
-	prevUntil(selector?: string | Function | Node | Node[], filter?: string | Function | Node | Node[]): EagleJS
-	push(...elements: Node): EagleJS
-	ready(handler: Function): EagleJS
-	remove(): EagleJS
-	removeAttr(name: string): EagleJS
-	removeClass(name: string): EagleJS
-	siblings(selector?: string | Function | Node | Node[]): EagleJS
-	some(callback: Function): boolean
-	text(value?: any): string | EagleJS
-	toggleClass(name: string, force?: boolean): EagleJS
-	trigger(type: string, data?: any[]): EagleJS
-	unshift(...elements: Node): EagleJS
-}
-```
-
-### Methods avoid adding to this project for better performance
+## Methods avoid adding to this project for better performance
 
 - CSS Manipulation
   - Use addClass, toggleClass and removeClass
