@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "ES2015",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ],
+  "files": [
+    "eaglejs.module.ts",
+  ]
+}

@@ -1,50 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>eaglejs.js - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/EagleFramework/EagleJS" target="_blank" class="menu-item" id="website_link" >Github repo</a></h2><h3>Classes</h3><ul><li><a href="EagleJS.html">EagleJS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="EagleJS.html#.isContext">isContext</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#.isDocument">isDocument</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#.isElement">isElement</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#.isIterable">isIterable</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#.normalizeSelector">normalizeSelector</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#addClass">addClass</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#after">after</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#append">append</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#appendTo">appendTo</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#attr">attr</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#before">before</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#children">children</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#clone">clone</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#closest">closest</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#concat">concat</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#empty">empty</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#eq">eq</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#every">every</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#filter">filter</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#find">find</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#first">first</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#forEach">forEach</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#hasClass">hasClass</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#html">html</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#includes">includes</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#insertAfter">insertAfter</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#insertBefore">insertBefore</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#insertElement">insertElement</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#insertElementTo">insertElementTo</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#is">is</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#last">last</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#map">map</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#mapProperty">mapProperty</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#mapPropertyUntil">mapPropertyUntil</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#next">next</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#nextAll">nextAll</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#nextUntil">nextUntil</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#not">not</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#off">off</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#on">on</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#one">one</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#parent">parent</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#parents">parents</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#parentsUntil">parentsUntil</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#prepend">prepend</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#prependTo">prependTo</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#prev">prev</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#prevAll">prevAll</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#prevUntil">prevUntil</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#push">push</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#ready">ready</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#remove">remove</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#removeAttr">removeAttr</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#removeClass">removeClass</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#siblings">siblings</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#slice">slice</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#some">some</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#text">text</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#toggleClass">toggleClass</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#trigger">trigger</a></li><li data-type='method' style='display: none;'><a href="EagleJS.html#unshift">unshift</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#EagleJSProxy">EagleJSProxy</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">eaglejs.js</h1>
-    
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/* eslint semi: "error", no-param-reassign: "error" */
+/* eslint semi: "error", no-param-reassign: "error" */
 /**
  * EagleJS is a jQuery-Like DOM manipulation class for modern browsers
  *
@@ -84,16 +38,16 @@ class EagleJS extends Array {
    * @param {string|DOMNode|DOMNodeArray} [context=document] Node(s) to use as
    * context.
    */
-  constructor (selector, context = document) {
+  constructor(selector?: string | DOMNode | DOMNodeArray, context: string | DOMNode | DOMNodeArray = document) {
     /** @type {Array} */
-    const elements = [];
+    const elements: Array<any> = [];
     if (typeof selector !== 'undefined') {
       /** @type {*} */
-      let result;
+      let result: any;
       // Query with String Selector
       if (typeof selector === 'string') {
         const normalized = EagleJS.normalizeSelector(selector);
-        if (/^(&lt;).+(>)$/i.test(normalized)) {
+        if (/^(<).+(>)$/i.test(normalized)) {
           // Create HTML tag
           const doc = document.implementation.createHTMLDocument('');
           doc.body.innerHTML = normalized;
@@ -108,8 +62,8 @@ class EagleJS extends Array {
         result = [selector];
       }
       // Convert Iterable Object to Array and Filter
-      for (let i = 0; i &lt; result.length; i++) {
-        if (EagleJS.isContext(result[i]) &amp;&amp; !elements.includes(result[i])) {
+      for (let i = 0; i < result.length; i++) {
+        if (EagleJS.isContext(result[i]) && !elements.includes(result[i])) {
           elements.push(result[i]);
         }
       }
@@ -127,7 +81,7 @@ class EagleJS extends Array {
    * @param  {string} name One or more class names.
    * @return {EagleJS} The current collection.
    */
-  addClass (name) {
+  addClass (name: string): EagleJS {
     if (typeof name === 'string') {
       const classes = name.match(/\S+/g) || [];
       this.forEach((element) => {
@@ -157,7 +111,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} content The content to insert.
    * @return {EagleJS} The current collection.
    */
-  after (content) {
+  after (content: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElement(content, 'after');
   }
 
@@ -179,7 +133,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} content The content to insert.
    * @return {EagleJS} The current collection.
    */
-  append (content) {
+  append (content: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElement(content, 'append');
   }
 
@@ -201,7 +155,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} target The target to insert.
    * @return {EagleJS} A new collection of clone and original node elements.
    */
-  appendTo (target) {
+  appendTo (target: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElementTo(target, 'append');
   }
 
@@ -209,12 +163,12 @@ class EagleJS extends Array {
    * Get or set attribute value for elements of the collection.
    *
    * @example
-   * &lt;caption>attr(name: string): string | undefined&lt;/caption>
+   * <caption>attr(name: string): string | undefined</caption>
    * // Returns attribute
    * $(element).attr( 'name' );
    *
    * @example
-   * &lt;caption>attr(name: string, value: any): EagleJS&lt;/caption>
+   * <caption>attr(name: string, value: any): EagleJS</caption>
    * // Sets attribute
    * $(element).attr( 'name', 'string' );
    * $(element).attr( 'name', 100 );
@@ -224,7 +178,7 @@ class EagleJS extends Array {
    * @return {string|undefined|EagleJS} The current collection or value of
    * attribute.
    */
-  attr (name, value) {
+  attr (name: string, value?: any): string | undefined | EagleJS {
     if (typeof name !== 'undefined') {
       if (typeof name === 'string') {
         // Set attribute
@@ -241,7 +195,7 @@ class EagleJS extends Array {
         }
         // Get attribute
         const $result = this.find((element) => {
-          return EagleJS.isElement(element) &amp;&amp; element.hasAttribute(name);
+          return EagleJS.isElement(element) && element.hasAttribute(name);
         });
         if ($result.length > 0) {
           return $result[0].getAttribute(name);
@@ -270,7 +224,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} content The content to insert.
    * @return {EagleJS} The current collection.
    */
-  before (content) {
+  before (content: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElement(content, 'before');
   }
 
@@ -285,7 +239,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  children (filter) {
+  children (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     const $elements = new EagleJS();
     this.forEach((element) => {
       $elements.push(...element.childNodes);
@@ -308,7 +262,7 @@ class EagleJS extends Array {
    * subtree—including text that may be in child Text nodes—is also copied.
    * @return {EagleJS} A new collection.
    */
-  clone (deep = true) {
+  clone (deep: boolean = true): EagleJS {
     return new EagleJS(this.map((element) => {
       if (EagleJS.isElement(element)) {
         return element.cloneNode(deep);
@@ -326,7 +280,7 @@ class EagleJS extends Array {
    * @param  {string} selector A selector to match.
    * @return {EagleJS} A new collection.
    */
-  closest (selector) {
+  closest (selector: string): EagleJS {
     let result = [];
     if (typeof selector === 'string') {
       const normalized = EagleJS.normalizeSelector(selector);
@@ -352,7 +306,7 @@ class EagleJS extends Array {
    * @param  {...*|Array} items Values to concatenate into a new array.
    * @return {EagleJS} A new collection.
    */
-  concat (...items) {
+  concat (...items: (any | Array<any>)[]): EagleJS {
     return new EagleJS(super.concat(...items));
   }
 
@@ -364,7 +318,7 @@ class EagleJS extends Array {
    *
    * @return {EagleJS} The current collection.
    */
-  empty () {
+  empty (): EagleJS {
     this.html('');
     return this; // better return type for IDE
   }
@@ -379,7 +333,7 @@ class EagleJS extends Array {
    * @param  {number} index The position of element.
    * @return {EagleJS} A new collection.
    */
-  eq (index) {
+  eq (index: number): EagleJS {
     return this.slice(index, index + 1);
   }
 
@@ -395,7 +349,7 @@ class EagleJS extends Array {
    * @return {boolean} True if all elements match the given condition,
    * otherwise false.
    */
-  every (callback) {
+  every (callback: MatchCallback): boolean {
     return super.every((element, index, array) => {
       return callback.call(element, element, index, array);
     });
@@ -424,13 +378,13 @@ class EagleJS extends Array {
    * to match.
    * @return {EagleJS} A new collection.
    */
-  filter (selector) {
+  filter (selector?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     if (typeof selector !== 'undefined') {
       if (typeof selector === 'string') {
         const normalized = EagleJS.normalizeSelector(selector);
         if (normalized !== '') {
           return this.filter((element) => {
-            return EagleJS.isElement(element) &amp;&amp; element.matches(normalized);
+            return EagleJS.isElement(element) && element.matches(normalized);
           });
         }
       } else if (typeof selector === 'function') {
@@ -448,7 +402,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Returns the matched descendants of elements with the filter.&lt;br>
+   * Returns the matched descendants of elements with the filter.<br>
    * Be aware: If the parameter is a function, the method acts as
    * "Array.prototype.find" function.
    *
@@ -464,7 +418,7 @@ class EagleJS extends Array {
    * @param  {string|MatchCallback} selector A selector to match.
    * @return {EagleJS} A new collection.
    */
-  find (selector) {
+  find (selector: string | MatchCallback): EagleJS {
     const $elements = new EagleJS();
     if (typeof selector === 'string') {
       const normalized = EagleJS.normalizeSelector(selector);
@@ -489,7 +443,7 @@ class EagleJS extends Array {
    *
    * @return {EagleJS} A new collection.
    */
-  first () {
+  first (): EagleJS {
     return this.slice(0, 1);
   }
 
@@ -504,7 +458,7 @@ class EagleJS extends Array {
    * @param  {EachCallback} callback A function to execute on each element.
    * @return {EagleJS} The current collection.
    */
-  forEach (callback) {
+  forEach (callback: EachCallback): EagleJS {
     super.forEach((element, index, array) => {
       callback.call(element, element, index, array);
     });
@@ -539,10 +493,10 @@ class EagleJS extends Array {
    * @return {boolean} True if elements have the given class name, otherwise
    * false.
    */
-  hasClass (name) {
+  hasClass (name: string): boolean {
     if (typeof name === 'string') {
       return this.some((element) => {
-        return EagleJS.isElement(element) &amp;&amp; element.classList.contains(name);
+        return EagleJS.isElement(element) && element.classList.contains(name);
       });
     }
     return false;
@@ -552,18 +506,18 @@ class EagleJS extends Array {
    * Get or set the HTML contents of elements of the collection.
    *
    * @example
-   * &lt;caption>html(): string | undefined &lt;/caption>
+   * <caption>html(): string | undefined </caption>
    * $(element).html();
    *
    * @example
-   * &lt;caption>html(value: string): EagleJS&lt;/caption>
+   * <caption>html(value: string): EagleJS</caption>
    * $(element).html( 'htmlString' ); // Create HTML tag
    *
    * @param  {string} [value] The html string to set.
    * @return {string|undefined|EagleJS} The current collection or html string
    * of element.
    */
-  html (value) {
+  html (value?: string): string | undefined | EagleJS {
     if (typeof value !== 'undefined') {
       this.forEach((element) => {
         if (EagleJS.isElement(element)) {
@@ -585,7 +539,7 @@ class EagleJS extends Array {
    * @return {boolean} A Boolean which is true if the value is found (or the
    * part of the collection indicated by the index fromIndex, if specified).
    */
-  includes (value, fromIndex) {
+  includes (value: any, fromIndex?: number): boolean {
     return super.includes(value, fromIndex);
   }
 
@@ -607,7 +561,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} target The target to insert.
    * @return {EagleJS} A new collection of clone and original node elements.
    */
-  insertAfter (target) {
+  insertAfter (target: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElementTo(target, 'after');
   }
 
@@ -629,7 +583,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} target The target to insert.
    * @return {EagleJS} A new collection of clone and original node elements.
    */
-  insertBefore (target) {
+  insertBefore (target: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElementTo(target, 'before');
   }
 
@@ -651,7 +605,7 @@ class EagleJS extends Array {
    *
    * @protected
    * @param  {string|DOMNode|DOMNodeArray} content The content to insert.
-   * @param  {string}                 insertMethod The method to insert.&lt;br>
+   * @param  {string}                 insertMethod The method to insert.<br>
    * ("after": after, "append": end, "before": before, "prepend": beginning)
    * @param  {boolean} [returnContent=false]       If true, returns a new
    * collection of clone and original node elements.
@@ -659,7 +613,7 @@ class EagleJS extends Array {
    * collection of clone and original node elements. Otherwise the current
    * collection
    */
-  insertElement (content, insertMethod, returnContent = false) {
+  insertElement (content: string | DOMNode | DOMNodeArray, insertMethod: string, returnContent: boolean = false): EagleJS {
     const $content = new EagleJS(content);
     const $elements = new EagleJS();
     this.forEach((element, index) => {
@@ -674,7 +628,7 @@ class EagleJS extends Array {
         if (returnContent) {
           $elements.push(...$clone);
         }
-        if (insertMethod === 'after' &amp;&amp; EagleJS.isContext(parent)) {
+        if (insertMethod === 'after' && EagleJS.isContext(parent)) {
           $clone.forEach((clone) => {
             parent.insertBefore(clone, element.nextSibling);
           });
@@ -682,7 +636,7 @@ class EagleJS extends Array {
           $clone.forEach((clone) => {
             element.appendChild(clone);
           });
-        } else if (insertMethod === 'before' &amp;&amp; EagleJS.isContext(parent)) {
+        } else if (insertMethod === 'before' && EagleJS.isContext(parent)) {
           $clone.forEach((clone) => {
             parent.insertBefore(clone, element);
           });
@@ -711,11 +665,11 @@ class EagleJS extends Array {
    *
    * @protected
    * @param  {string|DOMNode|DOMNodeArray} target The target to insert.
-   * @param  {string}                insertMethod The method to insert.&lt;br>
+   * @param  {string}                insertMethod The method to insert.<br>
    * ("after": after, "append": end, "before": before, "prepend": beginning)
    * @return {EagleJS} A new collection of clone and original node elements.
    */
-  insertElementTo (target, insertMethod) {
+  insertElementTo (target: string | DOMNode | DOMNodeArray, insertMethod: string): EagleJS {
     return new EagleJS(target).insertElement(this, insertMethod, true);
   }
 
@@ -743,13 +697,13 @@ class EagleJS extends Array {
    * @return {boolean} True if any element matches the given filter, otherwise
    * false.
    */
-  is (selector) {
+  is (selector?: string | DOMNode | DOMNodeArray | MatchCallback): boolean {
     if (typeof selector !== 'undefined') {
       if (typeof selector === 'string') {
         const normalized = EagleJS.normalizeSelector(selector);
         if (normalized !== '') {
           return this.some((element) => {
-            return EagleJS.isElement(element) &amp;&amp; element.matches(normalized);
+            return EagleJS.isElement(element) && element.matches(normalized);
           });
         }
       } else if (typeof selector === 'function') {
@@ -775,7 +729,7 @@ class EagleJS extends Array {
    * @param  {*} value The value to check.
    * @return {boolean} True if the variable is a context node, otherwise false.
    */
-  static isContext (value) {
+  static isContext (value: any): value is DOMNode {
     Array.isArray(value);
     return EagleJS.isElement(value) || EagleJS.isDocument(value);
   }
@@ -790,8 +744,8 @@ class EagleJS extends Array {
    * @param  {*} value The value to check.
    * @return {boolean} True if the variable is a Document node, otherwise false.
    */
-  static isDocument (value) {
-    return Boolean(value &amp;&amp; value.nodeType &amp;&amp; value.nodeType === 9);
+  static isDocument (value: any): value is Document {
+    return Boolean(value && value.nodeType && value.nodeType === 9);
   }
 
   /**
@@ -804,8 +758,8 @@ class EagleJS extends Array {
    * @param  {*} value The value to check.
    * @return {boolean} True if the variable is a Element node, otherwise false.
    */
-  static isElement (value) {
-    return Boolean(value &amp;&amp; value.nodeType &amp;&amp; value.nodeType === 1);
+  static isElement (value: any): value is Element {
+    return Boolean(value && value.nodeType && value.nodeType === 1);
   }
 
   /**
@@ -815,8 +769,8 @@ class EagleJS extends Array {
    * @param  {*} value The value to check.
    * @return {boolean} True if the variable is an iterable, otherwise false.
    */
-  static isIterable (value) {
-    return value !== null &amp;&amp; typeof value[Symbol.iterator] === 'function';
+  static isIterable (value: any): boolean {
+    return value !== null && typeof value[Symbol.iterator] === 'function';
   }
 
   /**
@@ -827,7 +781,7 @@ class EagleJS extends Array {
    *
    * @return {EagleJS} A new collection.
    */
-  last () {
+  last (): EagleJS {
     return this.slice(-1);
   }
 
@@ -844,7 +798,7 @@ class EagleJS extends Array {
    * @return {Array} A new array with each element being the result of the
    * callback function.
    */
-  map (callback) {
+  map (callback: MapCallback): Array<any> {
     return [...super.map((element, index, array) => {
       return callback.call(element, element, index, array);
     })];
@@ -870,9 +824,9 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  mapProperty (name, filter) {
+  mapProperty (name: string, filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     const $elements = new EagleJS(this.map((element) => {
-      return element[name];
+      return (element as any)[name];
     }));
     if (typeof filter !== 'undefined') {
       return $elements.filter(filter);
@@ -908,13 +862,13 @@ class EagleJS extends Array {
    * indicate where to stop matching ancestor elements.
    * @return {EagleJS} A new collection.
    */
-  mapPropertyUntil (name, filter, until) {
+  mapPropertyUntil (name: string, filter?: string | DOMNode | DOMNodeArray | MatchCallback, until?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     const $elements = new EagleJS();
     const flag = (typeof until !== 'undefined');
     this.forEach((element) => {
       let newElement = element;
-      while ((newElement = newElement[name])) {
-        if (flag &amp;&amp; new EagleJS(newElement).is(until)) {
+      while ((newElement = (newElement as any)[name])) {
+        if (flag && new EagleJS(newElement).is(until)) {
           break;
         }
         $elements.push(newElement);
@@ -937,7 +891,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  next (filter) {
+  next (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapProperty('nextElementSibling', filter);
   }
 
@@ -953,7 +907,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  nextAll (filter) {
+  nextAll (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('nextElementSibling', filter);
   }
 
@@ -975,17 +929,17 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  nextUntil (selector, filter) {
+  nextUntil (selector?: string | DOMNode | DOMNodeArray | MatchCallback, filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('nextElementSibling', filter, selector);
   }
 
   /**
-   * Normalizes given CSS selector.&lt;br>
+   * Normalizes given CSS selector.<br>
    * Trims and adds ":scope" if begins with Child or Adjacent Sibling
    * combinator.
    *
    * @example
-   * $.normalizeSelector( " &lt;div> " ) // returns "&lt;div>"
+   * $.normalizeSelector( " <div> " ) // returns "<div>"
    * $.normalizeSelector( " > * " ) // returns ":scope > *"
    * $.normalizeSelector( " + * " ) // returns ":scope + *"
    * $.normalizeSelector( " ~ * " ) // returns ":scope ~ *"
@@ -1004,7 +958,7 @@ class EagleJS extends Array {
    * @param  {*} selector CSS selector to normalize.
    * @return {string} Normalized CSS selector.
    */
-  static normalizeSelector (selector) {
+  static normalizeSelector (selector: any): string {
     let normalized = '';
     if (typeof selector === 'string') {
       // Trim whitespaces
@@ -1040,13 +994,13 @@ class EagleJS extends Array {
    * to match.
    * @return {EagleJS} A new collection.
    */
-  not (selector) {
+  not (selector?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     if (typeof selector !== 'undefined') {
       if (typeof selector === 'string') {
         const normalized = EagleJS.normalizeSelector(selector);
         if (normalized !== '') {
           return this.filter((element) => {
-            return EagleJS.isElement(element) &amp;&amp; !element.matches(normalized);
+            return EagleJS.isElement(element) && !element.matches(normalized);
           });
         }
       } else if (typeof selector === 'function') {
@@ -1076,8 +1030,8 @@ class EagleJS extends Array {
    * event listener.
    * @return {EagleJS} The current collection.
    */
-  off (events, handler, options = false) {
-    if (typeof events === 'string' &amp;&amp; typeof handler === 'function') {
+  off (events: string, handler: EventListener, options: boolean | EventListenerOptions = false): EagleJS {
+    if (typeof events === 'string' && typeof handler === 'function') {
       const eventNames = events.match(/\S+/g) || [];
       this.forEach((element) => {
         eventNames.forEach((event) => {
@@ -1102,8 +1056,8 @@ class EagleJS extends Array {
    * of event listener.
    * @return {EagleJS} The current collection.
    */
-  on (events, handler, options = false) {
-    if (typeof events === 'string' &amp;&amp; typeof handler === 'function') {
+  on (events: string, handler: EventListener, options: boolean | AddEventListenerOptions = false): EagleJS {
+    if (typeof events === 'string' && typeof handler === 'function') {
       const eventNames = events.match(/\S+/g) || [];
       this.forEach((element) => {
         eventNames.forEach((event) => {
@@ -1127,7 +1081,7 @@ class EagleJS extends Array {
    * @param  {EventListener} handler The handler funcion for event.
    * @return {EagleJS} The current collection.
    */
-  one (events, handler) {
+  one (events: string, handler: EventListener): EagleJS {
     return this.on(events, handler, {
       once: true
     });
@@ -1144,7 +1098,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  parent (filter) {
+  parent (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapProperty('parentNode', filter);
   }
 
@@ -1159,7 +1113,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  parents (filter) {
+  parents (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('parentElement', filter);
   }
 
@@ -1181,7 +1135,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  parentsUntil (selector, filter) {
+  parentsUntil (selector?: string | DOMNode | DOMNodeArray | MatchCallback, filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('parentElement', filter, selector);
   }
 
@@ -1203,7 +1157,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} content The content to insert.
    * @return {EagleJS} The current collection.
    */
-  prepend (content) {
+  prepend (content: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElement(content, 'prepend');
   }
 
@@ -1225,7 +1179,7 @@ class EagleJS extends Array {
    * @param  {string|DOMNode|DOMNodeArray} target The target to insert.
    * @return {EagleJS} A new collection.
    */
-  prependTo (target) {
+  prependTo (target: string | DOMNode | DOMNodeArray): EagleJS {
     return this.insertElementTo(target, 'prepend');
   }
 
@@ -1240,7 +1194,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  prev (filter) {
+  prev (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapProperty('previousElementSibling', filter);
   }
 
@@ -1256,7 +1210,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  prevAll (filter) {
+  prevAll (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('previousElementSibling', filter);
   }
 
@@ -1278,7 +1232,7 @@ class EagleJS extends Array {
    * to filter.
    * @return {EagleJS} A new collection.
    */
-  prevUntil (selector, filter) {
+  prevUntil (selector?: string | DOMNode | DOMNodeArray | MatchCallback, filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     return this.mapPropertyUntil('previousElementSibling', filter, selector);
   }
 
@@ -1295,9 +1249,9 @@ class EagleJS extends Array {
    * @param  {...*} items The elements to add to the end of the collecton.
    * @return {number} The new length.
    */
-  push (...items) {
+  push (...items: any[]): number {
     return super.push(...items.filter((item) => {
-      return EagleJS.isContext(item) &amp;&amp; !this.includes(item);
+      return EagleJS.isContext(item) && !this.includes(item);
     }));
   }
 
@@ -1312,7 +1266,7 @@ class EagleJS extends Array {
    * @param  {EventListener} handler The handler funcion for event.
    * @return {EagleJS} The current collection.
    */
-  ready (handler) {
+  ready (handler: EventListener): EagleJS {
     const $document = this.find((element) => {
       return EagleJS.isDocument(element);
     });
@@ -1334,7 +1288,7 @@ class EagleJS extends Array {
    *
    * @return {EagleJS} The current collection.
    */
-  remove () {
+  remove (): EagleJS {
     this.forEach((element) => {
       if (EagleJS.isElement(element)) {
         element.remove();
@@ -1352,7 +1306,7 @@ class EagleJS extends Array {
    * @param  {string} name One or more attribute names.
    * @return {EagleJS} The current collection.
    */
-  removeAttr (name) {
+  removeAttr (name: string): EagleJS {
     if (typeof name === 'string') {
       const attributes = name.match(/\S+/g) || [];
       this.forEach((element) => {
@@ -1376,7 +1330,7 @@ class EagleJS extends Array {
    * @param  {string} name One or more class names.
    * @return {EagleJS} The current collection.
    */
-  removeClass (name) {
+  removeClass (name: string): EagleJS {
     if (typeof name === 'string') {
       const classes = name.match(/\S+/g) || [];
       this.forEach((element) => {
@@ -1399,7 +1353,7 @@ class EagleJS extends Array {
    * filter.
    * @return {EagleJS} A new collection.
    */
-  siblings (filter) {
+  siblings (filter?: string | DOMNode | DOMNodeArray | MatchCallback): EagleJS {
     const $elements = new EagleJS();
     this.forEach((element) => {
       const $element = new EagleJS(element);
@@ -1421,7 +1375,7 @@ class EagleJS extends Array {
    * @param  {number} [end]   Zero-based index before which to end extraction.
    * @return {EagleJS} A new collection.
    */
-  slice (begin, end) {
+  slice (begin?: number, end?: number): EagleJS {
     return new EagleJS(super.slice(begin, end));
   }
 
@@ -1437,7 +1391,7 @@ class EagleJS extends Array {
    * @return {boolean} True if any element matches the given condition,
    * otherwise false.
    */
-  some (callback) {
+  some (callback: MatchCallback): boolean {
     return super.some((element, index, array) => {
       return callback.call(element, element, index, array);
     });
@@ -1447,11 +1401,11 @@ class EagleJS extends Array {
    * Get or set the text contents of elements of the collection.
    *
    * @example
-   * &lt;caption>text(): string&lt;/caption>
+   * <caption>text(): string</caption>
    * $(element).text();
    *
    * @example
-   * &lt;caption>text(value: any): EagleJS&lt;/caption>
+   * <caption>text(value: any): EagleJS</caption>
    * $(element).text( 'string' );
    * $(element).text( 100 );
    * $(element).text( true );
@@ -1459,7 +1413,7 @@ class EagleJS extends Array {
    * @param  {*} [value] The text to set.
    * @return {string|EagleJS} The current collection or text of element.
    */
-  text (value) {
+  text (value?: any): string | EagleJS {
     if (typeof value !== 'undefined') {
       this.forEach((element) => {
         if (EagleJS.isElement(element)) {
@@ -1484,7 +1438,7 @@ class EagleJS extends Array {
    * should be added or removed.
    * @return {EagleJS} The current collection.
    */
-  toggleClass (name, force) {
+  toggleClass (name: string, force?: boolean): EagleJS {
     if (typeof name === 'string') {
       const classes = name.match(/\S+/g) || [];
       this.forEach((element) => {
@@ -1510,7 +1464,7 @@ class EagleJS extends Array {
    * event handler.
    * @return {EagleJS} The current collection.
    */
-  trigger (type, data = null) {
+  trigger (type: string, data: Object | null = null): EagleJS {
     if (typeof type === 'string') {
       const event = new CustomEvent(type, {
         bubbles: true,
@@ -1537,9 +1491,9 @@ class EagleJS extends Array {
    * @param  {...*} items The elements to add to the front of the collecton.
    * @return {number} The new length.
    */
-  unshift (...items) {
+  unshift (...items: any[]): number {
     return super.unshift(...items.filter((item) => {
-      return EagleJS.isContext(item) &amp;&amp; !this.includes(item);
+      return EagleJS.isContext(item) && !this.includes(item);
     }));
   }
 }
@@ -1562,13 +1516,13 @@ class EagleJS extends Array {
  *
  * @typedef {Document|Element} DOMNode
  */
-
+type DOMNode = Document | Element;
 /**
  * Array of DOM Nodes.
  *
  * @typedef {EagleJS|DOMNode[]|HTMLCollection|NodeList} DOMNodeArray
  */
-
+type DOMNodeArray = EagleJS | DOMNode[] | HTMLCollection | NodeList;
 /**
  * Function to execute on each element.
  *
@@ -1578,7 +1532,7 @@ class EagleJS extends Array {
  * @param  {Array}   [array] The array function was called upon.
  * @return {void}
  */
-
+type EachCallback = (element: DOMNode, index: number, array: any[]) => void;
 /**
  * The handler funcion for event.
  *
@@ -1605,7 +1559,7 @@ class EagleJS extends Array {
  * @param  {Array}   [array] The array function was called upon.
  * @return {*}
  */
-
+type MapCallback = (element: DOMNode, index: number, array: any[]) => any;
 /**
  * Function is a predicate, to test each element of the collection.
  *
@@ -1615,16 +1569,16 @@ class EagleJS extends Array {
  * @param  {Array}   [array] The array function was called upon.
  * @return {boolean|*}
  */
-
+type MatchCallback = (element: DOMNode, index: number, array: any[]) => boolean | any;
 /**
  * Proxy for EagleJS Class to use without a "new" keyword.
  *
  * @example
- * &lt;caption>Usage (Classic Style)&lt;/caption>
+ * <caption>Usage (Classic Style)</caption>
  * window.$ = EagleJSProxy;
  *
  * @example
- * &lt;caption>Usage (Ecmascript 6 Module)&lt;/caption>
+ * <caption>Usage (Ecmascript 6 Module)</caption>
  * // Default Import
  * import $ from "eaglejs.module.js";
  *
@@ -1637,34 +1591,6 @@ const EagleJSProxy = new Proxy(EagleJS, {
   }
 });
 
-// Define $
-window.$ = EagleJSProxy;
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Mon May 11 2020 13:29:55 GMT+0300 (GMT+03:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-<script src="scripts/collapse.js" defer></script>
-
-
-</body>
-</html>
+// Export
+export default EagleJSProxy;
+export { EagleJS, EagleJSProxy };
