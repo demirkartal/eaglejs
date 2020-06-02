@@ -50,13 +50,13 @@ $(document).ready(function () {
 - Minimum required versions do not mean tested versions.
 - Partially requirements do not affect the main functions.
 
-| Required Features                                     |    Use by    |            Partially Use by            |  Edge  | Firefox | Chrome | Safari | iOS Safari |
-|-------------------------------------------------------|:------------:|:--------------------------------------:|:------:|:-------:|:------:|:------:|:----------:|
-| EcmaScript 2015 (ES6)                                 |    EagleJS   |                    -                   |   15   |    54   |   51   |   10   |     10     |
-| EcmaScript 2016 (ES7)<br>- Array.prototype.includes() |    EagleJS   |                    -                   |   14   |    43   |   47   |    9   |      9     |
-| addEventListener()<br>- options.once parameter        |     one()    |           on() options param           |   16   |    50   |   55   |   10   |     10     |
-| querySelectorAll()<br>- :scope selector               |       -      | Selectors starts<br>with “>", "+", "~" | 79 [1] |    32   |   27   |    7   |      7     |
-| **Minimum Required Versions**                         |              |                                        | **16** |  **54** | **55** | **10** |   **10**   |
+| Required Features                                     |  Use by |               Partially Use by              |  Edge  | Firefox | Chrome | Safari | iOS Safari |
+|-------------------------------------------------------|:-------:|:-------------------------------------------:|:------:|:-------:|:------:|:------:|:----------:|
+| EcmaScript 2015 (ES6)                                 | EagleJS |                      -                      |   15   |    54   |   51   |   10   |     10     |
+| EcmaScript 2016 (ES7)<br>- Array.prototype.includes() | EagleJS |                      -                      |   14   |    43   |   47   |    9   |      9     |
+| addEventListener()<br>- options.once parameter        |  one()  |            on() options parameter           |   16   |    50   |   55   |   10   |     10     |
+| querySelectorAll()<br>- :scope selector               |    -    | find() when the selector<br>starts with “>” | 79 [1] |    32   |   27   |    7   |      7     |
+| **Minimum Required Versions**                         |         |                                             | **16** |  **54** | **55** | **10** |   **10**   |
 
 *Source: [MDN Web Docs](https://developer.mozilla.org/), [www.caniuse.com](https://caniuse.com/)*
 
