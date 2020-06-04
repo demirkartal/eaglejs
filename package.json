@@ -1,7 +1,7 @@
 {
   "name": "eaglejs",
   "description": "EagleJS is a jQuery-Like DOM manipulation class for modern browsers",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "MIT",
   "main": "eaglejs.js",
   "module": "eaglejs.module.js",

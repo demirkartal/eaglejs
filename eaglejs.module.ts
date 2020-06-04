@@ -2,7 +2,7 @@
 /**
  * EagleJS is a jQuery-Like DOM manipulation class for modern browsers
  *
- * @version   0.4.1
+ * @version   0.4.2
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -432,36 +432,15 @@ class EagleJS extends Array<DOMItem> {
   find (selector: string | MatchCallback, thisArg?: any): EagleJS | DOMItem | undefined {
     const $elements = new EagleJS();
     if (typeof selector === 'string') {
-      let scopedSelector = selector;
-      if (/^\s*>/.test(selector)) {
-        scopedSelector = ':scope ' + selector;
-      }
       this.forEach((element) => {
         if (EagleJS.isNode(element)) {
-          $elements.push(...element.querySelectorAll(scopedSelector));
+          $elements.push(...element.querySelectorAll(selector));
         }
       });
     } else if (typeof selector === 'function') {
       return super.find(selector, thisArg);
     }
     return $elements;
-  }
-
-  /**
-   * Executing a function for each element in the collection.
-   *
-   * @example
-   * $(element).forEach(function (element, index) {
-   *
-   * });
-   *
-   * @param  {EachCallback} callback A function to execute on each element.
-   * @param  {*} [thisArg] Value to use as this when executing callback.
-   * @return {this} The current collection.
-   */
-  forEach (callback: EachCallback, thisArg?: any): this {
-    super.forEach(callback, thisArg);
-    return this;
   }
 
   /**
@@ -712,24 +691,6 @@ class EagleJS extends Array<DOMItem> {
    */
   static isWindow (value: any): value is Window {
     return Boolean(value && value === value.window);
-  }
-
-  /**
-   * Generates a new array with returned values.
-   *
-   * @example
-   * $(element).map(function (element, index) {
-   *   return element.id;
-   * });
-   *
-   * @param  {MapCallback} callback A function that is called for every element
-   * of the collection.
-   * @param  {*} [thisArg] Value to use as this when executing callback.
-   * @return {Array} A new array with each element being the result of the
-   * callback function.
-   */
-  map (callback: MapCallback, thisArg?: any): any[] {
-    return [...super.map(callback, thisArg)];
   }
 
   /**
@@ -1417,9 +1378,9 @@ class EagleJS extends Array<DOMItem> {
    * @param  {string}  names   One or more class names.
    * @param  {boolean} [force] A boolean value to determine whether the class
    * should be added or removed.
-   * @return {EagleJS} The current collection.
+   * @return {this} The current collection.
    */
-  toggleClass (names: string, force?: boolean): EagleJS {
+  toggleClass (names: string, force?: boolean): this {
     const namesArray = names.match(/\S+/g) || [];
     this.forEach((element) => {
       if (EagleJS.isElement(element)) {
@@ -1489,26 +1450,6 @@ type DOMItem = Element | EventTarget | Document | DocumentFragment | Window;
  */
 type DOMItemArray = EagleJS | DOMItem[] | HTMLCollection | NodeList;
 /**
- * Function to execute on each element.
- *
- * @callback EachCallback
- * @param  {DOMItem} element The current element being processed.
- * @param  {number}  [index] The index of the current element being processed.
- * @param  {EagleJS} [array] The array function was called upon.
- * @return {void}
- */
-type EachCallback = (element: DOMItem, index: number, array: DOMItem[]) => void;
-/**
- * Function to execute on each element.
- *
- * @callback MapCallback
- * @param  {DOMItem} element The current element being processed.
- * @param  {number}  [index] The index of the current element being processed.
- * @param  {EagleJS} [array] The array function was called upon.
- * @return {*}
- */
-type MapCallback = (element: DOMItem, index: number, array: DOMItem[]) => any;
-/**
  * Function is a predicate, to test each element of the collection.
  *
  * @callback MatchCallback
@@ -1541,7 +1482,7 @@ const EagleJSProxy = new Proxy(EagleJS, {
 
 // Export
 export default EagleJSProxy;
-export { EagleJS, EagleJSProxy, DOMItem, DOMItemArray, EachCallback, MapCallback, MatchCallback };
+export { EagleJS, EagleJSProxy, DOMItem, DOMItemArray, MatchCallback };
 
 // TypeScript Things
 interface EagleJS {
