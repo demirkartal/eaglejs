@@ -1,8 +1,8 @@
 /* eslint semi: "error", no-param-reassign: "error" */
 /**
- * EagleJS is a jQuery-Like DOM manipulation class for modern browsers
+ * EagleJS is a jQuery-Like DOM manipulation class for modern browsers.
  *
- * @version   0.4.2
+ * @version   0.4.3
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -10,7 +10,7 @@
  */
 class EagleJS extends Array<DOMItem> {
   /**
-   * Return a collection of matched elements or created elements by HTML string.
+   * Return a collection of matched items or created nodes by HTML string.
    *
    * @example
    * // CSS Selector and htmlString
@@ -39,18 +39,18 @@ class EagleJS extends Array<DOMItem> {
    *
    * });
    *
-   * @param {string|DOMItem|DOMItemArray|EventListener} [selector] A selector to
-   * match.
+   * @param {string|DOMItem|DOMItemArray|EventListener|null} [selector]
+   * A selector to match.
    * @param {string|DOMItem|DOMItemArray} [context=document] Node(s) to use as
    * context.
    */
-  constructor(selector?: string | DOMItem | DOMItemArray | EventListener, context: string | DOMItem | DOMItemArray = document) {
+  constructor(selector?: string | DOMItem | DOMItemArray | EventListener | null, context: string | DOMItem | DOMItemArray = document) {
     super();
     if (typeof selector !== 'undefined') {
       if (typeof selector === 'string') {
         if (/^\s*<.+>\s*$/.test(selector)) {
           // Create HTML tag
-          const doc = document.implementation.createHTMLDocument('');
+          const doc = (context as Document).implementation.createHTMLDocument('');
           return new EagleJS('body', doc).html(selector).children();
         }
         // Find
@@ -67,7 +67,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Adds one or more class names to elements of the collection.
+   * Add the class name to each element of the collection.
    *
    * @example
    * $(element).addClass( 'className' );
@@ -86,7 +86,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert content after each element in the collection.
+   * Insert content after each node of the collection.
    *
    * @example
    * // CSS Selector and htmlString
@@ -107,7 +107,7 @@ class EagleJS extends Array<DOMItem> {
     let $content = new EagleJS(content);
     let flag = true;
     this.slice().reverse().forEach((element) => {
-      if (EagleJS.isElement(element)) { // ChildNode
+      if (EagleJS.isChildNode(element) && element.parentNode) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -122,7 +122,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert content to the end of each element in the collection.
+   * Insert content to the end of each node in the collection.
    *
    * @example
    * // CSS Selector and htmlString
@@ -143,7 +143,7 @@ class EagleJS extends Array<DOMItem> {
     let $content = new EagleJS(content);
     let flag = true;
     this.slice().reverse().forEach((element) => {
-      if (EagleJS.isNode(element)) {
+      if (EagleJS.isParentNode(element)) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -158,7 +158,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert every element in the collection to the end of the target.
+   * Insert every item of the collection to the end of the target.
    *
    * @example
    * // CSS Selector and htmlString
@@ -173,7 +173,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).appendTo( EagleJS );
    *
    * @param  {string|DOMItem|DOMItemArray} target The target to insert.
-   * @return {EagleJS} A new collection of clone and original node elements.
+   * @return {EagleJS} Return a new collection of original and clone nodes.
    */
   appendTo (target: string | DOMItem | DOMItemArray): EagleJS {
     const $elements = new EagleJS();
@@ -181,7 +181,7 @@ class EagleJS extends Array<DOMItem> {
     let $content: EagleJS = this;
     let flag = true;
     new EagleJS(target).reverse().forEach((element) => {
-      if (EagleJS.isNode(element)) {
+      if (EagleJS.isParentNode(element)) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -201,17 +201,16 @@ class EagleJS extends Array<DOMItem> {
    *
    * @example
    * <caption>attr (name: string): string | null</caption>
-   * // Returns attribute
    * $(element).attr( 'attributeName' );
    *
    * @example
    * <caption>attr (name: string, value: any): this</caption>
-   * // Sets attribute
    * $(element).attr( 'attributeName', 'value' );
    *
    * @param  {string} name    The name of attribute.
    * @param  {string} [value] The value for attribute.
-   * @return {string|null|this} The current collection or value of attribute.
+   * @return {string|null|this} The attribute value of the first element; or the
+   * current collection if the value parameter provided.
    */
   attr (name: string, value?: string): string | null | this {
     if (typeof value !== 'undefined') {
@@ -238,7 +237,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert content before each element in the collection.
+   * Insert content before each node of the collection.
    *
    * @example
    * // CSS Selector and htmlString
@@ -259,7 +258,7 @@ class EagleJS extends Array<DOMItem> {
     let $content = new EagleJS(content);
     let flag = true;
     this.slice().reverse().forEach((element) => {
-      if (EagleJS.isElement(element)) { // ChildNode
+      if (EagleJS.isChildNode(element) && element.parentNode) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -274,7 +273,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the children of elements. Optionally filtered by the selector.
+   * Get the children of each node in the collection, optionally filtered by a
+   * selector.
    *
    * @example
    * $(element).children();
@@ -287,7 +287,7 @@ class EagleJS extends Array<DOMItem> {
   children (filter?: string | DOMItem | DOMItemArray | MatchCallback): EagleJS {
     const $elements = new EagleJS();
     this.forEach((element) => {
-      if (EagleJS.isNode(element)) {
+      if (EagleJS.isParentNode(element)) {
         $elements.push(...element.children);
       }
     });
@@ -298,7 +298,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Create a deep copy of each element in the collection.
+   * Create a deep copy of each node in the collection.
    *
    * @example
    * $(element).clone();
@@ -320,7 +320,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the closest ancestor of elements matching with selector
+   * Get the closest ancestor of elements matching with the selector.
    *
    * @example
    * $(element).closest( 'selector' );
@@ -356,7 +356,26 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Remove all child nodes of the set of matched elements from the DOM.
+   * Get the children of each node in the collection, including comment and text
+   * nodes.
+   *
+   * @example
+   * $(element).contents();
+   *
+   * @return {EagleJS} A new collection.
+   */
+  contents (): EagleJS {
+    const $elements = new EagleJS();
+    this.forEach((element) => {
+      if (EagleJS.isNode(element)) {
+        $elements.push(...element.childNodes);
+      }
+    });
+    return $elements;
+  }
+
+  /**
+   * Remove the children of each node in the collection from the DOM.
    *
    * @example
    * $(element).empty();
@@ -410,9 +429,10 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Returns the matched descendants of elements with the filter.<br>
-   * Be aware: If the parameter is a function, the method acts as
-   * Array.prototype.find function.
+   * Get the descendants of each node in the collection, filtered by a
+   * selector.<br>
+   * Be aware: If the parameter is a function, the method functions as the
+   * Array.prototype.find.
    *
    * @example
    * <caption>find (selector: string): EagleJS</caption>
@@ -427,13 +447,14 @@ class EagleJS extends Array<DOMItem> {
    *
    * @param  {string|MatchCallback} selector A selector to match.
    * @param  {*} [thisArg] Value to use as this when executing callback.
-   * @return {EagleJS|DOMItem|undefined} A new collection.
+   * @return {EagleJS|DOMItem|undefined} A new collection; or a DOMItem if the
+   * parameter is a function.
    */
   find (selector: string | MatchCallback, thisArg?: any): EagleJS | DOMItem | undefined {
     const $elements = new EagleJS();
     if (typeof selector === 'string') {
       this.forEach((element) => {
-        if (EagleJS.isNode(element)) {
+        if (EagleJS.isParentNode(element)) {
           $elements.push(...element.querySelectorAll(selector));
         }
       });
@@ -447,10 +468,10 @@ class EagleJS extends Array<DOMItem> {
    * Alias to EagleJS.prototype.
    *
    * @example
-   * // Adds a new method (plugin) to the library
+   * // Adds a new method to the library
    * $.fn.newPlugin = function () {
    *   return this.each(function () {
-   *     // Do something to each element here.
+   *     // Do something to each item
    *   });
    * };
    *
@@ -468,7 +489,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).hasClass( 'className' );
    *
    * @param  {string} name The class name to search.
-   * @return {boolean} True if elements have the given class name, otherwise
+   * @return {boolean} True if any element has the given class name, otherwise
    * false.
    */
   hasClass (name: string): boolean {
@@ -478,7 +499,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get or set the HTML contents of elements of the collection.
+   * Get or set the HTML contents of elements in the collection.
    *
    * @example
    * <caption>html (): string</caption>
@@ -489,7 +510,8 @@ class EagleJS extends Array<DOMItem> {
    * $(element).html( 'htmlString' ); // Create HTML tag
    *
    * @param  {string} [value] The html string to set.
-   * @return {string|this} The current collection or html string of element.
+   * @return {string|this} The HTML string of the first element; or the current
+   * collection if the value parameter provided.
    */
   html (value?: string): string | this {
     if (typeof value !== 'undefined') {
@@ -513,7 +535,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert every element in the collection after the target.
+   * Insert every item of the collection after the target.
    *
    * @example
    * // CSS Selector and htmlString
@@ -528,7 +550,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).insertAfter( EagleJS );
    *
    * @param  {string|DOMItem|DOMItemArray} target The target to insert.
-   * @return {EagleJS} A new collection of clone and original node elements.
+   * @return {EagleJS} Return a new collection of original and clone nodes.
    */
   insertAfter (target: string | DOMItem | DOMItemArray): EagleJS {
     const $elements = new EagleJS();
@@ -536,7 +558,7 @@ class EagleJS extends Array<DOMItem> {
     let $content: EagleJS = this;
     let flag = true;
     new EagleJS(target).reverse().forEach((element) => {
-      if (EagleJS.isElement(element)) { // ChildNode
+      if (EagleJS.isChildNode(element) && element.parentNode) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -552,7 +574,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert every element in the collection before the target.
+   * Insert every item of the collection before the target.
    *
    * @example
    * // CSS Selector and htmlString
@@ -567,7 +589,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).insertBefore( EagleJS );
    *
    * @param  {string|DOMItem|DOMItemArray} target The target to insert.
-   * @return {EagleJS} A new collection of clone and original node elements.
+   * @return {EagleJS} Return a new collection of original and clone nodes.
    */
   insertBefore (target: string | DOMItem | DOMItemArray): EagleJS {
     const $elements = new EagleJS();
@@ -575,7 +597,7 @@ class EagleJS extends Array<DOMItem> {
     let $content: EagleJS = this;
     let flag = true;
     new EagleJS(target).reverse().forEach((element) => {
-      if (EagleJS.isElement(element)) { // ChildNode
+      if (EagleJS.isChildNode(element) && element.parentNode) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -591,7 +613,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Check any collection elements matches selector
+   * Check any element of the collection that matches the selector.
    *
    * @example
    * // CSS Selector
@@ -633,6 +655,16 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
+   * Check if the variable implements the ChildNode interface.
+   *
+   * @param  {*} value The value to check.
+   * @return {boolean}
+   */
+  static isChildNode (value: any): value is ChildNode {
+    return this.isNode(value) && [1, 3, 4, 7, 8, 10].includes(value.nodeType);
+  }
+
+  /**
    * Check if the variable is a Document node.
    *
    * @param  {*} value The value to check.
@@ -643,17 +675,17 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Check if the variable is a DocumentFragment node.
+   * Check if the variable is a DOMItem.
    *
    * @param  {*} value The value to check.
    * @return {boolean}
    */
-  static isDocumentFragment (value: any): value is DocumentFragment {
-    return this.isNode(value) && value.nodeType === 11;
+  static isDOMItem (value: any): value is DOMItem {
+    return this.isNode(value) || this.isWindow(value);
   }
 
   /**
-   * Check if the variable is a Element node.
+   * Check if the variable is an Element node.
    *
    * @param  {*} value The value to check.
    * @return {boolean}
@@ -673,14 +705,13 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Check if the variable is DOMItem.
+   * Check if the variable implements the ParentNode interface.
    *
    * @param  {*} value The value to check.
    * @return {boolean}
    */
-  static isDOMItem (value: any): value is DOMItem {
-    return this.isElement(value) || this.isDocument(value) ||
-      this.isDocumentFragment(value) || this.isWindow(value);
+  static isParentNode (value: any): value is ParentNode {
+    return this.isNode(value) && [1, 9, 11].includes(value.nodeType);
   }
 
   /**
@@ -694,8 +725,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Collect the given property of elements. Optionally filtered by the
-   * selector.
+   * Collect the given property of items, optionally filtered by a selector.
    *
    * @example
    * $(element).mapProp( 'nextElementSibling' );
@@ -724,8 +754,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Collect the given property of elements until the given selector.
-   * Optionally filtered by the selector.
+   * Collect the given property of items until the given selector, optionally
+   * filtered by a selector.
    *
    * @example
    * // Until node element exists
@@ -770,7 +800,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the next sibling of elements. Optionally filtered by the selector.
+   * Get the next sibling of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).next();
@@ -785,8 +815,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get all following siblings of elements. Optionally filtered by the
-   * selector.
+   * Get all the following siblings of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).nextAll();
@@ -801,8 +830,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get all following siblings of elements until the given selector. Optionally
-   * filtered by the selector.
+   * Get all the following siblings of nodes until the given selector,
+   * optionally filtered by a selector.
    *
    * @example
    * $(element).nextUntil();
@@ -866,7 +895,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Remove an event handler from elements of the collection.
+   * Remove the event listener from each item of the collection.
    *
    * @example
    * $(element).off( 'click', handler );
@@ -889,14 +918,14 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Attach an event handler to elements of the collection.
+   * Attach the event listener to each item of the collection.
    *
    * @example
    * $(element).on( 'hover', function(event) {
    *   console.log( $(this).text() );
    * });
    *
-   * @param  {string} events  One or more event names.
+   * @param  {string} events One or more event names.
    * @param  {EventListener|EventListenerObject} handler The handler funcion for
    * event.
    * @param  {boolean|AddEventListenerOptions} [options=false] Characteristics
@@ -914,15 +943,15 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Attach an event handler to elements of the collection. The handler is
-   * executed at most once per element per event type.
+   * Attach the event listener to each item of the collection. The event
+   * listener is executed at most once per element per event type.
    *
    * @example
    * $(element).one( 'hover', function(event) {
    *   console.log( $(this).text() );
    * });
    *
-   * @param  {string}        events  One or more event names.
+   * @param  {string} events One or more event names.
    * @param  {EventListener|EventListenerObject} handler The handler funcion for
    * event.
    * @return {this} The current collection.
@@ -934,7 +963,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the parent of elements. Optionally filtered by the selector.
+   * Get the parent of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).parent();
@@ -949,7 +978,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the ancestors of elements. Optionally filtered by the selector.
+   * Get the ancestors of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).parents();
@@ -964,8 +993,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the ancestors of elements until the given selector. Optionally
-   * filtered by the selector.
+   * Get the ancestors of nodes until the given selector, optionally filtered
+   * by a selector.
    *
    * @example
    * $(element).parentsUntil();
@@ -986,7 +1015,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert content to the beginning each element in the collection.
+   * Insert content to the beginning of each node in the collection.
    *
    * @example
    * // CSS Selector and htmlString
@@ -1007,7 +1036,7 @@ class EagleJS extends Array<DOMItem> {
     let $content = new EagleJS(content);
     let flag = true;
     this.slice().reverse().forEach((element) => {
-      if (EagleJS.isNode(element)) {
+      if (EagleJS.isParentNode(element)) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -1022,7 +1051,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert every element in the collection to the beginning of the target.
+   * Insert every item of the collection to the beginning of the target.
    *
    * @example
    * // CSS Selector and htmlString
@@ -1037,7 +1066,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).prependTo( EagleJS );
    *
    * @param  {string|DOMItem|DOMItemArray} target The target to insert.
-   * @return {EagleJS} A new collection.
+   * @return {EagleJS} Return a new collection of original and clone nodes.
    */
   prependTo (target: string | DOMItem | DOMItemArray): EagleJS {
     const $elements = new EagleJS();
@@ -1045,7 +1074,7 @@ class EagleJS extends Array<DOMItem> {
     let $content: EagleJS = this;
     let flag = true;
     new EagleJS(target).reverse().forEach((element) => {
-      if (EagleJS.isNode(element)) {
+      if (EagleJS.isParentNode(element)) {
         if (!flag) {
           $content = $content.clone();
         } else {
@@ -1061,7 +1090,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the previous sibling of elements. Optionally filtered by the selector.
+   * Get the previous sibling of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).prev();
@@ -1076,8 +1105,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get all preceding siblings of elements. Optionally filtered by the
-   * selector.
+   * Get all preceding siblings of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).prevAll();
@@ -1092,8 +1120,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get all preceding siblings of elements until the given selector. Optionally
-   * filtered by the selector.
+   * Get all preceding siblings of nodes until the given selector, optionally
+   * filtered by a selector.
    *
    * @example
    * $(element).prevUntil();
@@ -1114,21 +1142,20 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get or set property value for elements of the collection.
+   * Get or set the property value for items of the collection.
    *
    * @example
    * <caption>prop (name: string): any</caption>
-   * // Returns property
    * $(element).prop( 'propertyName' );
    *
    * @example
    * <caption>prop (name: string, value: any): this</caption>
-   * // Sets property
    * $(element).prop( 'propertyName', 'value' );
    *
    * @param  {string} name    The name of property.
    * @param  {*}      [value] The value for property.
-   * @return {*|this} The current collection or value of property.
+   * @return {*|this} The property value of the first item; or the current
+   * collection if the value parameter provided.
    */
   prop (name: string, value?: any): any | this {
     if (typeof value !== 'undefined') {
@@ -1149,7 +1176,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Adds new items to the end of the collection.
+   * Adds one or more items to the end of the collection.
    *
    * @example
    * $(element).push( DOMItem, DOMItem, DOMItem );
@@ -1158,7 +1185,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).push( ...DOMItem[] );
    * $(element).push( ...EagleJS );
    *
-   * @param  {...DOMItem} items The elements to add to the end of the collecton.
+   * @param  {...DOMItem} items Items to add to the end of the collection.
    * @return {number} The new length.
    */
   push (...items: DOMItem[]): number {
@@ -1192,7 +1219,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Remove collection elements from the DOM.
+   * Remove nodes of the collection from the DOM.
    *
    * @example
    * $(element).remove();
@@ -1201,15 +1228,17 @@ class EagleJS extends Array<DOMItem> {
    */
   remove (): this {
     this.forEach((element) => {
-      if (EagleJS.isElement(element)) {
-        element.remove();
+      if (EagleJS.isChildNode(element)) {
+        if (element.parentNode) {
+          element.parentNode.removeChild(element);
+        }
       }
     });
     return this;
   }
 
   /**
-   * Removes one or more attributes from elements of the collection.
+   * Remove the attribute from each element of the collection.
    *
    * @example
    * $(element).removeAttr( 'attributeName' );
@@ -1230,7 +1259,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Removes one or more classes from elements of the collection.
+   * Remove the class name from each element of the collection.
    *
    * @example
    * $(element).removeClass( 'className' );
@@ -1249,7 +1278,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Removes property from elements of the collection.
+   * Remove the property from each item of the collection.
    *
    * @example
    * $(element).removeProp( 'propertyName' );
@@ -1266,7 +1295,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Replace the given target with each element in the collection.
+   * Replace the given target with each item of the collection.
    *
    * @example
    * // CSS Selector and htmlString
@@ -1291,7 +1320,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Replace each element in the collection with the given content.
+   * Replace each node of the collection with the given content.
    *
    * @example
    * // CSS Selector and htmlString
@@ -1313,7 +1342,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the siblings of elements. Optionally filtered by the selector.
+   * Get the siblings of nodes, optionally filtered by a selector.
    *
    * @example
    * $(element).siblings();
@@ -1333,7 +1362,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get or set the text contents of elements of the collection.
+   * Get or set the text contents of nodes in the collection.
    *
    * @example
    * <caption>text (): string | null</caption>
@@ -1344,7 +1373,8 @@ class EagleJS extends Array<DOMItem> {
    * $(element).text( 'value' );
    *
    * @param  {string} [value] The text to set.
-   * @return {string|null|this} The current collection or text of element.
+   * @return {string|null|this} Text of the first node; or the current
+   * collection if the value parameter provided.
    */
   text (value?: string): string | null | this {
     if (typeof value !== 'undefined') {
@@ -1368,7 +1398,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Toggle one or more class names for elements of the collection.
+   * Toggle the class name to each element of the collection.
    *
    * @example
    * $(element).toggleClass( 'className' );
@@ -1393,18 +1423,18 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Trigger the specified event on elements of the collection.
+   * Trigger the specified event on each item of the collection.
    *
    * @example
    * $(element).trigger( 'click' );
    * $(element).trigger( 'click', data );
    *
    * @param  {string}      type        Name of the event.
-   * @param  {Object|null} [data=null] Additional data to pass along to the
+   * @param  {object|null} [data=null] Additional data to pass along to the
    * event handler.
    * @return {this} The current collection.
    */
-  trigger (type: string, data: Object | null = null): this {
+  trigger (type: string, data: object | null = null): this {
     const event = new CustomEvent(type, {
       bubbles: true,
       cancelable: true,
@@ -1426,8 +1456,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).unshift( ...DOMItem[] );
    * $(element).unshift( ...EagleJS );
    *
-   * @param  {...DOMItem} items The elements to add to the front of the
-   * collecton.
+   * @param  {...DOMItem} items Items to add to the front of the collection.
    * @return {number} The new length.
    */
   unshift (...items: DOMItem[]): number {
@@ -1438,19 +1467,19 @@ class EagleJS extends Array<DOMItem> {
 }
 
 /**
- * DOM Items like Element, EventTarget, Document, DocumentFragment and Window.
+ * DOM items like EventTarget, Node, and Window.
  *
- * @typedef {Element|EventTarget|Document|DocumentFragment|Window} DOMItem
+ * @typedef {EventTarget|Node|Window} DOMItem
  */
-type DOMItem = Element | EventTarget | Document | DocumentFragment | Window;
+type DOMItem = EventTarget | Node | Window | Element | Text | CDATASection | ProcessingInstruction | Comment | Document | DocumentType | DocumentFragment;
 /**
- * Array of DOM Items.
+ * An array of DOM items.
  *
  * @typedef {EagleJS|DOMItem[]|HTMLCollection|NodeList} DOMItemArray
  */
 type DOMItemArray = EagleJS | DOMItem[] | HTMLCollection | NodeList;
 /**
- * Function is a predicate, to test each element of the collection.
+ * A function to test each item of the collection.
  *
  * @callback MatchCallback
  * @param  {DOMItem} element The current element being processed.
@@ -1460,7 +1489,7 @@ type DOMItemArray = EagleJS | DOMItem[] | HTMLCollection | NodeList;
  */
 type MatchCallback = (element: DOMItem, index: number, array: DOMItem[]) => boolean | any;
 /**
- * Proxy for EagleJS Class to use without a "new" keyword.
+ * Proxy to use EagleJS Class without the new keyword.
  *
  * @example
  * <caption>Usage (Classic Style)</caption>
@@ -1469,10 +1498,10 @@ type MatchCallback = (element: DOMItem, index: number, array: DOMItem[]) => bool
  * @example
  * <caption>Usage (Ecmascript 6 Module)</caption>
  * // Default Import
- * import $ from "eaglejs.module.js";
+ * import $ from 'eaglejs.module.js';
  *
  * // Custom Import
- * import {EagleJSProxy as $} from "eaglejs.module.js";
+ * import {EagleJSProxy as $} from 'eaglejs.module.js';
  */
 const EagleJSProxy = new Proxy(EagleJS, {
   apply: (Target, _thisArg, argumentsList) => {
@@ -1482,7 +1511,7 @@ const EagleJSProxy = new Proxy(EagleJS, {
 
 // Export
 export default EagleJSProxy;
-export { EagleJS, EagleJSProxy, DOMItem, DOMItemArray, MatchCallback };
+export { EagleJS, EagleJSProxy, DOMItem, DOMItemArray };
 
 // TypeScript Things
 interface EagleJS {
@@ -1504,5 +1533,5 @@ interface EagleJS {
 
 interface EagleJSProxy {
   // Make callable
-  (selector?: string | DOMItem | DOMItemArray, context?: string | DOMItem | DOMItemArray): EagleJS
+  (selector?: string | DOMItem | DOMItemArray | EventListener | null, context?: string | DOMItem | DOMItemArray): EagleJS
 }

@@ -1,6 +1,6 @@
 # EagleJS
 
-EagleJS is a jQuery-Like DOM manipulation class for modern browsers
+EagleJS is a jQuery-Like DOM manipulation class for modern browsers.
 
 - Powered with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
@@ -12,7 +12,7 @@ EagleJS is a jQuery-Like DOM manipulation class for modern browsers
 
 ### Classic Style
 
-Download script file and include on top of other script which require EagleJS.
+Download the script file, and include on top of other scripts that require EagleJS.
 
 ```html
 <script src="eaglejs.min.js"></script>
@@ -26,7 +26,7 @@ $(document).ready(function () {
 ### ES6 Module
 
 ```js
-import $ from "eaglejs.module.js";
+import $ from 'eaglejs.module.js';
 
 $(document).ready(function () {
   // Call when DOM is loaded
@@ -35,7 +35,7 @@ $(document).ready(function () {
 
 ## Browser Support
 
-### Desktop (Last two major versions)
+### Desktop (Last two versions)
 - Chrome
 - Edge
 - Firefox
@@ -62,21 +62,5 @@ $(document).ready(function () {
 ## Documentation
 
 - You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/).
-- You can read from javascript file.
-- IDE which supports JSDOC can help dynamically by code. Like;
-  - Apache NetBeans IDE
-  - Visual Studio Code
-
-## Methods avoid adding to this project for better performance
-
-- CSS Manipulation
-  - Use addClass, toggleClass and removeClass
-- Dimensions, Offset and Position
-   - Use responsive design
-- Effects
-   - Use CSS3 animation and transitions
-- Live event listeners
-  - Use  $(document).on() with event.target
-
-## Be aware
-- This project is **still under development**
+- You can read from the javascript file.
+- IDEs that support JSDoc can help dynamically by code.
