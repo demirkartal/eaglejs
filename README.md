@@ -12,52 +12,49 @@ EagleJS is a jQuery-Like DOM manipulation class for modern browsers.
 
 ### Classic Style
 
-Download the script file, and include on top of other scripts that require EagleJS.
+Download the script file, and include on top of other scripts that requires EagleJS.
 
 ```html
 <script src="eaglejs.min.js"></script>
 <script>
-$(document).ready(function () {
-  // Call when DOM is loaded
-});
+  $(document).ready(function () {
+    // Call when DOM is completely loaded
+  });
 </script>
 ```
 
 ### ES6 Module
 
 ```js
-import $ from 'eaglejs.module.js';
+import $ from "eaglejs.module.js";
 
 $(document).ready(function () {
-  // Call when DOM is loaded
+  // Call when DOM is completely loaded
 });
 ```
 
 ## Browser Support
 
+For a detailed view, please check the table on [caniuse.com](https://caniuse.com/es6,array-includes,once-event-listener).
+
 ### Desktop (Last two versions)
+
 - Chrome
-- Edge
+- Edge 16+
 - Firefox
 - Safari 10.1+
 
 ### Mobile (Latest versions)
+
 - Chrome
 - Firefox
 - iOS Safari 10.3+
 
-### Detailed View on Browser Support
-- Minimum required versions do not mean tested versions.
-- Partially requirements do not affect the main functions.
+### Required features:
 
-| Required Features                                     |  Use by |    Partially Use by    |  Edge  | Firefox | Chrome | Safari | iOS Safari |
-|-------------------------------------------------------|:-------:|:----------------------:|:------:|:-------:|:------:|:------:|:----------:|
-| EcmaScript 2015 (ES6)                                 | EagleJS |            -           |   15   |    54   |   51   |   10   |     10     |
-| EcmaScript 2016 (ES7)<br>- Array.prototype.includes() | EagleJS |            -           |   14   |    43   |   47   |    9   |      9     |
-| addEventListener()<br>- options.once parameter        |  one()  | on() options parameter |   16   |    50   |   55   |   10   |     10     |
-| **Minimum Required Versions**                         |         |                        | **16** |  **54** | **55** | **10** |   **10**   |
-
-*Source: [MDN Web Docs](https://developer.mozilla.org/), [www.caniuse.com](https://caniuse.com/)*
+- EcmaScript 2015 (ES6)
+- EcmaScript 2016 (ES7) partially: Array.prototype.includes()
+- EventTarget.addEventListener(): options.once option
 
 ## Documentation
 

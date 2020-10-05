@@ -1,4 +1,8 @@
-/.vscode
-/nbproject
-/node_modules
 package-lock.json
+/node_modules
+
+# Editors
+/.vscode
+
+# Others
+/project_files

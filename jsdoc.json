@@ -3,9 +3,7 @@
     "allowUnknownTags": true
   },
   "source": {
-    "include": [
-      "./README.md"
-    ],
+    "include": ["./README.md"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
@@ -26,10 +24,7 @@
     "sort": true,
     "search": true,
     "collapse": true,
-    "sectionOrder": [
-      "Modules",
-      "Classes"
-    ],
+    "sectionOrder": ["Modules", "Classes"],
     "menu": {
       "Github repo": {
         "href": "https://github.com/EagleFramework/EagleJS",
