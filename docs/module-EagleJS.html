@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>EagleJS - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/EagleFramework/EagleJS" target="_blank" class="menu-item" id="website_link" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-EagleJS.html">EagleJS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-EagleJS.html#~EagleJSProxy">EagleJSProxy</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="module-EagleJS-EagleJS.html">EagleJS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isChildNode">isChildNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isDocument">isDocument</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isDOMItem">isDOMItem</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isElement">isElement</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isNode">isNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isParentNode">isParentNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#addClass">addClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#after">after</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#append">append</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#attr">attr</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#before">before</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#children">children</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#clone">clone</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#closest">closest</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#concat">concat</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#contents">contents</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#empty">empty</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#filter">filter</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#find">find</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#hasClass">hasClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#html">html</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#is">is</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#next">next</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#not">not</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#off">off</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#on">on</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#one">one</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#parent">parent</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#prepend">prepend</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#prev">prev</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#push">push</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#ready">ready</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#remove">remove</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#removeAttr">removeAttr</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#removeClass">removeClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#replaceWith">replaceWith</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#siblings">siblings</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#text">text</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#toggleClass">toggleClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#trigger">trigger</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#unshift">unshift</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">EagleJS</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-EagleJS-EagleJS.html">EagleJS</a></dt>
+            <dd></dd>
+        </dl>
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~EagleJSProxy"><span class="type-signature">(inner) </span>EagleJSProxy<span class="signature">(selector<span class="signature-attributes">opt, nullable</span>, context<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {EagleJS}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="eaglejs.esm.js.html">eaglejs.esm.js</a>, <a href="eaglejs.esm.js.html#line1170">line 1170</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    Proxy to use EagleJS Class without the new keyword.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Usage (Ecmascript 6 Module)</p>
+    
+    <pre class="prettyprint"><code>import { EagleJSProxy as $ } from 'eaglejs.esm.js';</code></pre>
+
+        <p class="code-caption">Usage (Classic Style)</p>
+    
+    <pre class="prettyprint"><code>window.$ = EagleJSProxy;</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">DOMItem</span>
+|
+
+<span class="param-type">Array.&lt;DOMItem></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last">A selector to match.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">DOMItem</span>
+|
+
+<span class="param-type">Array.&lt;DOMItem></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>document</code>
+                
+                </td>
+            
+
+            <td class="description last">A selector to use as
+context.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new collection.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">EagleJS</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~DOMItem">DOMItem</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="eaglejs.esm.js.html">eaglejs.esm.js</a>, <a href="eaglejs.esm.js.html#line1138">line 1138</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>EventTarget on <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">MDN</a>.</li>
+        
+            <li>Node on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">MDN</a>.</li>
+        
+            <li>Window on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">MDN</a>.</li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    DOM items like EventTarget, Node (Element, Text, Document, etc.), and Window.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">EventTarget</span>
+|
+
+<span class="param-type">Node</span>
+|
+
+<span class="param-type">Window</span>
+|
+
+<span class="param-type">Element</span>
+|
+
+<span class="param-type">Text</span>
+|
+
+<span class="param-type">CDATASection</span>
+|
+
+<span class="param-type">ProcessingInstruction</span>
+|
+
+<span class="param-type">Comment</span>
+|
+
+<span class="param-type">Document</span>
+|
+
+<span class="param-type">DocumentType</span>
+|
+
+<span class="param-type">DocumentFragment</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+
+    
+
+    <h4 class="name" id="~MatchCallback"><span class="type-signature"></span>MatchCallback<span class="signature">(element, index<span class="signature-attributes">opt</span>, array<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="eaglejs.esm.js.html">eaglejs.esm.js</a>, <a href="eaglejs.esm.js.html#line1147">line 1147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    A function to test each item in the collection.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DOMItem</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The current element being processed.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The index of the current element being processed.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>array</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;DOMItem></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The array function was called upon.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Nov 07 2020 13:33:18 GMT+0300 (GMT+03:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

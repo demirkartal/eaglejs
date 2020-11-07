@@ -2,17 +2,25 @@
   "compilerOptions": {
     "target": "ES2016",
     "module": "ES2015",
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "strictBindCallApply": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
+
+    /* Strict Checks */
+    "strict": true,
+    // "noImplicitAny": true,
+    // "strictNullChecks": true,
+    // "strictFunctionTypes": true,
+    // "strictPropertyInitialization": true,
+    // "strictBindCallApply": true,
+    // "noImplicitThis": true,
+    // "alwaysStrict": true,
+
+    /* Linter Checks */
     "noImplicitReturns": true,
+    // "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+
+    // Style
+    "newLine": "lf"
   },
-  "exclude": ["node_modules", "**/node_modules/*"],
-  "files": ["eaglejs.module.ts"]
+  "exclude": ["node_modules", "docs", "project_files"]
 }

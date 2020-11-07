@@ -1,4 +1,4 @@
-'use strict';
+/** @module EagleJS */
 /**
  * EagleJS.
  *
@@ -1170,5 +1170,5 @@ class EagleJS extends Array {
 const EagleJSProxy = function (selector = null, context = document) {
   return new EagleJS(selector, context);
 };
-// Define $
-window.$ = EagleJSProxy;
+// Export
+export { EagleJS, EagleJSProxy };

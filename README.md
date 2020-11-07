@@ -26,7 +26,7 @@ Download the script file, and include on top of other scripts that requires Eagl
 ### ES6 Module
 
 ```js
-import $ from "eaglejs.module.js";
+import { EagleJSProxy as $ } from 'eaglejs.esm.js';
 
 $(document).ready(function () {
   // Call when DOM is completely loaded

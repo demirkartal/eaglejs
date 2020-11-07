@@ -1,4 +1,50 @@
-'use strict';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>eaglejs.esm.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/EagleFramework/EagleJS" target="_blank" class="menu-item" id="website_link" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-EagleJS.html">EagleJS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-EagleJS.html#~EagleJSProxy">EagleJSProxy</a></li></ul></li></ul><h3>Classes</h3><ul><li><a href="module-EagleJS-EagleJS.html">EagleJS</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isChildNode">isChildNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isDocument">isDocument</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isDOMItem">isDOMItem</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isElement">isElement</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isNode">isNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#.isParentNode">isParentNode</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#addClass">addClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#after">after</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#append">append</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#attr">attr</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#before">before</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#children">children</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#clone">clone</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#closest">closest</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#concat">concat</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#contents">contents</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#empty">empty</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#filter">filter</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#find">find</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#hasClass">hasClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#html">html</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#is">is</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#next">next</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#not">not</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#off">off</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#on">on</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#one">one</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#parent">parent</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#prepend">prepend</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#prev">prev</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#push">push</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#ready">ready</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#remove">remove</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#removeAttr">removeAttr</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#removeClass">removeClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#replaceWith">replaceWith</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#siblings">siblings</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#text">text</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#toggleClass">toggleClass</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#trigger">trigger</a></li><li data-type='method' style='display: none;'><a href="module-EagleJS-EagleJS.html#unshift">unshift</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">eaglejs.esm.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module EagleJS */
 /**
  * EagleJS.
  *
@@ -6,7 +52,7 @@
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
- * @augments  Array<DOMItem>
+ * @augments  Array&lt;DOMItem>
  */
 class EagleJS extends Array {
   /**
@@ -40,7 +86,7 @@ class EagleJS extends Array {
     super();
     if (selector !== null) {
       if (typeof selector === 'string') {
-        if (/^\s*<.+>\s*$/.test(selector)) {
+        if (/^\s*&lt;.+>\s*$/.test(selector)) {
           if (EagleJS.isDocument(context)) {
             const doc = context.implementation.createHTMLDocument('');
             return new EagleJS('body', doc).html(selector).children();
@@ -101,7 +147,7 @@ class EagleJS extends Array {
     });
     let first = true;
     this.slice().reverse().forEach((item) => {
-      if (EagleJS.isChildNode(item) && item.parentNode !== null) {
+      if (EagleJS.isChildNode(item) &amp;&amp; item.parentNode !== null) {
         const parentNode = item.parentNode;
         if (first) {
           nodeArray.forEach((node) => {
@@ -162,10 +208,10 @@ class EagleJS extends Array {
   /**
    * Get or set the attribute value of each element in the collection.
    *
-   * @example <caption>attr (name: string): string | null</caption>
+   * @example &lt;caption>attr (name: string): string | null&lt;/caption>
    * $(element).attr('attributeName');
    *
-   * @example <caption>attr (name: string, value: string): this</caption>
+   * @example &lt;caption>attr (name: string, value: string): this&lt;/caption>
    * $(element).attr('attributeName', 'value');
    *
    * @see Element.getAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute MDN}
@@ -223,7 +269,7 @@ class EagleJS extends Array {
     });
     let first = true;
     this.slice().reverse().forEach((item) => {
-      if (EagleJS.isChildNode(item) && item.parentNode !== null) {
+      if (EagleJS.isChildNode(item) &amp;&amp; item.parentNode !== null) {
         const parentNode = item.parentNode;
         if (first) {
           nodeArray.forEach((node) => {
@@ -320,7 +366,7 @@ class EagleJS extends Array {
    * $(element).concat(EagleJS, EagleJS, EagleJS);
    *
    * @see Array.prototype.concat() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat MDN}.
-   * @param {...(DOMItem|Array<DOMItem>)} items Values to concatenate into a new
+   * @param {...(DOMItem|Array&lt;DOMItem>)} items Values to concatenate into a new
    * array.
    * @returns {EagleJS} A new collection.
    */
@@ -393,7 +439,7 @@ class EagleJS extends Array {
   filter (selector, thisArg) {
     if (typeof selector === 'string') {
       return this.filter((item) => {
-        return EagleJS.isElement(item) && item.matches(selector);
+        return EagleJS.isElement(item) &amp;&amp; item.matches(selector);
       });
     }
     if (typeof selector === 'function') {
@@ -413,11 +459,11 @@ class EagleJS extends Array {
    * Get the descendants of each node in the collection, filtered by a
    * selector.
    *
-   * @example <caption>find (selector: string): this</caption>
+   * @example &lt;caption>find (selector: string): this&lt;/caption>
    * $(element).find('selector');
    *
-   * @example <caption>find (selector: MatchCallback, thisArg?: any): DOMItem |
-   * undefined</caption>
+   * @example &lt;caption>find (selector: MatchCallback, thisArg?: any): DOMItem |
+   * undefined&lt;/caption>
    * $(element).find(function (item, index) {
    *   return item.value > 0;
    * });
@@ -458,17 +504,17 @@ class EagleJS extends Array {
    */
   hasClass (name) {
     return this.some((item) => {
-      return EagleJS.isElement(item) && item.classList.contains(name);
+      return EagleJS.isElement(item) &amp;&amp; item.classList.contains(name);
     });
   }
 
   /**
    * Get or set the HTML content of each element in the collection.
    *
-   * @example <caption>html (): string</caption>
+   * @example &lt;caption>html (): string&lt;/caption>
    * $(element).html();
    *
-   * @example <caption>html (value: string): this</caption>
+   * @example &lt;caption>html (value: string): this&lt;/caption>
    * $(element).html('htmlString'); // Create HTML tag
    *
    * @see Element.innerHTML on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML MDN}.
@@ -529,7 +575,7 @@ class EagleJS extends Array {
   is (selector) {
     if (typeof selector === 'string') {
       return this.some((item) => {
-        return EagleJS.isElement(item) && item.matches(selector);
+        return EagleJS.isElement(item) &amp;&amp; item.matches(selector);
       });
     }
     if (typeof selector === 'function') {
@@ -559,7 +605,7 @@ class EagleJS extends Array {
    * otherwise, false.
    */
   static isChildNode (value) {
-    return this.isNode(value) && [1, 3, 4, 7, 8, 10].includes(value.nodeType);
+    return this.isNode(value) &amp;&amp; [1, 3, 4, 7, 8, 10].includes(value.nodeType);
   }
 
   /**
@@ -575,7 +621,7 @@ class EagleJS extends Array {
    * @returns {boolean} True if the value is a Document node; otherwise, false.
    */
   static isDocument (value) {
-    return this.isNode(value) && value.nodeType === 9;
+    return this.isNode(value) &amp;&amp; value.nodeType === 9;
   }
 
   /**
@@ -591,7 +637,7 @@ class EagleJS extends Array {
    * @returns {boolean} True if the value is a DOMItem; otherwise, false.
    */
   static isDOMItem (value) {
-    return Boolean(value) && Boolean(value.addEventListener);
+    return Boolean(value) &amp;&amp; Boolean(value.addEventListener);
   }
 
   /**
@@ -607,7 +653,7 @@ class EagleJS extends Array {
    * @returns {boolean} True if the value is an Element node; otherwise, false.
    */
   static isElement (value) {
-    return this.isNode(value) && value.nodeType === 1;
+    return this.isNode(value) &amp;&amp; value.nodeType === 1;
   }
 
   /**
@@ -623,7 +669,7 @@ class EagleJS extends Array {
    * @returns {boolean} True if the value is a Node; otherwise, false.
    */
   static isNode (value) {
-    return Boolean(value) && Boolean(value.nodeType);
+    return Boolean(value) &amp;&amp; Boolean(value.nodeType);
   }
 
   /**
@@ -640,7 +686,7 @@ class EagleJS extends Array {
    * otherwise, false.
    */
   static isParentNode (value) {
-    return this.isNode(value) && [1, 9, 11].includes(value.nodeType);
+    return this.isNode(value) &amp;&amp; [1, 9, 11].includes(value.nodeType);
   }
 
   /**
@@ -659,7 +705,7 @@ class EagleJS extends Array {
   next (filter = null) {
     const $elements = new EagleJS();
     this.forEach((item) => {
-      if ('nextElementSibling' in item &&
+      if ('nextElementSibling' in item &amp;&amp;
                 item.nextElementSibling !== null) {
         $elements.push(item.nextElementSibling);
       }
@@ -701,7 +747,7 @@ class EagleJS extends Array {
   not (selector) {
     if (typeof selector === 'string') {
       return this.filter((item) => {
-        return EagleJS.isElement(item) && !item.matches(selector);
+        return EagleJS.isElement(item) &amp;&amp; !item.matches(selector);
       });
     }
     if (typeof selector === 'function') {
@@ -801,7 +847,7 @@ class EagleJS extends Array {
   parent (filter = null) {
     const $elements = new EagleJS();
     this.forEach((item) => {
-      if (EagleJS.isNode(item) && item.parentNode !== null) {
+      if (EagleJS.isNode(item) &amp;&amp; item.parentNode !== null) {
         $elements.push(item.parentNode);
       }
     });
@@ -895,7 +941,7 @@ class EagleJS extends Array {
    */
   push (...items) {
     return super.push(...items.filter((item) => {
-      return EagleJS.isDOMItem(item) && !this.includes(item);
+      return EagleJS.isDOMItem(item) &amp;&amp; !this.includes(item);
     }));
   }
 
@@ -1027,10 +1073,10 @@ class EagleJS extends Array {
   /**
    * Get or set the text content of each node in the collection.
    *
-   * @example <caption>text (): string | null</caption>
+   * @example &lt;caption>text (): string | null&lt;/caption>
    * $(element).text();
    *
-   * @example <caption>text (value: string): this</caption>
+   * @example &lt;caption>text (value: string): this&lt;/caption>
    * $(element).text('value');
    *
    * @see HTMLElement.innerText on {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText MDN}.
@@ -1131,7 +1177,7 @@ class EagleJS extends Array {
    */
   unshift (...items) {
     return super.unshift(...items.filter((item) => {
-      return EagleJS.isDOMItem(item) && !this.includes(item);
+      return EagleJS.isDOMItem(item) &amp;&amp; !this.includes(item);
     }));
   }
 }
@@ -1156,10 +1202,10 @@ class EagleJS extends Array {
 /**
  * Proxy to use EagleJS Class without the new keyword.
  *
- * @example <caption>Usage (Ecmascript 6 Module)</caption>
+ * @example &lt;caption>Usage (Ecmascript 6 Module)&lt;/caption>
  * import { EagleJSProxy as $ } from 'eaglejs.esm.js';
  *
- * @example <caption>Usage (Classic Style)</caption>
+ * @example &lt;caption>Usage (Classic Style)&lt;/caption>
  * window.$ = EagleJSProxy;
  *
  * @param {?(string|DOMItem|DOMItem[])} [selector=null] A selector to match.
@@ -1170,5 +1216,34 @@ class EagleJS extends Array {
 const EagleJSProxy = function (selector = null, context = document) {
   return new EagleJS(selector, context);
 };
-// Define $
-window.$ = EagleJSProxy;
+// Export
+export { EagleJS, EagleJSProxy };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Nov 07 2020 13:33:18 GMT+0300 (GMT+03:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
