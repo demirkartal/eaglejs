@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2016",
     "module": "ES2015",
+    "declaration": true,
 
     /* Strict Checks */
     "strict": true,
@@ -15,7 +16,7 @@
 
     /* Linter Checks */
     "noImplicitReturns": true,
-    // "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
 

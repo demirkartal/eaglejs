@@ -1,8 +1,7 @@
-'use strict';
 /**
  * EagleJS.
  *
- * @version   0.5.0
+ * @version   0.5.1
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
@@ -102,17 +101,12 @@ class EagleJS extends Array {
     let first = true;
     this.slice().reverse().forEach((item) => {
       if (EagleJS.isChildNode(item) && item.parentNode !== null) {
-        const parentNode = item.parentNode;
-        if (first) {
-          nodeArray.forEach((node) => {
-            parentNode.insertBefore(node, item.nextSibling);
-          });
-          first = false;
-        } else {
-          nodeArray.forEach((node) => {
-            parentNode.insertBefore(node.cloneNode(true), item.nextSibling);
-          });
-        }
+        const parent = item.parentNode;
+        const next = item.nextSibling;
+        nodeArray.forEach((node) => {
+          parent.insertBefore(first ? node : node.cloneNode(true), next);
+        });
+        first = false;
       }
     });
     return this;
@@ -144,16 +138,10 @@ class EagleJS extends Array {
     let first = true;
     this.slice().reverse().forEach((item) => {
       if (EagleJS.isParentNode(item)) {
-        if (first) {
-          nodeArray.forEach((node) => {
-            item.appendChild(node);
-          });
-          first = false;
-        } else {
-          nodeArray.forEach((node) => {
-            item.appendChild(node.cloneNode(true));
-          });
-        }
+        nodeArray.forEach((node) => {
+          item.appendChild(first ? node : node.cloneNode(true));
+        });
+        first = false;
       }
     });
     return this;
@@ -174,8 +162,8 @@ class EagleJS extends Array {
    * for the set functionality.
    * @param {string} name The name of the attribute.
    * @param {string} [value] The value for the attribute.
-   * @returns {string|null|this} The attribute value of the first element; or
-   * the current collection if the value parameter is provided.
+   * @returns {string|null|this} The attribute value of the first element; Or if
+   * the value parameter provided, returns the current collection.
    */
   attr (name, value) {
     if (typeof value !== 'undefined') {
@@ -224,17 +212,11 @@ class EagleJS extends Array {
     let first = true;
     this.slice().reverse().forEach((item) => {
       if (EagleJS.isChildNode(item) && item.parentNode !== null) {
-        const parentNode = item.parentNode;
-        if (first) {
-          nodeArray.forEach((node) => {
-            parentNode.insertBefore(node, item);
-          });
-          first = false;
-        } else {
-          nodeArray.forEach((node) => {
-            parentNode.insertBefore(node.cloneNode(true), item);
-          });
-        }
+        const parent = item.parentNode;
+        nodeArray.forEach((node) => {
+          parent.insertBefore(first ? node : node.cloneNode(true), item);
+        });
+        first = false;
       }
     });
     return this;
@@ -349,6 +331,62 @@ class EagleJS extends Array {
   }
 
   /**
+   * Get or set the data attribute value of each element in the collection.
+   *
+   * @example <caption>data (): object</caption>
+   * $(element).data();
+   *
+   * @example <caption>data (key: string): string | undefined</caption>
+   * $(element).data('key');
+   *
+   * @example <caption>data (key: string, value: string): this</caption>
+   * $(element).data('key', 'value');
+   *
+   * @see HTMLOrForeignElement.dataset on {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset MDN}.
+   * @param {string} [key] The name of the data.
+   * @param {string} [value] The new data value.
+   * @returns {object|string|undefined|this} The dataset of the first element;
+   * Or if the key parameter provided, returns the value of the first element,
+   * and if the value parameter provided, returns the current collection.
+   */
+  data (key, value) {
+    if (typeof key !== 'undefined') {
+      /** @type {string} */
+      const camelCaseKey = key.replace(/-([a-z])/g, (_match, letter) => {
+        return letter.toUpperCase();
+      });
+      if (typeof value !== 'undefined') {
+        this.forEach((item) => {
+          if ('dataset' in item) {
+            item.dataset[camelCaseKey] = value;
+          }
+        });
+        return this;
+      }
+      /** @type {string|undefined} */
+      let returnValue;
+      this.some((item) => {
+        if ('dataset' in item) {
+          returnValue = item.dataset[camelCaseKey];
+          return true;
+        }
+        return false;
+      });
+      return returnValue;
+    }
+    /** @type {object} */
+    let returnValue = {};
+    this.some((item) => {
+      if ('dataset' in item) {
+        returnValue = item.dataset;
+        return true;
+      }
+      return false;
+    });
+    return returnValue;
+  }
+
+  /**
    * Remove the children of each node in the collection from the DOM.
    *
    * @example
@@ -400,20 +438,16 @@ class EagleJS extends Array {
       return super.filter(selector, thisArg);
     }
     if (Array.isArray(selector)) {
-      return this.filter((item) => {
-        return selector.includes(item);
-      });
+      return this.filter((item) => selector.includes(item));
     }
-    return this.filter((item) => {
-      return item === selector;
-    });
+    return this.filter((item) => item === selector);
   }
 
   /**
    * Get the descendants of each node in the collection, filtered by a
    * selector.
    *
-   * @example <caption>find (selector: string): this</caption>
+   * @example <caption>find (selector: string): EagleJS</caption>
    * $(element).find('selector');
    *
    * @example <caption>find (selector: MatchCallback, thisArg?: any): DOMItem |
@@ -473,8 +507,8 @@ class EagleJS extends Array {
    *
    * @see Element.innerHTML on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML MDN}.
    * @param {string} [value] The html string to set.
-   * @returns {string|this} The HTML string of the first element; or the current
-   * collection if the value parameter is provided.
+   * @returns {string|this} The HTML string of the first element; Or if the
+   * value parameter provided, returns the current collection.
    */
   html (value) {
     if (typeof value !== 'undefined') {
@@ -536,13 +570,9 @@ class EagleJS extends Array {
       return this.some(selector);
     }
     if (Array.isArray(selector)) {
-      return this.some((item) => {
-        return selector.includes(item);
-      });
+      return this.some((item) => selector.includes(item));
     }
-    return this.some((item) => {
-      return item === selector;
-    });
+    return this.some((item) => item === selector);
   }
 
   /**
@@ -711,13 +741,9 @@ class EagleJS extends Array {
       });
     }
     if (Array.isArray(selector)) {
-      return this.filter((item) => {
-        return !selector.includes(item);
-      });
+      return this.filter((item) => !selector.includes(item));
     }
-    return this.filter((item) => {
-      return item !== selector;
-    });
+    return this.filter((item) => item !== selector);
   }
 
   /**
@@ -727,7 +753,7 @@ class EagleJS extends Array {
    * $(element).off('click', handler);
    *
    * @see EventTarget.removeEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener MDN}.
-   * @param {string} event A string which specifies the type of event.
+   * @param {string} event A case-sensitive string representing the event type.
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
    * @param {boolean|EventListenerOptions} [options=false] Characteristics of
@@ -750,7 +776,7 @@ class EagleJS extends Array {
    * });
    *
    * @see EventTarget.addEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener MDN}.
-   * @param {string} event A string which specifies the type of event.
+   * @param {string} event A case-sensitive string representing the event type.
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
    * @param {boolean|AddEventListenerOptions} [options=false] Characteristics of
@@ -774,7 +800,7 @@ class EagleJS extends Array {
    * });
    *
    * @see {@link EagleJS#on EagleJS.prototype.on()} with options.once parameter.
-   * @param {string} event A string which specifies the type of event.
+   * @param {string} event A case-sensitive string representing the event type.
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
    * @returns {this} The current collection.
@@ -837,16 +863,11 @@ class EagleJS extends Array {
     let first = true;
     this.slice().reverse().forEach((item) => {
       if (EagleJS.isParentNode(item)) {
-        if (first) {
-          nodeArray.forEach((node) => {
-            item.insertBefore(node, item.firstChild);
-          });
-          first = false;
-        } else {
-          nodeArray.forEach((node) => {
-            item.insertBefore(node.cloneNode(true), item.firstChild);
-          });
-        }
+        const firstChild = item.firstChild;
+        nodeArray.forEach((node) => {
+          item.insertBefore(first ? node : node.cloneNode(true), firstChild);
+        });
+        first = false;
       }
     });
     return this;
@@ -1035,8 +1056,8 @@ class EagleJS extends Array {
    *
    * @see HTMLElement.innerText on {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText MDN}.
    * @param {string} [value] The text to set.
-   * @returns {string|null|this} Text of the first node; or the current
-   * collection if the value parameter is provided.
+   * @returns {string|null|this} Text of the first node; Or if the value
+   * parameter provided, returns the current collection.
    */
   text (value) {
     if (typeof value !== 'undefined') {
@@ -1074,7 +1095,7 @@ class EagleJS extends Array {
    * @returns {this} The current collection.
    */
   toggleClass (name, force = null) {
-    if (force == null) {
+    if (force === null) {
       this.forEach((item) => {
         if (EagleJS.isElement(item)) {
           item.classList.toggle(name);
@@ -1159,16 +1180,18 @@ class EagleJS extends Array {
  * @example <caption>Usage (Ecmascript 6 Module)</caption>
  * import { EagleJSProxy as $ } from 'eaglejs.esm.js';
  *
- * @example <caption>Usage (Classic Style)</caption>
- * window.$ = EagleJSProxy;
+ * $(document).ready(function () {
+ *   // Call when DOM is completely loaded
+ * });
  *
  * @param {?(string|DOMItem|DOMItem[])} [selector=null] A selector to match.
  * @param {string|DOMItem|DOMItem[]} [context=document] A selector to use as
  * context.
  * @returns {EagleJS} A new collection.
  */
-const EagleJSProxy = function (selector = null, context = document) {
+const EagleJSProxy = (selector = null, context = document) => {
   return new EagleJS(selector, context);
 };
+
 // Define $
 window.$ = EagleJSProxy;

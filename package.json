@@ -1,39 +1,52 @@
 {
   "name": "eaglejs",
   "description": "EagleJS is a jQuery-Like DOM manipulation class for modern browsers",
-  "version": "0.5.0",
-  "license": "MIT",
-  "main": "./eaglejs.js",
-  "module": "./eaglejs.esm.js",
+  "version": "0.5.1",
   "author": "Cem Demirkartal",
+  "license": "MIT",
+  "homepage": "https://github.com/EagleFramework/EagleJS",
   "repository": {
     "type": "git",
     "url": "https://github.com/EagleFramework/EagleJS"
   },
+  "bugs": {
+    "url": "https://github.com/EagleFramework/EagleJS/issues"
+  },
+  "main": "./eaglejs.js",
+  "module": "./eaglejs.esm.js",
+  "types": "./eaglejs.esm.d.ts",
+  "dependencies": {},
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.6.1",
-    "@typescript-eslint/parser": "^4.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
     "docdash": "^1.2.0",
-    "eslint": "^7.13.0",
-    "eslint-config-standard": "^16.0.1",
+    "eslint": "^7.15.0",
+    "eslint-config-standard": "^16.0.2",
     "eslint-config-standard-with-typescript": "^19.0.1",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^30.7.7",
+    "eslint-plugin-jsdoc": "^30.7.8",
+    "eslint-plugin-markdown": "^2.0.0-rc.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-standard": "^5.0.0",
     "jsdoc": "^3.6.6",
-    "terser": "^5.3.8",
-    "typescript": "^4.0.5"
+    "rimraf": "^3.0.2",
+    "rollup": "^2.34.2",
+    "terser": "^5.5.1",
+    "typescript": "^4.1.2"
   },
   "scripts": {
-    "build": "npm run build-esm && npm run build-esm-min && npm run create-docs",
+    "build": "npm run build-esm && npm run build-script && npm run build-esm-min && npm run build-script-min && npm run build-docs",
+    "build-docs": "npm run delete-docs && npm run create-docs",
     "build-esm": "npm run tsc-build && npm run eslint-fix-esm",
     "build-esm-min": "terser ./eaglejs.esm.js --compress --mangle --output ./eaglejs.esm.min.js",
-    "build-main-min": "terser ./eaglejs.js --compress --mangle --output ./eaglejs.min.js",
+    "build-script": "npm run rollup-build && npm run eslint-fix-script",
+    "build-script-min": "terser ./eaglejs.js --compress --mangle --output ./eaglejs.min.js",
     "create-docs": "jsdoc -c ./.jsdoc.json",
+    "delete-docs": "rimraf ./docs/",
     "eslint-fix-esm": "eslint --fix ./eaglejs.esm.js",
-    "eslint-fix-main": "eslint --fix ./eaglejs.js",
+    "eslint-fix-script": "eslint --fix ./eaglejs.js",
+    "rollup-build": "rollup ./src-build/eaglejs.js -o ./eaglejs.js",
     "tsc-build": "tsc --project ./tsconfig.json"
   }
 }
