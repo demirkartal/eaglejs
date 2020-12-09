@@ -3,6 +3,7 @@
     "target": "ES2016",
     "module": "ES2015",
     "declaration": true,
+    "outDir": "dist",
 
     /* Strict Checks */
     "strict": true,
@@ -23,5 +24,5 @@
     // Style
     "newLine": "lf"
   },
-  "exclude": ["node_modules", "docs", "project_files"]
+  "include": ["src"]
 }

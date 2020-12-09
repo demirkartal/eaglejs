@@ -58,6 +58,6 @@ For a detailed view, please check the table on [caniuse.com](https://caniuse.com
 
 ## Documentation
 
-- You can find documents on [https://eagleframework.github.io/EagleJS/](https://eagleframework.github.io/EagleJS/).
+- You can find documents on [https://eagleirons.github.io/eaglejs/](https://eagleirons.github.io/eaglejs/).
 - You can read from the javascript file.
 - IDEs that support JSDoc can help dynamically by code.

@@ -3,7 +3,7 @@
     "allowUnknownTags": true
   },
   "source": {
-    "include": ["./README.md", "eaglejs.esm.js"]
+    "include": ["./README.md", "./dist/eaglejs.esm.js"]
   },
   "plugins": [],
   "templates": {
@@ -25,7 +25,7 @@
     "sectionOrder": ["Modules", "Classes"],
     "menu": {
       "Github repo": {
-        "href": "https://github.com/EagleFramework/EagleJS",
+        "href": "https://github.com/eagleirons/eaglejs",
         "target": "_blank",
         "class": "menu-item",
         "id": "website_link"

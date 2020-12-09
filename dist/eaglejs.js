@@ -1,10 +1,10 @@
 /**
  * EagleJS.
  *
- * @version   0.5.1
+ * @version   0.5.2
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
- * @see       {@link https://github.com/EagleFramework/EagleJS GitHub}
+ * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
  * @augments  Array<DOMItem>
  */
 class EagleJS extends Array {
@@ -232,7 +232,7 @@ class EagleJS extends Array {
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
    * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link EagleJS#filter EagleJS.prototype.filter()}.
+   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
    * @returns {EagleJS} A new collection.
    */
   children (filter = null) {
@@ -616,7 +616,7 @@ class EagleJS extends Array {
    * EagleJS.isDOMItem(document); // true
    * EagleJS.isDOMItem(window); // true
    *
-   * @see {@link DOMItem}
+   * @see {@link module:eaglejs~DOMItem DOMItem} type.
    * @param {*} value The value to be checked.
    * @returns {boolean} True if the value is a DOMItem; otherwise, false.
    */
@@ -683,7 +683,7 @@ class EagleJS extends Array {
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
    * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link EagleJS#filter EagleJS.prototype.filter()}.
+   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
    * @returns {EagleJS} A new collection.
    */
   next (filter = null) {
@@ -799,7 +799,8 @@ class EagleJS extends Array {
    *   console.log(event.type);
    * });
    *
-   * @see {@link EagleJS#on EagleJS.prototype.on()} with options.once parameter.
+   * @see {@link module:eaglejs~EagleJS#on EagleJS.prototype.on()} with
+   * options.once parameter.
    * @param {string} event A case-sensitive string representing the event type.
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
@@ -821,7 +822,7 @@ class EagleJS extends Array {
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
    * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link EagleJS#filter EagleJS.prototype.filter()}.
+   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
    * @returns {EagleJS} A new collection.
    */
   parent (filter = null) {
@@ -883,7 +884,7 @@ class EagleJS extends Array {
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
    * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link EagleJS#filter EagleJS.prototype.filter()}.
+   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
    * @returns {EagleJS} A new collection.
    */
   prev (filter = null) {
@@ -1033,7 +1034,7 @@ class EagleJS extends Array {
    * $(element).siblings('selector');
    *
    * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link EagleJS#filter EagleJS.prototype.filter()}.
+   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
    * @returns {EagleJS} A new collection.
    */
   siblings (filter = null) {
@@ -1163,7 +1164,8 @@ class EagleJS extends Array {
  * @see Node on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node MDN}.
  * @see Window on {@link https://developer.mozilla.org/en-US/docs/Web/API/Window MDN}.
  * @typedef {EventTarget|Node|Window|Element|Text|CDATASection|
- * ProcessingInstruction|Comment|Document|DocumentType|DocumentFragment} DOMItem
+ * ProcessingInstruction|Comment|Document|DocumentType|DocumentFragment|
+ * HTMLElement|SVGElement} DOMItem
  */
 /**
  * A function to test each item in the collection.
