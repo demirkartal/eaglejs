@@ -1,7 +1,7 @@
 /**
  * EagleJS.
  *
- * @version   0.5.2
+ * @version   0.5.3
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
