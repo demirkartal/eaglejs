@@ -445,8 +445,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Get the descendants of each node in the collection, filtered by a
-   * selector.
+   * Get the descendants of each node in the collection, filtered by a selector.
    *
    * @example <caption>find (selector: string): EagleJS</caption>
    * $(element).find('selector');
@@ -690,8 +689,7 @@ class EagleJS extends Array {
   next (filter = null) {
     const $elements = new EagleJS();
     this.forEach((item) => {
-      if ('nextElementSibling' in item &&
-                item.nextElementSibling !== null) {
+      if ('nextElementSibling' in item && item.nextElementSibling !== null) {
         $elements.push(item.nextElementSibling);
       }
     });
@@ -891,10 +889,9 @@ class EagleJS extends Array {
   prev (filter = null) {
     const $elements = new EagleJS();
     this.forEach((item) => {
-      if ('previousElementSibling' in item) {
-        if (item.previousElementSibling !== null) {
-          $elements.push(item.previousElementSibling);
-        }
+      if ('previousElementSibling' in item &&
+                item.previousElementSibling !== null) {
+        $elements.push(item.previousElementSibling);
       }
     });
     if (filter !== null) {
