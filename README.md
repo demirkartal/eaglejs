@@ -1,6 +1,6 @@
 # EagleJS
 
-EagleJS is a jQuery-Like DOM manipulation class for modern browsers.
+EagleJS is a jQuery-Like DOM manipulation library for modern browsers.
 
 - Powered with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
