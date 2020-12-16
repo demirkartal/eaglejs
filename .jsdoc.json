@@ -20,6 +20,10 @@
     "search": true,
     "collapse": true,
     "sectionOrder": ["Modules", "Classes"],
+    "meta": {
+      "title": "EagleJS",
+      "description": "EagleJS is a jQuery-Like DOM manipulation library for modern browsers."
+    },
     "menu": {
       "Github repo": {
         "href": "https://github.com/eagleirons/eaglejs",
