@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.5.3
+ * @version   0.5.4
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -1089,24 +1089,16 @@ class EagleJS extends Array {
    *
    * @see DOMTokenList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle MDN}.
    * @param {string} name The class name.
-   * @param {?boolean} [force=null] A boolean value to determine whether the
-   * class should be added or removed.
+   * @param {boolean} [force] A boolean value to determine whether the class
+   * should be added or removed.
    * @returns {this} The current collection.
    */
-  toggleClass (name, force = null) {
-    if (force === null) {
-      this.forEach((item) => {
-        if (EagleJS.isElement(item)) {
-          item.classList.toggle(name);
-        }
-      });
-    } else {
-      this.forEach((item) => {
-        if (EagleJS.isElement(item)) {
-          item.classList.toggle(name);
-        }
-      });
-    }
+  toggleClass (name, force) {
+    this.forEach((item) => {
+      if (EagleJS.isElement(item)) {
+        item.classList.toggle(name, force);
+      }
+    });
     return this;
   }
 

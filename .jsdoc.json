@@ -1,9 +1,6 @@
 {
-  "tags": {
-    "allowUnknownTags": true
-  },
   "source": {
-    "include": ["./README.md", "./dist/eaglejs.esm.js"]
+    "include": ["README.md", "dist/eaglejs.esm.js"]
   },
   "plugins": [],
   "templates": {
@@ -14,9 +11,9 @@
     }
   },
   "opts": {
-    "template": "./node_modules/docdash",
+    "template": "node_modules/docdash/",
     "encoding": "utf8",
-    "destination": "./docs/"
+    "destination": "docs/"
   },
   "docdash": {
     "sort": true,
@@ -29,6 +26,12 @@
         "target": "_blank",
         "class": "menu-item",
         "id": "website_link"
+      },
+      "Npm page": {
+        "href": "https://www.npmjs.com/package/@eagleirons/eaglejs",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "npm-link"
       }
     }
   }

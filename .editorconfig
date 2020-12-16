@@ -1,4 +1,4 @@
-# Eagle Framework v0.1
+# eagleirons/editorconfig v0.1
 root = true
 
 [*]
@@ -16,4 +16,5 @@ indent_size = 4
 trim_trailing_whitespace = false
 
 [*.php]
+# PSR-12
 indent_size = 4

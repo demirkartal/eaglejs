@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.5.3
+ * @version   0.5.4
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -547,11 +547,11 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see DOMTokenList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle MDN}.
    * @param {string} name The class name.
-   * @param {?boolean} [force=null] A boolean value to determine whether the
-   * class should be added or removed.
+   * @param {boolean} [force] A boolean value to determine whether the class
+   * should be added or removed.
    * @returns {this} The current collection.
    */
-  toggleClass (name: string, force?: boolean | null): this;
+  toggleClass (name: string, force?: boolean): this;
   /**
    * Trigger the specified event on each item in the collection.
    *
