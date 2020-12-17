@@ -9,11 +9,23 @@ EagleJS is a jQuery-Like DOM manipulation library for modern browsers.
 - [JavaScript Standard Style](https://standardjs.com "JavaScript Standard Style") codes
 - Documented with [JSDoc](https://jsdoc.app "JSDoc")
 
+## Installation
+
+### CDN
+
+[https://www.jsdelivr.com/package/npm/@eagleirons/eaglejs](https://www.jsdelivr.com/package/npm/@eagleirons/eaglejs)
+
+### NPM
+
+```sh
+npm install @eagleirons/eaglejs
+```
+
 ## Usage
 
-### Classic Style
+### Script tag
 
-Download the script file, and include on top of other scripts that requires EagleJS.
+Include the script file on top of other scripts that requires EagleJS.
 
 ```html
 <script src="eaglejs.min.js"></script>
