@@ -27,7 +27,6 @@
   "settings": {
     "jsdoc": {
       "preferredTypes": [
-        "this",
         "EventListener",
         "EventListenerObject",
         "EventListenerOptions",
