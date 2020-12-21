@@ -653,7 +653,7 @@ class EagleJS extends Array<DOMItem> {
    * @returns {boolean} True if the value is a Node; otherwise, false.
    */
   static isNode (value: any): value is Node {
-    return Boolean(value) && Boolean(value.nodeType);
+    return Boolean(value) && 'nodeType' in value;
   }
 
   /**
@@ -890,7 +890,7 @@ class EagleJS extends Array<DOMItem> {
     const $elements = new EagleJS();
     this.forEach((item) => {
       if ('previousElementSibling' in item &&
-                item.previousElementSibling !== null) {
+        item.previousElementSibling !== null) {
         $elements.push(item.previousElementSibling);
       }
     });
@@ -1201,16 +1201,16 @@ type MatchCallback = (element: DOMItem, index: number, array: DOMItem[])
 => unknown;
 
 interface EagleJS {
-  attr (name: string): string | null
-  attr (name: string, value: string): this
-  data (): object
-  data (key: string): string | undefined
-  data (key: string, value: string): this
-  find (selector: string): this
-  find (selector: MatchCallback, thisArg?: any): DOMItem | undefined
-  html (): string
-  html (value: string): this
-  slice (start?: number, end?: number): this // return type fix
-  text (): string | null
-  text (value: string): this
+  attr(name: string): string | null
+  attr(name: string, value: string): this
+  data(): object
+  data(key: string): string | undefined
+  data(key: string, value: string): this
+  find(selector: string): this
+  find(selector: MatchCallback, thisArg?: any): DOMItem | undefined
+  html(): string
+  html(value: string): this
+  slice(start?: number, end?: number): this // return type fix
+  text(): string | null
+  text(value: string): this
 }

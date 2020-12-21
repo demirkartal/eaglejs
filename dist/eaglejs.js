@@ -652,7 +652,7 @@ class EagleJS extends Array {
    * @returns {boolean} True if the value is a Node; otherwise, false.
    */
   static isNode (value) {
-    return Boolean(value) && Boolean(value.nodeType);
+    return Boolean(value) && 'nodeType' in value;
   }
 
   /**
