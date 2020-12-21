@@ -4,12 +4,16 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["standard", "plugin:jsdoc/recommended"],
-  "plugins": ["jsdoc"],
+  "extends": [
+    "standard",
+    "plugin:jsdoc/recommended",
+    "plugin:markdown/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
+  "plugins": ["jsdoc", "markdown"],
   "rules": {
     "semi": ["error", "always"],
     "max-len": ["error", { "code": 80, "tabWidth": 4, "ignoreUrls": true }],
@@ -40,23 +44,16 @@
       // TypeScript
       "files": ["**/*.ts", "**/*.tsx"],
       "extends": ["standard-with-typescript"],
-      "plugins": ["@typescript-eslint"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": "./tsconfig.json"
       },
+      "plugins": ["@typescript-eslint"],
       "rules": {
         "max-len": "warn",
         "@typescript-eslint/semi": ["error", "always"],
         "@typescript-eslint/method-signature-style": ["error", "method"]
       }
-    },
-    {
-      // Markdown
-      "files": ["**/*.md"],
-      "extends": ["plugin:markdown/recommended"],
-      "plugins": ["markdown"],
-      "processor": "markdown/markdown"
     }
   ]
 }
