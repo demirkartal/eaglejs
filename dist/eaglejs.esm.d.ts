@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.5.4
+ * @version   0.6.0
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -32,6 +32,8 @@ declare class EagleJS extends Array<DOMItem> {
    * // string + DOMItem[]
    * $('selector', EagleJS);
    *
+   * @see DOMParser on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMParser MDN}
+   * for htmlString.
    * @param {?(string|DOMItem|DOMItem[])} [selector=null] A selector to match.
    * @param {string|DOMItem|DOMItem[]} [context=document] A selector to use as
    * context.
@@ -58,7 +60,8 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).after('text', Node);
    * $(element).after(Node, Node);
    *
-   * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}.
+   * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} content The content to insert.
    * @returns {this} The current collection.
    */
@@ -72,7 +75,8 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).append('text', Node);
    * $(element).append(Node, Node);
    *
-   * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}.
+   * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} content The content to insert.
    * @returns {this} The current collection.
    */
@@ -86,7 +90,8 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).before('text', Node);
    * $(element).before(Node, Node);
    *
-   * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}.
+   * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} content The content to insert.
    * @returns {this} The current collection.
    */
@@ -250,19 +255,6 @@ declare class EagleJS extends Array<DOMItem> {
    */
   static isChildNode (value: any): value is ChildNode;
   /**
-   * Check if the value is a Document node.
-   *
-   * @example
-   * EagleJS.isDocument(element); // false
-   * EagleJS.isDocument(document); // true
-   * EagleJS.isDocument(window); // false
-   *
-   * @see Document interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/Document MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is a Document node; otherwise, false.
-   */
-  static isDocument (value: any): value is Document;
-  /**
    * Check if the variable is a DOMItem.
    *
    * @example
@@ -275,46 +267,6 @@ declare class EagleJS extends Array<DOMItem> {
    * @returns {boolean} True if the value is a DOMItem; otherwise, false.
    */
   static isDOMItem (value: any): value is DOMItem;
-  /**
-   * Check if the value is an Element node.
-   *
-   * @example
-   * EagleJS.isElement(element); // true
-   * EagleJS.isElement(document); // false
-   * EagleJS.isElement(window); // false
-   *
-   * @see Element interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is an Element node; otherwise, false.
-   */
-  static isElement (value: any): value is Element;
-  /**
-   * Check if the value is a Node.
-   *
-   * @example
-   * EagleJS.isNode(element); // true
-   * EagleJS.isNode(document); // true
-   * EagleJS.isNode(window); // false
-   *
-   * @see Node interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is a Node; otherwise, false.
-   */
-  static isNode (value: any): value is Node;
-  /**
-   * Check if the value implements the ParentNode interface.
-   *
-   * @example
-   * EagleJS.isParentNode(element); // true
-   * EagleJS.isParentNode(document); // true
-   * EagleJS.isParentNode(window); // false
-   *
-   * @see ParentNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value implements the ParentNode interface;
-   * otherwise, false.
-   */
-  static isParentNode (value: any): value is ParentNode;
   /**
    * Get the next sibling of each node in the collection, optionally filtered by
    * a selector.
@@ -430,7 +382,8 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).prepend('text', Node);
    * $(element).prepend(Node, Node);
    *
-   * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}.
+   * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} content The content to insert.
    * @returns {this} The current collection.
    */
@@ -463,6 +416,30 @@ declare class EagleJS extends Array<DOMItem> {
    * @returns {number} The new length.
    */
   push (...items: DOMItem[]): number;
+  /**
+   * Get the first element descendant of each node in the collection that
+   * matches selectors.
+   *
+   * @example
+   * $(element).querySelector('selector');
+   *
+   * @see ParentNode.querySelector() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector MDN}.
+   * @param {string} selectors One or more selector to match.
+   * @returns {EagleJS} A new collection.
+   */
+  querySelector (selectors: string): EagleJS;
+  /**
+   * Get all element descendants of each node in the collection that matches
+   * selectors.
+   *
+   * @example
+   * $(element).querySelectorAll('selector');
+   *
+   * @see ParentNode.querySelectorAll() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll MDN}.
+   * @param {string} selectors One or more selector to match.
+   * @returns {EagleJS} A new collection.
+   */
+  querySelectorAll (selectors: string): EagleJS;
   /**
    * Specify a function to execute when the DOM is completely loaded.
    *
@@ -626,8 +603,6 @@ interface EagleJS {
   data(): object
   data(key: string): string | undefined
   data(key: string, value: string): this
-  find(selector: string): this
-  find(selector: MatchCallback, thisArg?: any): DOMItem | undefined
   html(): string
   html(value: string): this
   slice(start?: number, end?: number): this

@@ -21,7 +21,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
 
-    // Style
+    /* Style */
     "newLine": "lf"
   },
   "include": ["src"]
