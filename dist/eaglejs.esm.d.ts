@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.6.0
+ * @version   0.6.1
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -40,6 +40,33 @@ declare class EagleJS extends Array<DOMItem> {
    */
   constructor (selector?: string | DOMItem | DOMItem[] | null, context?: string | DOMItem | DOMItem[]);
   /**
+   * Check if the value implements the ChildNode interface.
+   *
+   * @example
+   * EagleJS.isChildNode(element); // true
+   * EagleJS.isChildNode(document); // false
+   * EagleJS.isChildNode(window); // false
+   *
+   * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
+   * @param {*} value The value to be checked.
+   * @returns {boolean} True if the value implements the ChildNode interface;
+   * otherwise, false.
+   */
+  static isChildNode (value: any): value is ChildNode;
+  /**
+   * Check if the variable is a DOMItem.
+   *
+   * @example
+   * EagleJS.isDOMItem(element); // true
+   * EagleJS.isDOMItem(document); // true
+   * EagleJS.isDOMItem(window); // true
+   *
+   * @see {@link module:eaglejs~DOMItem DOMItem} type.
+   * @param {*} value The value to be checked.
+   * @returns {boolean} True if the value is a DOMItem; otherwise, false.
+   */
+  static isDOMItem (value: any): value is DOMItem;
+  /**
    * Add the class name to each element in the collection.
    *
    * @example
@@ -52,7 +79,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   addClass (...names: string[]): this;
   /**
-   * Insert content after each node in the collection.
+   * Insert nodes after each node in the collection.
    *
    * @example
    * $(element).after('text');
@@ -62,12 +89,12 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  after (...content: Array<string | Node>): this;
+  after (...nodes: Array<string | Node>): this;
   /**
-   * Insert content to the end of each node in the collection.
+   * Insert nodes to the end of each node in the collection.
    *
    * @example
    * $(element).append('text');
@@ -77,12 +104,12 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  append (...content: Array<string | Node>): this;
+  append (...nodes: Array<string | Node>): this;
   /**
-   * Insert content before each node in the collection.
+   * Insert nodes before each node in the collection.
    *
    * @example
    * $(element).before('text');
@@ -92,10 +119,10 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  before (...content: Array<string | Node>): this;
+  before (...nodes: Array<string | Node>): this;
   /**
    * Get the children of each node in the collection, optionally filtered by a
    * selector.
@@ -105,11 +132,10 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).children('selector');
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
-  children (filter?: string | DOMItem | DOMItem[] | MatchCallback | null): EagleJS;
+  children (filter?: string | null): EagleJS;
   /**
    * Return duplicates of each node in the collection.
    *
@@ -241,33 +267,6 @@ declare class EagleJS extends Array<DOMItem> {
    */
   is (selector: string | DOMItem | DOMItem[] | MatchCallback): boolean;
   /**
-   * Check if the value implements the ChildNode interface.
-   *
-   * @example
-   * EagleJS.isChildNode(element); // true
-   * EagleJS.isChildNode(document); // false
-   * EagleJS.isChildNode(window); // false
-   *
-   * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value implements the ChildNode interface;
-   * otherwise, false.
-   */
-  static isChildNode (value: any): value is ChildNode;
-  /**
-   * Check if the variable is a DOMItem.
-   *
-   * @example
-   * EagleJS.isDOMItem(element); // true
-   * EagleJS.isDOMItem(document); // true
-   * EagleJS.isDOMItem(window); // true
-   *
-   * @see {@link module:eaglejs~DOMItem DOMItem} type.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is a DOMItem; otherwise, false.
-   */
-  static isDOMItem (value: any): value is DOMItem;
-  /**
    * Get the next sibling of each node in the collection, optionally filtered by
    * a selector.
    *
@@ -276,11 +275,10 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).next('selector');
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
-  next (filter?: string | DOMItem | DOMItem[] | MatchCallback | null): EagleJS;
+  next (filter?: string | null): EagleJS;
   /**
    * Remove matched elements from the collection.
    *
@@ -368,13 +366,12 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).parent('selector');
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
-  parent (filter?: string | DOMItem | DOMItem[] | MatchCallback | null): EagleJS;
+  parent (filter?: string | null): EagleJS;
   /**
-   * Insert content to the beginning of each node in the collection.
+   * Insert nodes to the beginning of each node in the collection.
    *
    * @example
    * $(element).prepend('text');
@@ -384,10 +381,10 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  prepend (...content: Array<string | Node>): this;
+  prepend (...nodes: Array<string | Node>): this;
   /**
    * Get the previous sibling of each node in the collection, optionally
    * filtered by a selector.
@@ -397,11 +394,10 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).prev('selector');
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
-  prev (filter?: string | DOMItem | DOMItem[] | MatchCallback | null): EagleJS;
+  prev (filter?: string | null): EagleJS;
   /**
    * Adds one or more items to the end of the collection.
    *
@@ -459,7 +455,8 @@ declare class EagleJS extends Array<DOMItem> {
    * @example
    * $(element).remove();
    *
-   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}.
+   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}
+   * (Polyfilled).
    * @returns {this} The current collection.
    */
   remove (): this;
@@ -488,7 +485,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   removeClass (...names: string[]): this;
   /**
-   * Replace each node in the collection with the given content.
+   * Replace each node in the collection with the given nodes.
    *
    * @example
    * $(element).replaceWith('text');
@@ -497,10 +494,10 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).replaceWith(Node, Node);
    *
    * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}.
-   * @param {...(string|Node)} content The content to replace.
+   * @param {...(string|Node)} nodes Nodes to replace.
    * @returns {this} The current collection.
    */
-  replaceWith (...content: Array<string | Node>): this;
+  replaceWith (...nodes: Array<string | Node>): this;
   /**
    * Get the siblings of each node in the collection, optionally filtered by a
    * selector.
@@ -509,11 +506,10 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).siblings();
    * $(element).siblings('selector');
    *
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
-  siblings (filter?: string | DOMItem | DOMItem[] | MatchCallback | null): EagleJS;
+  siblings (filter?: string | null): EagleJS;
   /**
    * Toggle the class name to each element in the collection.
    *

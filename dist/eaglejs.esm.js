@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.6.0
+ * @version   0.6.1
  * @copyright 2020 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -43,9 +43,8 @@ class EagleJS extends Array {
     if (selector !== null) {
       if (typeof selector === 'string') {
         if (/^\s*<.+>\s*$/.test(selector)) {
-          const domParser = new DOMParser();
-          const doc = domParser.parseFromString(selector, 'text/html');
-          this.push(...doc.body.children);
+          const doc = new DOMParser().parseFromString(selector, 'text/html');
+          this.push(...doc.body.childNodes);
         } else {
           return new EagleJS(context).querySelectorAll(selector);
         }
@@ -55,6 +54,40 @@ class EagleJS extends Array {
         this.push(selector);
       }
     }
+  }
+
+  /**
+   * Check if the value implements the ChildNode interface.
+   *
+   * @example
+   * EagleJS.isChildNode(element); // true
+   * EagleJS.isChildNode(document); // false
+   * EagleJS.isChildNode(window); // false
+   *
+   * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
+   * @param {*} value The value to be checked.
+   * @returns {boolean} True if the value implements the ChildNode interface;
+   * otherwise, false.
+   */
+  static isChildNode (value) {
+    return Boolean(value) && Boolean(value.nodeType) &&
+            [1, 3, 4, 7, 8, 10].includes(value.nodeType);
+  }
+
+  /**
+   * Check if the variable is a DOMItem.
+   *
+   * @example
+   * EagleJS.isDOMItem(element); // true
+   * EagleJS.isDOMItem(document); // true
+   * EagleJS.isDOMItem(window); // true
+   *
+   * @see {@link module:eaglejs~DOMItem DOMItem} type.
+   * @param {*} value The value to be checked.
+   * @returns {boolean} True if the value is a DOMItem; otherwise, false.
+   */
+  static isDOMItem (value) {
+    return Boolean(value) && Boolean(value.addEventListener);
   }
 
   /**
@@ -78,7 +111,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Insert content after each node in the collection.
+   * Insert nodes after each node in the collection.
    *
    * @example
    * $(element).after('text');
@@ -88,13 +121,13 @@ class EagleJS extends Array {
    *
    * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  after (...content) {
+  after (...nodes) {
     /** @type {Node[]} */
     const nodeArray = [];
-    content.forEach((value) => {
+    nodes.forEach((value) => {
       if (typeof value === 'string') {
         nodeArray.push(document.createTextNode(value));
       } else {
@@ -116,7 +149,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Insert content to the end of each node in the collection.
+   * Insert nodes to the end of each node in the collection.
    *
    * @example
    * $(element).append('text');
@@ -126,13 +159,13 @@ class EagleJS extends Array {
    *
    * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  append (...content) {
+  append (...nodes) {
     /** @type {Node[]} */
     const nodeArray = [];
-    content.forEach((value) => {
+    nodes.forEach((value) => {
       if (typeof value === 'string') {
         nodeArray.push(document.createTextNode(value));
       } else {
@@ -191,7 +224,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Insert content before each node in the collection.
+   * Insert nodes before each node in the collection.
    *
    * @example
    * $(element).before('text');
@@ -201,13 +234,13 @@ class EagleJS extends Array {
    *
    * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  before (...content) {
+  before (...nodes) {
     /** @type {Node[]} */
     const nodeArray = [];
-    content.forEach((value) => {
+    nodes.forEach((value) => {
       if (typeof value === 'string') {
         nodeArray.push(document.createTextNode(value));
       } else {
@@ -236,8 +269,7 @@ class EagleJS extends Array {
    * $(element).children('selector');
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
   children (filter = null) {
@@ -400,7 +432,13 @@ class EagleJS extends Array {
    * @returns {this} The current collection.
    */
   empty () {
-    this.contents().remove();
+    this.forEach((item) => {
+      if ('firstChild' in item) {
+        while (item.firstChild !== null) {
+          item.removeChild(item.firstChild);
+        }
+      }
+    });
     return this;
   }
 
@@ -537,41 +575,7 @@ class EagleJS extends Array {
     if (Array.isArray(selector)) {
       return this.some((item) => selector.includes(item));
     }
-    return this.some((item) => item === selector);
-  }
-
-  /**
-   * Check if the value implements the ChildNode interface.
-   *
-   * @example
-   * EagleJS.isChildNode(element); // true
-   * EagleJS.isChildNode(document); // false
-   * EagleJS.isChildNode(window); // false
-   *
-   * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value implements the ChildNode interface;
-   * otherwise, false.
-   */
-  static isChildNode (value) {
-    return Boolean(value) && 'nodeType' in value &&
-            [1, 3, 4, 7, 8, 10].includes(value.nodeType);
-  }
-
-  /**
-   * Check if the variable is a DOMItem.
-   *
-   * @example
-   * EagleJS.isDOMItem(element); // true
-   * EagleJS.isDOMItem(document); // true
-   * EagleJS.isDOMItem(window); // true
-   *
-   * @see {@link module:eaglejs~DOMItem DOMItem} type.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is a DOMItem; otherwise, false.
-   */
-  static isDOMItem (value) {
-    return Boolean(value) && Boolean(value.addEventListener);
+    return this.includes(selector);
   }
 
   /**
@@ -583,8 +587,7 @@ class EagleJS extends Array {
    * $(element).next('selector');
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
   next (filter = null) {
@@ -707,9 +710,7 @@ class EagleJS extends Array {
    * @returns {this} The current collection.
    */
   one (event, listener) {
-    return this.on(event, listener, {
-      once: true
-    });
+    return this.on(event, listener, { once: true });
   }
 
   /**
@@ -721,8 +722,7 @@ class EagleJS extends Array {
    * $(element).parent('selector');
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
   parent (filter = null) {
@@ -739,7 +739,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Insert content to the beginning of each node in the collection.
+   * Insert nodes to the beginning of each node in the collection.
    *
    * @example
    * $(element).prepend('text');
@@ -749,13 +749,13 @@ class EagleJS extends Array {
    *
    * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} content The content to insert.
+   * @param {...(string|Node)} nodes Nodes to insert.
    * @returns {this} The current collection.
    */
-  prepend (...content) {
+  prepend (...nodes) {
     /** @type {Node[]} */
     const nodeArray = [];
-    content.forEach((value) => {
+    nodes.forEach((value) => {
       if (typeof value === 'string') {
         nodeArray.push(document.createTextNode(value));
       } else {
@@ -784,8 +784,7 @@ class EagleJS extends Array {
    * $(element).prev('selector');
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
   prev (filter = null) {
@@ -897,15 +896,14 @@ class EagleJS extends Array {
    * @example
    * $(element).remove();
    *
-   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}.
+   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}
+   * (Polyfilled).
    * @returns {this} The current collection.
    */
   remove () {
     this.forEach((item) => {
-      if (EagleJS.isChildNode(item)) {
-        if (item.parentNode !== null) {
-          item.parentNode.removeChild(item);
-        }
+      if (EagleJS.isChildNode(item) && item.parentNode !== null) {
+        item.parentNode.removeChild(item);
       }
     });
     return this;
@@ -954,7 +952,7 @@ class EagleJS extends Array {
   }
 
   /**
-   * Replace each node in the collection with the given content.
+   * Replace each node in the collection with the given nodes.
    *
    * @example
    * $(element).replaceWith('text');
@@ -963,11 +961,11 @@ class EagleJS extends Array {
    * $(element).replaceWith(Node, Node);
    *
    * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}.
-   * @param {...(string|Node)} content The content to replace.
+   * @param {...(string|Node)} nodes Nodes to replace.
    * @returns {this} The current collection.
    */
-  replaceWith (...content) {
-    return this.before(...content).remove();
+  replaceWith (...nodes) {
+    return this.before(...nodes).remove();
   }
 
   /**
@@ -978,16 +976,24 @@ class EagleJS extends Array {
    * $(element).siblings();
    * $(element).siblings('selector');
    *
-   * @param {?(string|DOMItem|DOMItem[]|MatchCallback)} [filter=null] A selector
-   * to filter by {@link module:eaglejs~EagleJS#filter filter()} method.
+   * @param {?string} [filter=null] A selector to filter.
    * @returns {EagleJS} A new collection.
    */
   siblings (filter = null) {
     const $elements = new EagleJS();
     this.forEach((item) => {
-      const $element = new EagleJS(item);
-      $elements.push(...$element.parent().children(filter).not($element));
+      if ('parentNode' in item && item.parentNode !== null) {
+        const children = [...item.parentNode.children];
+        children.forEach((child) => {
+          if (child !== item) {
+            $elements.push(child);
+          }
+        });
+      }
     });
+    if (filter !== null) {
+      return $elements.filter(filter);
+    }
     return $elements;
   }
 
