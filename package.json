@@ -1,7 +1,7 @@
 {
   "name": "@eagleirons/eaglejs",
   "description": "EagleJS is a jQuery-Like DOM manipulation class for modern browsers",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": "Cem Demirkartal",
   "license": "MIT",
   "homepage": "https://github.com/eagleirons/eaglejs",
@@ -29,7 +29,6 @@
   "main": "dist/eaglejs.js",
   "module": "dist/eaglejs.esm.js",
   "types": "dist/eaglejs.esm.d.ts",
-  "dependencies": {},
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
@@ -42,7 +41,6 @@
     "eslint-plugin-markdown": "^2.0.0-rc.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^5.0.0",
     "jsdoc": "^3.6.6",
     "rimraf": "^3.0.2",
     "rollup": "^2.35.1",
