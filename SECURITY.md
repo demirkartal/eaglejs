@@ -6,4 +6,4 @@ The [latest released version](https://github.com/eagleirons/eaglejs/releases) of
 
 ## Reporting a Vulnerability
 
-Please use the `issues` section for reporting non-critical level vulnerabilities.
+To report a security issue, email [cem@demirkartal.com](mailto:cem@demirkartal.com) and include the word "SECURITY" in the subject line.
