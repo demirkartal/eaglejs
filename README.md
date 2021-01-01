@@ -5,7 +5,7 @@ EagleJS is a jQuery-Like DOM manipulation library for modern browsers.
 - Powered with EcmaScript 6 and Modern DOM functions
 - Subclass of Array for better collection management
 - Supports CSS3 selectors
-- Lightweight (Minified < 7.00 KB)
+- Lightweight (Minified < 6.00 KB)
 - [JavaScript Standard Style](https://standardjs.com "JavaScript Standard Style") codes
 - Documented with [JSDoc](https://jsdoc.app "JSDoc")
 
