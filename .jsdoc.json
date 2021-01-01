@@ -8,7 +8,7 @@
     "monospaceLinks": false,
     "default": {
       "includeDate": false,
-      "outputSourceFiles": true
+      "outputSourceFiles": false
     }
   },
   "opts": {
