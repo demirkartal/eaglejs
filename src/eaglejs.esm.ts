@@ -2,8 +2,8 @@
 /**
  * EagleJS.
  *
- * @version   0.6.1
- * @copyright 2020 Cem Demirkartal
+ * @version   0.6.2
+ * @copyright 2020-2021 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
  * @augments  Array<DOMItem>
@@ -42,7 +42,7 @@ class EagleJS extends Array<DOMItem> {
     super();
     if (selector !== null) {
       if (typeof selector === 'string') {
-        if (/^\s*<.+>\s*$/.test(selector)) {
+        if (/<.+>/.test(selector)) {
           const doc = new DOMParser().parseFromString(selector, 'text/html');
           this.push(...doc.body.childNodes);
         } else {
@@ -57,7 +57,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Check if the value implements the ChildNode interface.
+   * Check if the DOMItem implements the ChildNode interface.
    *
    * @example
    * EagleJS.isChildNode(element); // true
@@ -65,13 +65,12 @@ class EagleJS extends Array<DOMItem> {
    * EagleJS.isChildNode(window); // false
    *
    * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value implements the ChildNode interface;
+   * @param {DOMItem} value The DOMItem to be checked.
+   * @returns {boolean} True if the DOMItem implements the ChildNode interface;
    * otherwise, false.
    */
-  static isChildNode (value: any): value is ChildNode {
-    return Boolean(value) && Boolean(value.nodeType) &&
-            [1, 3, 4, 7, 8, 10].includes(value.nodeType);
+  static isChildNode (value: DOMItem): value is ChildNode {
+    return 'nodeType' in value && [1, 3, 4, 7, 8, 10].includes(value.nodeType);
   }
 
   /**
@@ -549,28 +548,17 @@ class EagleJS extends Array<DOMItem> {
    * // DOMItem[]
    * $(element).is(EagleJS);
    *
-   * // Function
-   * $(element).is(function (item, index) {
-   *   return item.value === 0;
-   * });
-   *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
    * for string parameter.
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
-   * @see Array.prototype.some() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some MDN}
-   * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|MatchCallback} selector A selector to
-   * match.
+   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
    * @returns {boolean} True if any element matches the given filter, otherwise
    * false.
    */
-  is (selector: string | DOMItem | DOMItem[] | MatchCallback): boolean {
+  is (selector: string | DOMItem | DOMItem[]): boolean {
     if (typeof selector === 'string') {
       return this.some((item) => 'matches' in item && item.matches(selector));
-    }
-    if (typeof selector === 'function') {
-      return this.some(selector);
     }
     if (Array.isArray(selector)) {
       return this.some((item) => selector.includes(item));
@@ -616,31 +604,17 @@ class EagleJS extends Array<DOMItem> {
    * // DOMItem[]
    * $(element).not(EagleJS);
    *
-   * // Function
-   * $(element).not(function (item, index) {
-   *   return item.value > 0;
-   * });
-   *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
    * for string parameter.
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
-   * @see Array.prototype.filter() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter MDN}
-   * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|MatchCallback} selector A selector to
-   * match.
+   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
    * @returns {this} A new collection.
    */
-  not (selector: string | DOMItem | DOMItem[] | MatchCallback): this {
+  not (selector: string | DOMItem | DOMItem[]): this {
     if (typeof selector === 'string') {
       return this.filter((item) => {
         return 'matches' in item && !item.matches(selector);
-      });
-    }
-    if (typeof selector === 'function') {
-      return this.filter((item, index, array) => {
-        const flag = Boolean(selector(item, index, array));
-        return !flag;
       });
     }
     if (Array.isArray(selector)) {
@@ -791,7 +765,7 @@ class EagleJS extends Array<DOMItem> {
     const $elements = new EagleJS();
     this.forEach((item) => {
       if ('previousElementSibling' in item &&
-        item.previousElementSibling !== null) {
+                item.previousElementSibling !== null) {
         $elements.push(item.previousElementSibling);
       }
     });
@@ -960,7 +934,8 @@ class EagleJS extends Array<DOMItem> {
    * $(element).replaceWith('text', Node);
    * $(element).replaceWith(Node, Node);
    *
-   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}.
+   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} nodes Nodes to replace.
    * @returns {this} The current collection.
    */
@@ -983,8 +958,7 @@ class EagleJS extends Array<DOMItem> {
     const $elements = new EagleJS();
     this.forEach((item) => {
       if ('parentNode' in item && item.parentNode !== null) {
-        const children = [...item.parentNode.children];
-        children.forEach((child) => {
+        [...item.parentNode.children].forEach((child) => {
           if (child !== item) {
             $elements.push(child);
           }
