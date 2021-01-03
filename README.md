@@ -48,7 +48,7 @@ $(document).ready(function () {
 
 ## Browser Support
 
-For a detailed view, please check the table on [caniuse.com](https://caniuse.com/es6,array-includes,once-event-listener).
+For a detailed view, please check the table on [caniuse.com](https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,es6,array-includes).
 
 ### Desktop (Last two versions)
 
@@ -62,12 +62,6 @@ For a detailed view, please check the table on [caniuse.com](https://caniuse.com
 - Chrome
 - Firefox
 - iOS Safari 10.3+
-
-### Required features:
-
-- EcmaScript 2015 (ES6)
-- EcmaScript 2016 (ES7) partially: Array.prototype.includes()
-- EventTarget.addEventListener(): options.once option
 
 ## Documentation
 
