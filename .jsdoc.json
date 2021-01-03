@@ -2,7 +2,7 @@
   "source": {
     "include": ["README.md", "dist/eaglejs.esm.js"]
   },
-  "plugins": [],
+  "plugins": ["plugins/markdown"],
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,
