@@ -8,7 +8,7 @@
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
  * @augments  Array<DOMItem>
  */
-class EagleJS extends Array {
+class EagleJS extends Array<DOMItem> {
   /**
    * Return a collection of matched items or created nodes by HTML string.
    *
