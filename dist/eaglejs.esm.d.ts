@@ -2,13 +2,13 @@
 /**
  * EagleJS.
  *
- * @version   0.6.1
- * @copyright 2020 Cem Demirkartal
+ * @version   0.6.2
+ * @copyright 2020-2021 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
  * @augments  Array<DOMItem>
  */
-declare class EagleJS extends Array<DOMItem> {
+declare class EagleJS extends Array {
   /**
    * Return a collection of matched items or created nodes by HTML string.
    *
@@ -40,21 +40,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   constructor (selector?: string | DOMItem | DOMItem[] | null, context?: string | DOMItem | DOMItem[]);
   /**
-   * Check if the value implements the ChildNode interface.
-   *
-   * @example
-   * EagleJS.isChildNode(element); // true
-   * EagleJS.isChildNode(document); // false
-   * EagleJS.isChildNode(window); // false
-   *
-   * @see ChildNode interface on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode MDN}.
-   * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value implements the ChildNode interface;
-   * otherwise, false.
-   */
-  static isChildNode (value: any): value is ChildNode;
-  /**
-   * Check if the variable is a DOMItem.
+   * Check if the value is a `DOMItem`.
    *
    * @example
    * EagleJS.isDOMItem(element); // true
@@ -63,23 +49,23 @@ declare class EagleJS extends Array<DOMItem> {
    *
    * @see {@link module:eaglejs~DOMItem DOMItem} type.
    * @param {*} value The value to be checked.
-   * @returns {boolean} True if the value is a DOMItem; otherwise, false.
+   * @returns {boolean} `true` if the value is a `DOMItem`; otherwise, `false`.
    */
   static isDOMItem (value: any): value is DOMItem;
   /**
-   * Add the class name to each element in the collection.
+   * Add one or more class names to each `Element` in the collection.
    *
    * @example
    * $(element).addClass('className');
    * $(element).addClass('className', 'className');
    *
-   * @see DOMTokenList.add() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add MDN}.
+   * @see Element.classList.add() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add MDN}.
    * @param {...string} names One or more class names.
    * @returns {this} The current collection.
    */
   addClass (...names: string[]): this;
   /**
-   * Insert nodes after each node in the collection.
+   * Insert nodes after each `ChildNode` in the collection.
    *
    * @example
    * $(element).after('text');
@@ -94,7 +80,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   after (...nodes: Array<string | Node>): this;
   /**
-   * Insert nodes to the end of each node in the collection.
+   * Insert nodes to the end of each `ParentNode` in the collection.
    *
    * @example
    * $(element).append('text');
@@ -109,7 +95,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   append (...nodes: Array<string | Node>): this;
   /**
-   * Insert nodes before each node in the collection.
+   * Insert nodes before each `ChildNode` in the collection.
    *
    * @example
    * $(element).before('text');
@@ -124,8 +110,8 @@ declare class EagleJS extends Array<DOMItem> {
    */
   before (...nodes: Array<string | Node>): this;
   /**
-   * Get the children of each node in the collection, optionally filtered by a
-   * selector.
+   * Get the `children` of each `ParentNode` in the collection, optionally
+   * filtered by a selector.
    *
    * @example
    * $(element).children();
@@ -137,7 +123,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   children (filter?: string | null): EagleJS;
   /**
-   * Return duplicates of each node in the collection.
+   * Return duplicate of each `Node` in the collection.
    *
    * @example
    * $(element).clone();
@@ -145,13 +131,13 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).clone(false);
    *
    * @see Node.cloneNode() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode MDN}.
-   * @param {boolean} [deep=false] If true, then node and its whole
-   * subtree—including text that may be in child Text nodes—is also copied.
+   * @param {boolean} [deep=false] If `true`, then `Node` and its whole
+   * subtree—including text that may be in child `Text` nodes—is also copied.
    * @returns {EagleJS} A new collection.
    */
   clone (deep?: boolean): EagleJS;
   /**
-   * Get the closest ancestor of each element in the collection matching with
+   * Get the closest ancestor of each `Element` in the collection matching with
    * the selector.
    *
    * @example
@@ -175,8 +161,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   concat (...items: Array<DOMItem | ConcatArray<DOMItem>>): EagleJS;
   /**
-   * Get the children of each node in the collection, including comment and text
-   * nodes.
+   * Get the `childNodes` of each `Node` in the collection.
    *
    * @example
    * $(element).contents();
@@ -186,7 +171,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   contents (): EagleJS;
   /**
-   * Remove the children of each node in the collection from the DOM.
+   * Remove all child nodes of each `Node` in the collection from the DOM.
    *
    * @example
    * $(element).empty();
@@ -218,26 +203,26 @@ declare class EagleJS extends Array<DOMItem> {
    * for DOMItem and DOMItem[] parameter.
    * @see Array.prototype.filter() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter MDN}
    * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|MatchCallback} selector A selector to
+   * @param {string|DOMItem|DOMItem[]|FilterCallback} selector A selector to
    * match.
-   * @param {*} [thisArg] Value to use as this when executing callback.
+   * @param {*} [thisArg] Value to use as `this` when executing `callback`.
    * @returns {this} A new collection.
    */
-  filter (selector: string | DOMItem | DOMItem[] | MatchCallback, thisArg?: any): this;
+  filter (selector: string | DOMItem | DOMItem[] | FilterCallback, thisArg?: any): this;
   /**
-   * Check if any collection element has the specified class name.
+   * Check if any collection `Element` has the specified class name.
    *
    * @example
    * $(element).hasClass('className');
    *
-   * @see DOMTokenList.contains() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains MDN}.
+   * @see Element.classList.contains() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains MDN}.
    * @param {string} name The class name to search.
-   * @returns {boolean} True if any element has the given class name, otherwise
-   * false.
+   * @returns {boolean} `true` if any `Element` has the given class name;
+   * otherwise, `false`.
    */
   hasClass (name: string): boolean;
   /**
-   * Check any element in the collection that matches the selector.
+   * Check any item in the collection that matches the selector.
    *
    * @example
    * // selector
@@ -249,26 +234,18 @@ declare class EagleJS extends Array<DOMItem> {
    * // DOMItem[]
    * $(element).is(EagleJS);
    *
-   * // Function
-   * $(element).is(function (item, index) {
-   *   return item.value === 0;
-   * });
-   *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
    * for string parameter.
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
-   * @see Array.prototype.some() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some MDN}
-   * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|MatchCallback} selector A selector to
-   * match.
-   * @returns {boolean} True if any element matches the given filter, otherwise
-   * false.
+   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
+   * @returns {boolean} `true` if any item matches the given filter; otherwise,
+   * `false`.
    */
-  is (selector: string | DOMItem | DOMItem[] | MatchCallback): boolean;
+  is (selector: string | DOMItem | DOMItem[]): boolean;
   /**
-   * Get the next sibling of each node in the collection, optionally filtered by
-   * a selector.
+   * Get the `nextElementSibling` of each `Node` in the collection, optionally
+   * filtered by a selector.
    *
    * @example
    * $(element).next();
@@ -280,7 +257,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   next (filter?: string | null): EagleJS;
   /**
-   * Remove matched elements from the collection.
+   * Remove matched items from the collection.
    *
    * @example
    * // string
@@ -292,39 +269,32 @@ declare class EagleJS extends Array<DOMItem> {
    * // DOMItem[]
    * $(element).not(EagleJS);
    *
-   * // Function
-   * $(element).not(function (item, index) {
-   *   return item.value > 0;
-   * });
-   *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
    * for string parameter.
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
-   * @see Array.prototype.filter() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter MDN}
-   * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|MatchCallback} selector A selector to
-   * match.
+   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
    * @returns {this} A new collection.
    */
-  not (selector: string | DOMItem | DOMItem[] | MatchCallback): this;
+  not (selector: string | DOMItem | DOMItem[]): this;
   /**
-   * Remove the event listener from each item in the collection.
+   * Remove the `EventListener` from each item in the collection.
    *
    * @example
    * $(element).off('click', handler);
    *
    * @see EventTarget.removeEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener MDN}.
-   * @param {string} event A case-sensitive string representing the event type.
-   * @param {EventListener|EventListenerObject} listener The handler function
-   * for the event.
-   * @param {boolean|EventListenerOptions} [options=false] Characteristics of
-   * the event listener.
+   * @param {string} event A string which specifies the type of event for which
+   * to remove an event listener.
+   * @param {EventListener|EventListenerObject} listener The `EventListener`
+   * function of the event handler to remove from the event target.
+   * @param {boolean|EventListenerOptions} [options=false] An options object
+   * that specifies characteristics about the event listener.
    * @returns {this} The current collection.
    */
   off (event: string, listener: EventListener | EventListenerObject, options?: boolean | EventListenerOptions): this;
   /**
-   * Attach the event listener to each item in the collection.
+   * Attach the `EventListener` to each item in the collection.
    *
    * @example
    * $(element).on('click', function (event) {
@@ -332,34 +302,18 @@ declare class EagleJS extends Array<DOMItem> {
    * });
    *
    * @see EventTarget.addEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener MDN}.
-   * @param {string} event A case-sensitive string representing the event type.
+   * @param {string} event A case-sensitive string representing the event type
+   * to listen for.
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
-   * @param {boolean|AddEventListenerOptions} [options=false] Characteristics of
-   * the event listener.
+   * @param {boolean|AddEventListenerOptions} [options=false] An options object
+   * that specifies characteristics about the event listener.
    * @returns {this} The current collection.
    */
   on (event: string, listener: EventListener | EventListenerObject, options?: boolean | AddEventListenerOptions): this;
   /**
-   * Attach the event listener to each item in the collection. The event
-   * listener is executed at most once per element per event type.
-   *
-   * @example
-   * $(element).one('click', function (event) {
-   *   console.log(event.type);
-   * });
-   *
-   * @see {@link module:eaglejs~EagleJS#on EagleJS.prototype.on()} with
-   * options.once parameter.
-   * @param {string} event A case-sensitive string representing the event type.
-   * @param {EventListener|EventListenerObject} listener The handler function
-   * for the event.
-   * @returns {this} The current collection.
-   */
-  one (event: string, listener: EventListener | EventListenerObject): this;
-  /**
-   * Get the parent of each node in the collection, optionally filtered by a
-   * selector.
+   * Get the `parentNode` of each `Node` in the collection, optionally filtered
+   * by a selector.
    *
    * @example
    * $(element).parent();
@@ -371,7 +325,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   parent (filter?: string | null): EagleJS;
   /**
-   * Insert nodes to the beginning of each node in the collection.
+   * Insert nodes to the beginning of each `ParentNode` in the collection.
    *
    * @example
    * $(element).prepend('text');
@@ -386,8 +340,8 @@ declare class EagleJS extends Array<DOMItem> {
    */
   prepend (...nodes: Array<string | Node>): this;
   /**
-   * Get the previous sibling of each node in the collection, optionally
-   * filtered by a selector.
+   * Get the `previousElementSibling` of each `Node` in the collection,
+   * optionally filtered by a selector.
    *
    * @example
    * $(element).prev();
@@ -399,7 +353,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   prev (filter?: string | null): EagleJS;
   /**
-   * Adds one or more items to the end of the collection.
+   * Add one or more items to the end of the collection.
    *
    * @example
    * $(element).push(DOMItem, DOMItem, DOMItem);
@@ -413,8 +367,8 @@ declare class EagleJS extends Array<DOMItem> {
    */
   push (...items: DOMItem[]): number;
   /**
-   * Get the first element descendant of each node in the collection that
-   * matches selectors.
+   * Get the first `Element` descendant of each `ParentNode` in the collection
+   * that matches selectors.
    *
    * @example
    * $(element).querySelector('selector');
@@ -425,8 +379,8 @@ declare class EagleJS extends Array<DOMItem> {
    */
   querySelector (selectors: string): EagleJS;
   /**
-   * Get all element descendants of each node in the collection that matches
-   * selectors.
+   * Get all `Element` descendants of each `ParentNode` in the collection that
+   * matches selectors.
    *
    * @example
    * $(element).querySelectorAll('selector');
@@ -450,7 +404,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   ready (listener: EventListener): this;
   /**
-   * Remove nodes of the collection from the DOM.
+   * Remove each `Node` of the collection from the DOM.
    *
    * @example
    * $(element).remove();
@@ -461,7 +415,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   remove (): this;
   /**
-   * Remove the attribute from each element in the collection.
+   * Remove one or more attributes from each `Element` in the collection.
    *
    * @example
    * $(element).removeAttr('attributeName');
@@ -473,19 +427,19 @@ declare class EagleJS extends Array<DOMItem> {
    */
   removeAttr (...names: string[]): this;
   /**
-   * Remove the class name from each element in the collection.
+   * Remove one or more class names from each `Element` in the collection.
    *
    * @example
    * $(element).removeClass('className');
    * $(element).removeClass('className', 'className');
    *
-   * @see DOMTokenList.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove MDN}.
+   * @see Element.classList.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove MDN}.
    * @param {...string} names One or more class names.
    * @returns {this} The current collection.
    */
   removeClass (...names: string[]): this;
   /**
-   * Replace each node in the collection with the given nodes.
+   * Replace each `ChildNode` in the collection with the given `Node` objects.
    *
    * @example
    * $(element).replaceWith('text');
@@ -493,13 +447,14 @@ declare class EagleJS extends Array<DOMItem> {
    * $(element).replaceWith('text', Node);
    * $(element).replaceWith(Node, Node);
    *
-   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}.
+   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}
+   * (Polyfilled).
    * @param {...(string|Node)} nodes Nodes to replace.
    * @returns {this} The current collection.
    */
   replaceWith (...nodes: Array<string | Node>): this;
   /**
-   * Get the siblings of each node in the collection, optionally filtered by a
+   * Get the siblings of each `Node` in the collection, optionally filtered by a
    * selector.
    *
    * @example
@@ -511,22 +466,22 @@ declare class EagleJS extends Array<DOMItem> {
    */
   siblings (filter?: string | null): EagleJS;
   /**
-   * Toggle the class name to each element in the collection.
+   * Toggle the class name to each `Element` in the collection.
    *
    * @example
    * $(element).toggleClass('className');
    * $(element).toggleClass('className', true);
    * $(element).toggleClass('className', false);
    *
-   * @see DOMTokenList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle MDN}.
-   * @param {string} name The class name.
+   * @see Element.classList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle MDN}.
+   * @param {string} name The class name to toggle.
    * @param {boolean} [force] A boolean value to determine whether the class
    * should be added or removed.
    * @returns {this} The current collection.
    */
   toggleClass (name: string, force?: boolean): this;
   /**
-   * Trigger the specified event on each item in the collection.
+   * Trigger the specified `Event` on each item in the collection.
    *
    * @example
    * $(element).trigger('click');
@@ -541,7 +496,7 @@ declare class EagleJS extends Array<DOMItem> {
    */
   trigger (event: string, data?: object | null): this;
   /**
-   * Adds new items to the beginning of the collection.
+   * Add one or more items to the beginning of the collection.
    *
    * @example
    * $(element).unshift(DOMItem, DOMItem, DOMItem);
@@ -559,8 +514,6 @@ declare class EagleJS extends Array<DOMItem> {
  * DOM items like EventTarget, Node (Element, Text, Document, etc.), and Window.
  *
  * @see EventTarget on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget MDN}.
- * @see Node on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node MDN}.
- * @see Window on {@link https://developer.mozilla.org/en-US/docs/Web/API/Window MDN}.
  * @typedef {EventTarget|Node|Window|Element|Text|CDATASection|
  * ProcessingInstruction|Comment|Document|DocumentType|DocumentFragment|
  * HTMLElement|SVGElement} DOMItem
@@ -568,14 +521,14 @@ declare class EagleJS extends Array<DOMItem> {
 /**
  * A function to test each item in the collection.
  *
- * @callback MatchCallback
+ * @callback FilterCallback
  * @param {DOMItem} element The current element being processed.
  * @param {number} [index] The index of the current element being processed.
- * @param {DOMItem[]} [array] The array function was called upon.
+ * @param {DOMItem[]} [array] The array `filter` was called upon.
  * @returns {boolean}
  */
 /**
- * Proxy to use EagleJS Class without the new keyword.
+ * Proxy to use `EagleJS` class without the new keyword.
  *
  * @example <caption>Usage (Ecmascript 6 Module)</caption>
  * import { EagleJSProxy as $ } from 'eaglejs.esm.js';
@@ -590,9 +543,9 @@ declare class EagleJS extends Array<DOMItem> {
  * @returns {EagleJS} A new collection.
  */
 declare const EagleJSProxy: (selector?: string | DOMItem | DOMItem[] | null, context?: string | DOMItem | DOMItem[]) => EagleJS;
-export { EagleJS, EagleJSProxy, DOMItem, MatchCallback };
+export { EagleJS, EagleJSProxy, DOMItem };
 declare type DOMItem = EventTarget | Node | Window | Element | Text | CDATASection | ProcessingInstruction | Comment | Document | DocumentType | DocumentFragment | HTMLElement | SVGElement;
-declare type MatchCallback = (element: DOMItem, index: number, array: DOMItem[]) => unknown;
+declare type FilterCallback = (element: DOMItem, index: number, array: DOMItem[]) => unknown;
 interface EagleJS {
   attr(name: string): string | null
   attr(name: string, value: string): this
