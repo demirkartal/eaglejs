@@ -745,7 +745,8 @@ $(element).addClass('className', 'className');</code></pre>
 
 
 <div class="description usertext">
-    <p>Insert nodes after each <code>ChildNode</code> in the collection.</p>
+    <p>Insert a set of <code>Node</code> or <code>DOMString</code> objects after each <code>ChildNode</code> in the
+collection. <code>DOMString</code> objects are inserted as equivalent <code>Text</code> nodes.</p>
 </div>
 
 
@@ -822,7 +823,8 @@ $(element).after(Node, Node);</code></pre>
 
             
 
-            <td class="description last"><p>Nodes to insert.</p></td>
+            <td class="description last"><p>A set of <code>Node</code> or <code>DOMString</code> objects to
+insert.</p></td>
         </tr>
 
     
@@ -929,7 +931,9 @@ $(element).after(Node, Node);</code></pre>
 
 
 <div class="description usertext">
-    <p>Insert nodes to the end of each <code>ParentNode</code> in the collection.</p>
+    <p>Insert a set of <code>Node</code> or <code>DOMString</code> objects before the first child of
+each <code>ParentNode</code> in the collection. <code>DOMString</code> objects are inserted as
+equivalent <code>Text</code> nodes.</p>
 </div>
 
 
@@ -1006,7 +1010,8 @@ $(element).append(Node, Node);</code></pre>
 
             
 
-            <td class="description last"><p>Nodes to insert.</p></td>
+            <td class="description last"><p>A set of <code>Node</code> or <code>DOMString</code> objects to
+insert.</p></td>
         </tr>
 
     
@@ -1336,7 +1341,9 @@ if the value parameter provided, returns the current collection.</p>
 
 
 <div class="description usertext">
-    <p>Insert nodes before each <code>ChildNode</code> in the collection.</p>
+    <p>Insert a set of <code>Node</code> or <code>DOMString</code> objects before each <code>ChildNode</code> in
+the collection. <code>DOMString</code> objects are inserted as equivalent <code>Text</code>
+nodes.</p>
 </div>
 
 
@@ -1413,7 +1420,8 @@ $(element).before(Node, Node);</code></pre>
 
             
 
-            <td class="description last"><p>Nodes to insert.</p></td>
+            <td class="description last"><p>A set of <code>Node</code> or <code>DOMString</code> objects to
+insert.</p></td>
         </tr>
 
     
@@ -1519,8 +1527,8 @@ $(element).before(Node, Node);</code></pre>
 
 
 <div class="description usertext">
-    <p>Get the <code>children</code> of each <code>ParentNode</code> in the collection, optionally
-filtered by a selector.</p>
+    <p>Get the <code>children</code> property of each <code>ParentNode</code> in the collection,
+optionally filtered by a selector.</p>
 </div>
 
 
@@ -1628,7 +1636,7 @@ $(element).children('selector');</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -1708,7 +1716,7 @@ $(element).children('selector');</code></pre>
 
 
 <div class="description usertext">
-    <p>Return duplicate of each <code>Node</code> in the collection.</p>
+    <p>Create a clone of each <code>Node</code> in the collection.</p>
 </div>
 
 
@@ -1816,7 +1824,7 @@ subtree—including text that may be in child <code>Text</code> nodes—is also 
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Node</code> objects.</p>
 </div>
 
 
@@ -1982,7 +1990,7 @@ the selector.</p>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -2243,7 +2251,7 @@ array.</p></td>
 
 
 <div class="description usertext">
-    <p>Get the <code>childNodes</code> of each <code>Node</code> in the collection.</p>
+    <p>Get the <code>childNodes</code> property of each <code>Node</code> in the collection.</p>
 </div>
 
 
@@ -2279,7 +2287,7 @@ array.</p></td>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>ChildNode</code> objects.</p>
 </div>
 
 
@@ -2574,6 +2582,13 @@ If the value parameter provided, returns the current collection.</p>
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>Node.removeChild() on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild">MDN</a>.</li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -2856,7 +2871,7 @@ match.</p></td>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection with the items that pass the test.</p>
 </div>
 
 
@@ -3581,7 +3596,7 @@ $(element).next('selector');</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -3763,7 +3778,7 @@ $(element).not(EagleJS);</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection with the items that not pass the test.</p>
 </div>
 
 
@@ -4482,7 +4497,7 @@ $(element).parent('selector');</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Node</code> objects.</p>
 </div>
 
 
@@ -4563,7 +4578,9 @@ $(element).parent('selector');</code></pre>
 
 
 <div class="description usertext">
-    <p>Insert nodes to the beginning of each <code>ParentNode</code> in the collection.</p>
+    <p>Insert a set of <code>Node</code> or <code>DOMString</code> objects after the last child of each
+<code>ParentNode</code> in the collection. <code>DOMString</code> objects are inserted as
+equivalent <code>Text</code> nodes.</p>
 </div>
 
 
@@ -4640,7 +4657,8 @@ $(element).prepend(Node, Node);</code></pre>
 
             
 
-            <td class="description last"><p>Nodes to insert.</p></td>
+            <td class="description last"><p>A set of <code>Node</code> or <code>DOMString</code> objects to
+insert.</p></td>
         </tr>
 
     
@@ -4855,7 +4873,7 @@ $(element).prev('selector');</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -5201,7 +5219,7 @@ that matches selectors.</p>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -5367,7 +5385,7 @@ matches selectors.</p>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -6088,7 +6106,9 @@ $(element).removeClass('className', 'className');</code></pre>
 
 
 <div class="description usertext">
-    <p>Replace each <code>ChildNode</code> in the collection with the given <code>Node</code> objects.</p>
+    <p>Replace each <code>ChildNode</code> in the collection with a set of <code>Node</code> or
+<code>DOMString</code> objects. <code>DOMString</code> objects are inserted as equivalent <code>Text</code>
+nodes.</p>
 </div>
 
 
@@ -6165,7 +6185,8 @@ $(element).replaceWith(Node, Node);</code></pre>
 
             
 
-            <td class="description last"><p>Nodes to replace.</p></td>
+            <td class="description last"><p>A set of <code>Node</code> or <code>DOMString</code> objects to
+replace.</p></td>
         </tr>
 
     
@@ -6373,7 +6394,7 @@ $(element).siblings('selector');</code></pre>
 
         
 <div class="param-desc">
-    <p>A new collection.</p>
+    <p>A new collection of <code>Element</code> objects.</p>
 </div>
 
 
@@ -6440,7 +6461,7 @@ $(element).siblings('selector');</code></pre>
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li>HTMLElement.innerText on <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText">MDN</a>.</li>
+            <li>Node.textContent on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent">MDN</a>.</li>
         </ul>
     </dd>
     

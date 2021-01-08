@@ -93,7 +93,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert nodes after each `ChildNode` in the collection.
+   * Insert a set of `Node` or `DOMString` objects after each `ChildNode` in the
+   * collection. `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
    * $(element).after('text');
@@ -103,7 +104,8 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} nodes Nodes to insert.
+   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
+   * insert.
    * @returns {this} The current collection.
    */
   after (...nodes: Array<string | Node>): this {
@@ -131,7 +133,9 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert nodes to the end of each `ParentNode` in the collection.
+   * Insert a set of `Node` or `DOMString` objects before the first child of
+   * each `ParentNode` in the collection. `DOMString` objects are inserted as
+   * equivalent `Text` nodes.
    *
    * @example
    * $(element).append('text');
@@ -141,7 +145,8 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} nodes Nodes to insert.
+   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
+   * insert.
    * @returns {this} The current collection.
    */
   append (...nodes: Array<string | Node>): this {
@@ -204,7 +209,9 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert nodes before each `ChildNode` in the collection.
+   * Insert a set of `Node` or `DOMString` objects before each `ChildNode` in
+   * the collection. `DOMString` objects are inserted as equivalent `Text`
+   * nodes.
    *
    * @example
    * $(element).before('text');
@@ -214,7 +221,8 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} nodes Nodes to insert.
+   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
+   * insert.
    * @returns {this} The current collection.
    */
   before (...nodes: Array<string | Node>): this {
@@ -241,8 +249,8 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the `children` of each `ParentNode` in the collection, optionally
-   * filtered by a selector.
+   * Get the `children` property of each `ParentNode` in the collection,
+   * optionally filtered by a selector.
    *
    * @example
    * $(element).children();
@@ -250,7 +258,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   children (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -266,7 +274,7 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Return duplicate of each `Node` in the collection.
+   * Create a clone of each `Node` in the collection.
    *
    * @example
    * $(element).clone();
@@ -276,7 +284,7 @@ class EagleJS extends Array<DOMItem> {
    * @see Node.cloneNode() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode MDN}.
    * @param {boolean} [deep=false] If `true`, then `Node` and its whole
    * subtree—including text that may be in child `Text` nodes—is also copied.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Node` objects.
    */
   clone (deep: boolean = false): EagleJS {
     const $elements = new EagleJS();
@@ -297,7 +305,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Element.closest() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest MDN}.
    * @param {string} selector A selector to match.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   closest (selector: string): EagleJS {
     const $elements = new EagleJS();
@@ -328,13 +336,13 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Get the `childNodes` of each `Node` in the collection.
+   * Get the `childNodes` property of each `Node` in the collection.
    *
    * @example
    * $(element).contents();
    *
    * @see Node.childNodes on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes MDN}.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `ChildNode` objects.
    */
   contents (): EagleJS {
     const $elements = new EagleJS();
@@ -408,6 +416,7 @@ class EagleJS extends Array<DOMItem> {
    * @example
    * $(element).empty();
    *
+   * @see Node.removeChild() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild MDN}.
    * @returns {this} The current collection.
    */
   empty (): this {
@@ -448,7 +457,7 @@ class EagleJS extends Array<DOMItem> {
    * @param {string|DOMItem|DOMItem[]|FilterCallback} selector A selector to
    * match.
    * @param {*} [thisArg] Value to use as `this` when executing `callback`.
-   * @returns {this} A new collection.
+   * @returns {this} A new collection with the items that pass the test.
    */
   filter (selector: string | DOMItem | DOMItem[] | FilterCallback, thisArg?: any): this {
     if (typeof selector === 'string') {
@@ -556,7 +565,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   next (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -589,7 +598,7 @@ class EagleJS extends Array<DOMItem> {
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
    * @param {string|DOMItem|DOMItem[]} selector A selector to match.
-   * @returns {this} A new collection.
+   * @returns {this} A new collection with the items that not pass the test.
    */
   not (selector: string | DOMItem | DOMItem[]): this {
     if (typeof selector === 'string') {
@@ -659,7 +668,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Node` objects.
    */
   parent (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -675,7 +684,9 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Insert nodes to the beginning of each `ParentNode` in the collection.
+   * Insert a set of `Node` or `DOMString` objects after the last child of each
+   * `ParentNode` in the collection. `DOMString` objects are inserted as
+   * equivalent `Text` nodes.
    *
    * @example
    * $(element).prepend('text');
@@ -685,7 +696,8 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} nodes Nodes to insert.
+   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
+   * insert.
    * @returns {this} The current collection.
    */
   prepend (...nodes: Array<string | Node>): this {
@@ -721,7 +733,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   prev (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -765,7 +777,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.querySelector() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector MDN}.
    * @param {string} selectors One or more selector to match.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   querySelector (selectors: string): EagleJS {
     const $elements = new EagleJS();
@@ -789,7 +801,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.querySelectorAll() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll MDN}.
    * @param {string} selectors One or more selector to match.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   querySelectorAll (selectors: string): EagleJS {
     const $elements = new EagleJS();
@@ -888,7 +900,9 @@ class EagleJS extends Array<DOMItem> {
   }
 
   /**
-   * Replace each `ChildNode` in the collection with the given `Node` objects.
+   * Replace each `ChildNode` in the collection with a set of `Node` or
+   * `DOMString` objects. `DOMString` objects are inserted as equivalent `Text`
+   * nodes.
    *
    * @example
    * $(element).replaceWith('text');
@@ -898,7 +912,8 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}
    * (Polyfilled).
-   * @param {...(string|Node)} nodes Nodes to replace.
+   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
+   * replace.
    * @returns {this} The current collection.
    */
   replaceWith (...nodes: Array<string | Node>): this {
@@ -914,7 +929,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).siblings('selector');
    *
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection.
+   * @returns {EagleJS} A new collection of `Element` objects.
    */
   siblings (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -942,7 +957,7 @@ class EagleJS extends Array<DOMItem> {
    * @example <caption>text (value: string): this</caption>
    * $(element).text('value');
    *
-   * @see HTMLElement.innerText on {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText MDN}.
+   * @see Node.textContent on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent MDN}.
    * @param {string} [value] The text to set.
    * @returns {string|null|this} Text of the first `Node`; Or if the value
    * parameter provided, returns the current collection.
