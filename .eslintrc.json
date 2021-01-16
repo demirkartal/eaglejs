@@ -13,7 +13,7 @@
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
-  "plugins": ["jsdoc", "markdown"],
+  "plugins": ["jsdoc", "markdown", "@typescript-eslint"],
   "rules": {
     "semi": ["error", "always"],
     "max-len": ["error", { "code": 80, "tabWidth": 4, "ignoreUrls": true }],
@@ -47,7 +47,6 @@
       "parserOptions": {
         "project": "./tsconfig.json"
       },
-      "plugins": ["@typescript-eslint"],
       "rules": {
         "max-len": "warn",
         "@typescript-eslint/semi": ["error", "always"],
