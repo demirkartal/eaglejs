@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version   0.6.2
+ * @version   0.6.3
  * @copyright 2020-2021 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -81,6 +81,10 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Element.classList.add() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add MDN}.
    * @param {...string} names One or more class names.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
+   * the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
+   * arguments contains any ASCII whitespace.
    * @returns {this} The current collection.
    */
   addClass (...names: string[]): this {
@@ -103,7 +107,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).after(Node, Node);
    *
    * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
    * insert.
    * @returns {this} The current collection.
@@ -144,7 +148,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).append(Node, Node);
    *
    * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
    * insert.
    * @returns {this} The current collection.
@@ -184,6 +188,9 @@ class EagleJS extends Array<DOMItem> {
    * @see Element.setAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute MDN}.
    * @param {string} name The name of the attribute.
    * @param {string} [value] The value for the attribute.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if the specified
+   * attribute name contains one or more characters that are not valid in
+   * attribute names.
    * @returns {string|null|this} The attribute value of the first `Element`; Or
    * if the value parameter provided, returns the current collection.
    */
@@ -220,7 +227,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).before(Node, Node);
    *
    * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
    * insert.
    * @returns {this} The current collection.
@@ -258,7 +265,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   children (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -284,7 +291,9 @@ class EagleJS extends Array<DOMItem> {
    * @see Node.cloneNode() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode MDN}.
    * @param {boolean} [deep=false] If `true`, then `Node` and its whole
    * subtree—including text that may be in child `Text` nodes—is also copied.
-   * @returns {EagleJS} A new collection of `Node` objects.
+   * @throws {DOMException} Throws a `NotSupportedError` if `Node` is a
+   * ShadowRoot.
+   * @returns {EagleJS} A new collection of `Node`s.
    */
   clone (deep: boolean = false): EagleJS {
     const $elements = new EagleJS();
@@ -305,7 +314,9 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Element.closest() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest MDN}.
    * @param {string} selector A selector to match.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
+   * specified `selectors` is not valid.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   closest (selector: string): EagleJS {
     const $elements = new EagleJS();
@@ -328,7 +339,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Array.prototype.concat() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat MDN}.
    * @param {...(DOMItem|Array<DOMItem>)} items Values to concatenate into a new
-   * array.
+   * collection.
    * @returns {EagleJS} A new collection.
    */
   concat (...items: Array<DOMItem | ConcatArray<DOMItem>>): EagleJS {
@@ -342,7 +353,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).contents();
    *
    * @see Node.childNodes on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes MDN}.
-   * @returns {EagleJS} A new collection of `ChildNode` objects.
+   * @returns {EagleJS} A new collection of `ChildNode`s.
    */
   contents (): EagleJS {
     const $elements = new EagleJS();
@@ -528,7 +539,7 @@ class EagleJS extends Array<DOMItem> {
    * Check any item in the collection that matches the selector.
    *
    * @example
-   * // selector
+   * // string
    * $(element).is('selector');
    *
    * // DOMItem
@@ -547,12 +558,29 @@ class EagleJS extends Array<DOMItem> {
    */
   is (selector: string | DOMItem | DOMItem[]): boolean {
     if (typeof selector === 'string') {
-      return this.some((item) => 'matches' in item && item.matches(selector));
+      return this.matches(selector);
     }
     if (Array.isArray(selector)) {
       return this.some((item) => selector.includes(item));
     }
     return this.includes(selector);
+  }
+
+  /**
+   * Check any `Element` in the collection that matches the selector.
+   *
+   * @example
+   * $(element).matches('selector');
+   *
+   * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}.
+   * @param {string} selectors A selector to match.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
+   * specified `selectors` is not valid.
+   * @returns {boolean} `true` if any `Element` matches the given selector;
+   * otherwise, `false`.
+   */
+  matches (selectors: string): boolean {
+    return this.some((item) => 'matches' in item && item.matches(selectors));
   }
 
   /**
@@ -565,7 +593,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   next (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -598,7 +626,7 @@ class EagleJS extends Array<DOMItem> {
    * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
    * for DOMItem and DOMItem[] parameter.
    * @param {string|DOMItem|DOMItem[]} selector A selector to match.
-   * @returns {this} A new collection with the items that not pass the test.
+   * @returns {this} A new collection with the items that did not pass the test.
    */
   not (selector: string | DOMItem | DOMItem[]): this {
     if (typeof selector === 'string') {
@@ -619,12 +647,12 @@ class EagleJS extends Array<DOMItem> {
    * $(element).off('click', handler);
    *
    * @see EventTarget.removeEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener MDN}.
-   * @param {string} event A string which specifies the type of event for which
+   * @param {string} event A string that specifies the type of event for which
    * to remove an event listener.
    * @param {EventListener|EventListenerObject} listener The `EventListener`
    * function of the event handler to remove from the event target.
    * @param {boolean|EventListenerOptions} [options=false] An options object
-   * that specifies characteristics about the event listener.
+   * specifies the characteristics of the event listener.
    * @returns {this} The current collection.
    */
   off (event: string, listener: EventListener | EventListenerObject, options: boolean | EventListenerOptions = false): this {
@@ -648,7 +676,7 @@ class EagleJS extends Array<DOMItem> {
    * @param {EventListener|EventListenerObject} listener The handler function
    * for the event.
    * @param {boolean|AddEventListenerOptions} [options=false] An options object
-   * that specifies characteristics about the event listener.
+   * specifies the characteristics of the event listener.
    * @returns {this} The current collection.
    */
   on (event: string, listener: EventListener | EventListenerObject, options: boolean | AddEventListenerOptions = false): this {
@@ -668,7 +696,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection of `Node` objects.
+   * @returns {EagleJS} A new collection of `Node`s.
    */
   parent (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -695,7 +723,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).prepend(Node, Node);
    *
    * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
    * insert.
    * @returns {this} The current collection.
@@ -733,7 +761,7 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   prev (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -776,8 +804,10 @@ class EagleJS extends Array<DOMItem> {
    * $(element).querySelector('selector');
    *
    * @see ParentNode.querySelector() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector MDN}.
-   * @param {string} selectors One or more selector to match.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @param {string} selectors One or more selectors to match.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
+   * specified `selectors` is not valid.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   querySelector (selectors: string): EagleJS {
     const $elements = new EagleJS();
@@ -800,8 +830,10 @@ class EagleJS extends Array<DOMItem> {
    * $(element).querySelectorAll('selector');
    *
    * @see ParentNode.querySelectorAll() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll MDN}.
-   * @param {string} selectors One or more selector to match.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @param {string} selectors One or more selectors to match.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
+   * specified `selectors` is not valid.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   querySelectorAll (selectors: string): EagleJS {
     const $elements = new EagleJS();
@@ -845,7 +877,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).remove();
    *
    * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @returns {this} The current collection.
    */
   remove (): this {
@@ -888,6 +920,10 @@ class EagleJS extends Array<DOMItem> {
    *
    * @see Element.classList.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove MDN}.
    * @param {...string} names One or more class names.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
+   * the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
+   * arguments contains any ASCII whitespace.
    * @returns {this} The current collection.
    */
   removeClass (...names: string[]): this {
@@ -911,7 +947,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).replaceWith(Node, Node);
    *
    * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}
-   * (Polyfilled).
+   * (Simulated).
    * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
    * replace.
    * @returns {this} The current collection.
@@ -929,7 +965,7 @@ class EagleJS extends Array<DOMItem> {
    * $(element).siblings('selector');
    *
    * @param {?string} [filter=null] A selector to filter.
-   * @returns {EagleJS} A new collection of `Element` objects.
+   * @returns {EagleJS} A new collection of `Element`s.
    */
   siblings (filter: string | null = null): EagleJS {
     const $elements = new EagleJS();
@@ -995,6 +1031,10 @@ class EagleJS extends Array<DOMItem> {
    * @param {string} name The class name to toggle.
    * @param {boolean} [force] A boolean value to determine whether the class
    * should be added or removed.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
+   * the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
+   * arguments contains any ASCII whitespace.
    * @returns {this} The current collection.
    */
   toggleClass (name: string, force?: boolean): this {
