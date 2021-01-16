@@ -1,5 +1,10 @@
 # EagleJS
 
+[![dependencies Status](https://status.david-dm.org/gh/eagleirons/eaglejs.svg)](https://david-dm.org/eagleirons/eaglejs)
+[![devDependencies Status](https://status.david-dm.org/gh/eagleirons/eaglejs.svg?type=dev)](https://david-dm.org/eagleirons/eaglejs?type=dev)
+[![Minified](https://badgen.net/bundlephobia/min/@eagleirons/eaglejs)](https://bundlephobia.com/result?p=@eagleirons/eaglejs)
+[![Minified+Gzipped](https://badgen.net/bundlephobia/minzip/@eagleirons/eaglejs)](https://bundlephobia.com/result?p=@eagleirons/eaglejs)
+
 EagleJS is a jQuery-Like DOM manipulation library for modern browsers.
 
 - Powered with EcmaScript 6 and Modern DOM functions
