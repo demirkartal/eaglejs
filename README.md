@@ -1,7 +1,12 @@
 # EagleJS
 
+[![NPM](https://badgen.net/npm/v/@eagleirons/eaglejs)](https://www.npmjs.com/package/@eagleirons/eaglejs)
+[![](https://data.jsdelivr.com/v1/package/npm/@eagleirons/eaglejs/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@eagleirons/eaglejs)
 [![dependencies Status](https://status.david-dm.org/gh/eagleirons/eaglejs.svg)](https://david-dm.org/eagleirons/eaglejs)
 [![devDependencies Status](https://status.david-dm.org/gh/eagleirons/eaglejs.svg?type=dev)](https://david-dm.org/eagleirons/eaglejs?type=dev)
+[![DeepScan grade](https://deepscan.io/api/teams/12532/projects/15558/branches/312508/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12532&pid=15558&bid=312508)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/eagleirons/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/eagleirons/eaglejs/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/eagleirons/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/eagleirons/eaglejs/context:javascript)
 [![Minified](https://badgen.net/bundlephobia/min/@eagleirons/eaglejs)](https://bundlephobia.com/result?p=@eagleirons/eaglejs)
 [![Minified+Gzipped](https://badgen.net/bundlephobia/minzip/@eagleirons/eaglejs)](https://bundlephobia.com/result?p=@eagleirons/eaglejs)
 
