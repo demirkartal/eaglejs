@@ -1,4 +1,4 @@
-/** @module eaglejs */
+'use strict';
 /**
  * EagleJS.
  *
@@ -1126,8 +1126,8 @@ class EagleJS extends Array<DOMItem> {
 const EagleJSProxy = (selector: string | DOMItem | DOMItem[] | null = null, context: string | DOMItem | DOMItem[] = document): EagleJS => {
   return new EagleJS(selector, context);
 };
-// Export
-export { EagleJS, EagleJSProxy, DOMItem };
+// Define $
+window.$ = EagleJSProxy;
 
 // TypeScript Things
 type DOMItem = EventTarget | Node | Window |
@@ -1153,4 +1153,8 @@ interface EagleJS {
   slice(start?: number, end?: number): this // return type fix
   text(): string | null
   text(value: string): this
+}
+
+interface Window {
+  $: typeof EagleJSProxy
 }
