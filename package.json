@@ -50,17 +50,18 @@
   },
   "scripts": {
     "build": "npm run build:tsc && npm run build:minified",
-    "build:tsc": "npm run tsc:build && npm run lint:fix-build",
+    "build:tsc": "npm run lint:fix && npm run tsc:build && npm run lint:fix-build",
     "build:minified": "npm run minify:esm && npm run minify:script",
     "docs:build": "npm run docs:delete && npm run docs:create",
     "docs:create": "jsdoc --configure .jsdoc.json",
     "docs:delete": "rimraf docs/",
-    "lint": "eslint --cache src/eaglejs.esm.ts",
-    "lint:fix": "eslint --fix src/eaglejs.esm.ts",
+    "lint": "eslint --cache src/",
+    "lint:fix": "eslint --fix src/",
     "lint:fix-build": "eslint --fix dist/",
     "minify:esm": "terser dist/eaglejs.esm.js --compress --mangle --output dist/eaglejs.esm.min.js",
     "minify:script": "terser dist/eaglejs.js --compress --mangle --output dist/eaglejs.min.js",
-    "test": "eslint dist/ src/",
+    "test": "npm run test:lint",
+    "test:lint": "eslint dist/ src/",
     "tsc:build": "tsc --project tsconfig.json"
   }
 }
