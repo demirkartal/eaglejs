@@ -1,28 +1,8 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2016",
-    "module": "ES2015",
     "declaration": true,
     "outDir": "dist",
-
-    /* Strict Checks */
-    "strict": true,
-    // "noImplicitAny": true,
-    // "strictNullChecks": true,
-    // "strictFunctionTypes": true,
-    // "strictPropertyInitialization": true,
-    // "strictBindCallApply": true,
-    // "noImplicitThis": true,
-    // "alwaysStrict": true,
-
-    /* Linter Checks */
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-
-    /* Style */
-    "newLine": "lf"
-  },
-  "include": ["src"]
+    "rootDir": "src"
+  }
 }
