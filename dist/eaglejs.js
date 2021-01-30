@@ -1,7 +1,8 @@
+'use strict';
 /**
  * EagleJS.
  *
- * @version   0.6.3
+ * @version   0.6.4
  * @copyright 2020-2021 Cem Demirkartal
  * @license   MIT
  * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
@@ -260,10 +261,10 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).children();
-   * $(element).children('selector');
+   * $(element).children('selectors');
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
-   * @param {?string} [filter=null] A selector to filter.
+   * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   children (filter = null) {
@@ -305,23 +306,23 @@ class EagleJS extends Array {
   }
 
   /**
-   * Get the closest ancestor of each `Element` in the collection matching with
-   * the selector.
+   * Get the closest ancestor of each `Element` in the collection that matches
+   * selectors.
    *
    * @example
-   * $(element).closest('selector');
+   * $(element).closest('selectors');
    *
    * @see Element.closest() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest MDN}.
-   * @param {string} selector A selector to match.
+   * @param {string} selectors One or more selectors to match.
    * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
    * specified `selectors` is not valid.
    * @returns {EagleJS} A new collection of `Element`s.
    */
-  closest (selector) {
+  closest (selectors) {
     const $elements = new EagleJS();
     this.forEach((item) => {
       if ('closest' in item) {
-        const closest = item.closest(selector);
+        const closest = item.closest(selectors);
         if (closest !== null) {
           $elements.push(closest);
         }
@@ -398,15 +399,15 @@ class EagleJS extends Array {
         return this;
       }
       /** @type {string|undefined} */
-      let returnValue;
+      let returnKeyValue;
       this.some((item) => {
         if ('dataset' in item) {
-          returnValue = item.dataset[camelCaseKey];
+          returnKeyValue = item.dataset[camelCaseKey];
           return true;
         }
         return false;
       });
-      return returnValue;
+      return returnKeyValue;
     }
     /** @type {object} */
     let returnValue = {};
@@ -566,16 +567,16 @@ class EagleJS extends Array {
   }
 
   /**
-   * Check any `Element` in the collection that matches the selector.
+   * Check any `Element` in the collection that matches selectors.
    *
    * @example
-   * $(element).matches('selector');
+   * $(element).matches('selectors');
    *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}.
-   * @param {string} selectors A selector to match.
+   * @param {string} selectors One or more selectors to match.
    * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
    * specified `selectors` is not valid.
-   * @returns {boolean} `true` if any `Element` matches the given selector;
+   * @returns {boolean} `true` if any `Element` matches the given selectors;
    * otherwise, `false`.
    */
   matches (selectors) {
@@ -588,10 +589,10 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).next();
-   * $(element).next('selector');
+   * $(element).next('selectors');
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
-   * @param {?string} [filter=null] A selector to filter.
+   * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   next (filter = null) {
@@ -691,10 +692,10 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).parent();
-   * $(element).parent('selector');
+   * $(element).parent('selectors');
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
-   * @param {?string} [filter=null] A selector to filter.
+   * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Node`s.
    */
   parent (filter = null) {
@@ -756,10 +757,10 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).prev();
-   * $(element).prev('selector');
+   * $(element).prev('selectors');
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
-   * @param {?string} [filter=null] A selector to filter.
+   * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   prev (filter = null) {
@@ -961,9 +962,9 @@ class EagleJS extends Array {
    *
    * @example
    * $(element).siblings();
-   * $(element).siblings('selector');
+   * $(element).siblings('selectors');
    *
-   * @param {?string} [filter=null] A selector to filter.
+   * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   siblings (filter = null) {
@@ -1125,6 +1126,5 @@ class EagleJS extends Array {
 const EagleJSProxy = (selector = null, context = document) => {
   return new EagleJS(selector, context);
 };
-
 // Define $
 window.$ = EagleJSProxy;

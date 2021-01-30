@@ -1,4 +1,3 @@
-/** @module eaglejs */
 /**
  * EagleJS.
  *
@@ -592,7 +591,6 @@ declare class EagleJS extends Array<DOMItem> {
  * @returns {EagleJS} A new collection.
  */
 declare const EagleJSProxy: (selector?: string | DOMItem | DOMItem[] | null, context?: string | DOMItem | DOMItem[]) => EagleJS;
-export { EagleJS, EagleJSProxy, DOMItem };
 declare type DOMItem = EventTarget | Node | Window | Element | Text | CDATASection | ProcessingInstruction | Comment | Document | DocumentType | DocumentFragment | HTMLElement | SVGElement;
 declare type FilterCallback = (element: DOMItem, index: number, array: DOMItem[]) => unknown;
 interface EagleJS {
@@ -606,4 +604,7 @@ interface EagleJS {
   slice(start?: number, end?: number): this
   text(): string | null
   text(value: string): this
+}
+interface Window {
+  $: typeof EagleJSProxy
 }
