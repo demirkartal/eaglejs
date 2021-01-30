@@ -26,17 +26,11 @@
       "description": "EagleJS is a jQuery-Like DOM manipulation library for modern browsers."
     },
     "menu": {
-      "Github repo": {
+      "Github Repo": {
         "href": "https://github.com/eagleirons/eaglejs",
         "target": "_blank",
         "class": "menu-item",
         "id": "website_link"
-      },
-      "Npm page": {
-        "href": "https://www.npmjs.com/package/@eagleirons/eaglejs",
-        "target": "_blank",
-        "class": "menu-item",
-        "id": "npm-link"
       }
     }
   }
