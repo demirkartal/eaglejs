@@ -2,11 +2,11 @@
 /**
  * EagleJS.
  *
- * @version   0.6.4
+ * @version 0.7.0
  * @copyright 2020-2021 Cem Demirkartal
- * @license   MIT
- * @see       {@link https://github.com/eagleirons/eaglejs GitHub}
- * @augments  Array<DOMItem>
+ * @license MIT
+ * @see The {@link https://github.com/demirkartal/eaglejs GitHub} repo
+ * @augments Array<EventTarget>
  */
 class EagleJS extends Array {
   /**
@@ -17,26 +17,27 @@ class EagleJS extends Array {
    * $('selector');
    * $('htmlString'); // Create HTML tag
    *
-   * // DOMItem
-   * $(DOMItem);
+   * // EventTarget
+   * $(EventTarget);
    *
-   * // DOMItem[]
+   * // EventTarget[]
    * $(EagleJS);
    *
    * // string + string
    * $('selector', 'selector');
    *
-   * // string + DOMItem
-   * $('selector', DOMItem);
+   * // string + EventTarget
+   * $('selector', EventTarget);
    *
-   * // string + DOMItem[]
+   * // string + EventTarget[]
    * $('selector', EagleJS);
    *
    * @see DOMParser on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMParser MDN}
    * for htmlString.
-   * @param {?(string|DOMItem|DOMItem[])} [selector=null] A selector to match.
-   * @param {string|DOMItem|DOMItem[]} [context=document] A selector to use as
-   * context.
+   * @param {?(string|EventTarget|EventTarget[])} [selector=null] A selector to
+   * match.
+   * @param {string|EventTarget|EventTarget[]} [context=document] A selector to
+   * use as context.
    */
   constructor (selector = null, context = document) {
     super();
@@ -57,18 +58,19 @@ class EagleJS extends Array {
   }
 
   /**
-   * Check if the value is a `DOMItem`.
+   * Check if the value is a `EventTarget`.
    *
    * @example
-   * EagleJS.isDOMItem(element); // true
-   * EagleJS.isDOMItem(document); // true
-   * EagleJS.isDOMItem(window); // true
+   * EagleJS.isEventTarget(element); // true
+   * EagleJS.isEventTarget(document); // true
+   * EagleJS.isEventTarget(window); // true
    *
-   * @see {@link module:eaglejs~DOMItem DOMItem} type.
+   * @see EventTarget on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget MDN}.
    * @param {*} value The value to be checked.
-   * @returns {boolean} `true` if the value is a `DOMItem`; otherwise, `false`.
+   * @returns {boolean} `true` if the value is a `EventTarget`; otherwise,
+   * `false`.
    */
-  static isDOMItem (value) {
+  static isEventTarget (value) {
     return Boolean(value) && Boolean(value.addEventListener);
   }
 
@@ -275,7 +277,7 @@ class EagleJS extends Array {
       }
     });
     if (filter !== null) {
-      return $elements.filter(filter);
+      return $elements.filterWith(filter);
     }
     return $elements;
   }
@@ -338,8 +340,8 @@ class EagleJS extends Array {
    * $(element).concat(EagleJS, EagleJS, EagleJS);
    *
    * @see Array.prototype.concat() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat MDN}.
-   * @param {...(DOMItem|Array<DOMItem>)} items Values to concatenate into a new
-   * collection.
+   * @param {...(EventTarget|Array<EventTarget>)} items Values to concatenate
+   * into a new collection.
    * @returns {EagleJS} A new collection.
    */
   concat (...items) {
@@ -445,42 +447,34 @@ class EagleJS extends Array {
    * Reduce the collection with the given selector.
    *
    * @example
-   * // string
-   * $(element).filter('selector');
+   * $(element).filterWith('selectors');
    *
-   * // DOMItem
-   * $(element).filter(DOMItem);
-   *
-   * // DOMItem[]
-   * $(element).filter(EagleJS);
-   *
-   * // Function
-   * $(element).filter(function (item, index) {
-   *   return item.value > 0;
-   * });
-   *
-   * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
-   * for string parameter.
-   * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
-   * for DOMItem and DOMItem[] parameter.
-   * @see Array.prototype.filter() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter MDN}
-   * for function parameter.
-   * @param {string|DOMItem|DOMItem[]|FilterCallback} selector A selector to
-   * match.
-   * @param {*} [thisArg] Value to use as `this` when executing `callback`.
+   * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}.
+   * @param {string} selectors A selector to match.
+   * @param {boolean} [condition=true] A condition for test.
    * @returns {this} A new collection with the items that pass the test.
    */
-  filter (selector, thisArg) {
-    if (typeof selector === 'string') {
-      return this.filter((item) => 'matches' in item && item.matches(selector));
-    }
-    if (typeof selector === 'function') {
-      return super.filter(selector, thisArg);
-    }
-    if (Array.isArray(selector)) {
-      return this.filter((item) => selector.includes(item));
-    }
-    return this.filter((item) => item === selector);
+  filterWith (selectors, condition = true) {
+    return this.filter((item) => {
+      return 'matches' in item && item.matches(selectors) === condition;
+    });
+  }
+
+  /**
+   * Check if any collection `Element` has the specified attribute.
+   *
+   * @example
+   * $(element).hasAttr('attributeName');
+   *
+   * @see Element.hasAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute MDN}
+   * @param {string} name The attribute to search.
+   * @returns {boolean} `true` if any `Element` has the given attribute;
+   * otherwise, `false`.
+   */
+  hasAttr (name) {
+    return this.some((item) => {
+      return 'hasAttribute' in item && item.hasAttribute(name);
+    });
   }
 
   /**
@@ -536,37 +530,6 @@ class EagleJS extends Array {
   }
 
   /**
-   * Check any item in the collection that matches the selector.
-   *
-   * @example
-   * // string
-   * $(element).is('selector');
-   *
-   * // DOMItem
-   * $(element).is(DOMItem);
-   *
-   * // DOMItem[]
-   * $(element).is(EagleJS);
-   *
-   * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
-   * for string parameter.
-   * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
-   * for DOMItem and DOMItem[] parameter.
-   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
-   * @returns {boolean} `true` if any item matches the given filter; otherwise,
-   * `false`.
-   */
-  is (selector) {
-    if (typeof selector === 'string') {
-      return this.matches(selector);
-    }
-    if (Array.isArray(selector)) {
-      return this.some((item) => selector.includes(item));
-    }
-    return this.includes(selector);
-  }
-
-  /**
    * Check any `Element` in the collection that matches selectors.
    *
    * @example
@@ -580,7 +543,9 @@ class EagleJS extends Array {
    * otherwise, `false`.
    */
   matches (selectors) {
-    return this.some((item) => 'matches' in item && item.matches(selectors));
+    return this.some((item) => {
+      return 'matches' in item && item.matches(selectors);
+    });
   }
 
   /**
@@ -603,41 +568,9 @@ class EagleJS extends Array {
       }
     });
     if (filter !== null) {
-      return $elements.filter(filter);
+      return $elements.filterWith(filter);
     }
     return $elements;
-  }
-
-  /**
-   * Remove matched items from the collection.
-   *
-   * @example
-   * // string
-   * $(element).not('selector');
-   *
-   * // DOMItem
-   * $(element).not(DOMItem);
-   *
-   * // DOMItem[]
-   * $(element).not(EagleJS);
-   *
-   * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}
-   * for string parameter.
-   * @see Array.prototype.includes() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes MDN}
-   * for DOMItem and DOMItem[] parameter.
-   * @param {string|DOMItem|DOMItem[]} selector A selector to match.
-   * @returns {this} A new collection with the items that did not pass the test.
-   */
-  not (selector) {
-    if (typeof selector === 'string') {
-      return this.filter((item) => {
-        return 'matches' in item && !item.matches(selector);
-      });
-    }
-    if (Array.isArray(selector)) {
-      return this.filter((item) => !selector.includes(item));
-    }
-    return this.filter((item) => item !== selector);
   }
 
   /**
@@ -706,7 +639,7 @@ class EagleJS extends Array {
       }
     });
     if (filter !== null) {
-      return $elements.filter(filter);
+      return $elements.filterWith(filter);
     }
     return $elements;
   }
@@ -772,7 +705,7 @@ class EagleJS extends Array {
       }
     });
     if (filter !== null) {
-      return $elements.filter(filter);
+      return $elements.filterWith(filter);
     }
     return $elements;
   }
@@ -781,18 +714,18 @@ class EagleJS extends Array {
    * Add one or more items to the end of the collection.
    *
    * @example
-   * $(element).push(DOMItem, DOMItem, DOMItem);
+   * $(element).push(EventTarget, EventTarget, EventTarget);
    *
    * // Spread and push
    * $(element).push(...EagleJS);
    *
    * @see Array.prototype.push() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push MDN}.
-   * @param {...DOMItem} items Items to add to the end of the collection.
+   * @param {...EventTarget} items Items to add to the end of the collection.
    * @returns {number} The new length.
    */
   push (...items) {
     return super.push(...items.filter((item) => {
-      return EagleJS.isDOMItem(item) && !this.includes(item);
+      return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
   }
 
@@ -979,7 +912,7 @@ class EagleJS extends Array {
       }
     });
     if (filter !== null) {
-      return $elements.filter(filter);
+      return $elements.filterWith(filter);
     }
     return $elements;
   }
@@ -1017,6 +950,40 @@ class EagleJS extends Array {
       return false;
     });
     return returnValue;
+  }
+
+  /**
+   * Toggle the attribute to each `Element` in the collection.
+   *
+   * @example
+   * $(element).toggleAttr('attributeName');
+   * $(element).toggleAttr('attributeName', true);
+   * $(element).toggleAttr('attributeName', false);
+   *
+   * @see Element.toggleAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute MDN}
+   * (Simulated).
+   * @param {string} name The name of the attribute.
+   * @param {boolean} [force] A boolean value to determine whether the attribute
+   * should be added or removed.
+   * @returns {this} The current collection.
+   */
+  toggleAttr (name, force) {
+    this.forEach((item) => {
+      if ('setAttribute' in item) {
+        if (item.hasAttribute(name)) {
+          if (force === true) {
+            return;
+          }
+          item.removeAttribute(name);
+        } else {
+          if (force === false) {
+            return;
+          }
+          item.setAttribute(name, '');
+        }
+      }
+    });
+    return this;
   }
 
   /**
@@ -1076,38 +1043,21 @@ class EagleJS extends Array {
    * Add one or more items to the beginning of the collection.
    *
    * @example
-   * $(element).unshift(DOMItem, DOMItem, DOMItem);
+   * $(element).unshift(EventTarget, EventTarget, EventTarget);
    *
    * // Spread and unshift
    * $(element).unshift(...EagleJS);
    *
    * @see Array.prototype.unshift() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift MDN}.
-   * @param {...DOMItem} items Items to add to the front of the collection.
+   * @param {...EventTarget} items Items to add to the front of the collection.
    * @returns {number} The new length.
    */
   unshift (...items) {
     return super.unshift(...items.filter((item) => {
-      return EagleJS.isDOMItem(item) && !this.includes(item);
+      return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
   }
 }
-/**
- * DOM items like EventTarget, Node (Element, Text, Document, etc.), and Window.
- *
- * @see EventTarget on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget MDN}.
- * @typedef {EventTarget|Node|Window|Element|Text|CDATASection|
- * ProcessingInstruction|Comment|Document|DocumentType|DocumentFragment|
- * HTMLElement|SVGElement} DOMItem
- */
-/**
- * A function to test each item in the collection.
- *
- * @callback FilterCallback
- * @param {DOMItem} element The current element being processed.
- * @param {number} [index] The index of the current element being processed.
- * @param {DOMItem[]} [array] The array `filter` was called upon.
- * @returns {boolean}
- */
 /**
  * Proxy to use `EagleJS` class without the new keyword.
  *
@@ -1118,13 +1068,15 @@ class EagleJS extends Array {
  *   // Call when DOM is completely loaded
  * });
  *
- * @param {?(string|DOMItem|DOMItem[])} [selector=null] A selector to match.
- * @param {string|DOMItem|DOMItem[]} [context=document] A selector to use as
- * context.
+ * @param {?(string|EventTarget|EventTarget[])} [selector=null] A selector to
+ * match.
+ * @param {string|EventTarget|EventTarget[]} [context=document] A selector to
+ * use as context.
  * @returns {EagleJS} A new collection.
  */
 const EagleJSProxy = (selector = null, context = document) => {
   return new EagleJS(selector, context);
 };
+EagleJSProxy.prototype = EagleJS.prototype;
 // Export
 export { EagleJS, EagleJSProxy };
