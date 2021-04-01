@@ -27,7 +27,7 @@
     },
     "menu": {
       "Github Repo": {
-        "href": "https://github.com/eagleirons/eaglejs",
+        "href": "https://github.com/demirkartal/eaglejs",
         "target": "_blank",
         "class": "menu-item",
         "id": "website_link"
