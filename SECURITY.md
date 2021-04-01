@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The [latest released version](https://github.com/eagleirons/eaglejs/releases) of EagleJS is supported.
+The [latest released version](https://github.com/demirkartal/eaglejs/releases) of EagleJS is supported.
 
 ## Reporting a Vulnerability
 
