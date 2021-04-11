@@ -1,7 +1,7 @@
 # EagleJS
 
 [![NPM](https://badgen.net/npm/v/@demirkartal/eaglejs)](https://www.npmjs.com/package/@demirkartal/eaglejs)
-[![](https://data.jsdelivr.com/v1/package/npm/@demirkartal/eaglejs/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@demirkartal/eaglejs)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@demirkartal/eaglejs/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@demirkartal/eaglejs)
 [![DeepScan grade](https://deepscan.io/api/teams/12532/projects/16494/branches/356366/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12532&pid=16494&bid=356366)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/demirkartal/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/demirkartal/eaglejs/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/demirkartal/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/demirkartal/eaglejs/context:javascript)
@@ -39,7 +39,7 @@ Include the script file on top of other scripts that requires EagleJS.
 <script src="eaglejs.min.js"></script>
 <script>
   const $ = EagleJSProxy;
-  $(document).ready(function () {
+  $(document).ready(() => {
     // Call when DOM is completely loaded
   });
 </script>
@@ -50,19 +50,19 @@ Include the script file on top of other scripts that requires EagleJS.
 ```js
 import { EagleJSProxy as $ } from 'eaglejs.esm.js';
 
-$(document).ready(function () {
+$(document).ready(() => {
   // Call when DOM is completely loaded
 });
 ```
 
 ## Browser Support
 
-For a detailed view, please check the table on [caniuse.com](https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,es6,array-includes).
+For a detailed view, please check the table on [caniuse.com](https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,dom-manip-convenience,es6,array-includes).
 
 ### Desktop (Last two versions)
 
 - Chrome
-- Edge 16+
+- Edge 17+
 - Firefox
 - Safari 10.1+
 
