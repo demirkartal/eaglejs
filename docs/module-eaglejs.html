@@ -93,7 +93,7 @@
 
     
 
-    <h4 class="name" id="~EagleJSProxy"><span class="type-signature">(inner) </span>EagleJSProxy<span class="signature">(selector<span class="signature-attributes">opt, nullable</span>, context<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {EagleJS}</span></h4>
+    <h4 class="name" id="~EagleJSProxy"><span class="type-signature">(inner) </span>EagleJSProxy<span class="signature">(selector<span class="signature-attributes">opt</span>, context<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {EagleJS}</span></h4>
 
     
 
@@ -157,7 +157,7 @@
     
     <pre class="prettyprint"><code>import { EagleJSProxy as $ } from 'eaglejs.esm.js';
 
-$(document).ready(function () {
+$(document).ready(() => {
   // Call when DOM is completely loaded
 });</code></pre>
 
@@ -199,13 +199,13 @@ $(document).ready(function () {
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
 <span class="param-type">EventTarget</span>
 |
 
 <span class="param-type">Array.&lt;EventTarget></span>
+|
+
+<span class="param-type">string</span>
 
 
             
@@ -218,8 +218,6 @@ $(document).ready(function () {
                 
 
                 
-                    &lt;nullable><br>
-                
 
                 
                 </td>
@@ -228,13 +226,10 @@ $(document).ready(function () {
             
                 <td class="default">
                 
-                    <code>null</code>
-                
                 </td>
             
 
-            <td class="description last"><p>A selector to
-match.</p></td>
+            <td class="description last"><p>A selector to match.</p></td>
         </tr>
 
     
@@ -247,13 +242,13 @@ match.</p></td>
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
 <span class="param-type">EventTarget</span>
 |
 
 <span class="param-type">Array.&lt;EventTarget></span>
+|
+
+<span class="param-type">string</span>
 
 
             
@@ -279,8 +274,7 @@ match.</p></td>
                 </td>
             
 
-            <td class="description last"><p>A selector to
-use as context.</p></td>
+            <td class="description last"><p>A selector to use as context.</p></td>
         </tr>
 
     

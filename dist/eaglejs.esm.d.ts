@@ -2,7 +2,7 @@
 /**
  * EagleJS.
  *
- * @version 0.7.0
+ * @version 0.7.1
  * @copyright 2020-2021 Cem Demirkartal
  * @license MIT
  * @see The {@link https://github.com/demirkartal/eaglejs GitHub} repo
@@ -13,35 +13,35 @@ declare class EagleJS extends Array<EventTarget> {
    * Return a collection of matched items or created nodes by HTML string.
    *
    * @example
+   * let example = new EagleJS();
+   *
    * // string
-   * $('selector');
-   * $('htmlString'); // Create HTML tag
+   * example = new EagleJS('selector');
+   * example = new EagleJS('htmlString'); // Create HTML tag
    *
    * // EventTarget
-   * $(EventTarget);
+   * example = new EagleJS(EventTarget);
    *
    * // EventTarget[]
-   * $(EagleJS);
+   * example = new EagleJS(EagleJS);
    *
    * // string + string
-   * $('selector', 'selector');
+   * example = new EagleJS('selector', 'selector');
    *
    * // string + EventTarget
-   * $('selector', EventTarget);
+   * example = new EagleJS('selector', EventTarget);
    *
    * // string + EventTarget[]
-   * $('selector', EagleJS);
+   * example = new EagleJS('selector', EagleJS);
    *
-   * @see DOMParser on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMParser MDN}
-   * for htmlString.
-   * @param {?(string|EventTarget|EventTarget[])} [selector=null] A selector to
-   * match.
-   * @param {string|EventTarget|EventTarget[]} [context=document] A selector to
-   * use as context.
+   * @see DOMParser on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMParser MDN} for
+   * htmlString.
+   * @param {EventTarget|EventTarget[]|string} [selector] A selector to match.
+   * @param {EventTarget|EventTarget[]|string} [context=document] A selector to use as context.
    */
-  constructor (selector?: string | EventTarget | EventTarget[] | null, context?: string | EventTarget | EventTarget[]);
+  constructor (selector?: EventTarget | EventTarget[] | string, context?: EventTarget | EventTarget[] | string);
   /**
-   * Check if the value is a `EventTarget`.
+   * Check if the value is an `EventTarget`.
    *
    * @example
    * EagleJS.isEventTarget(element); // true
@@ -50,86 +50,76 @@ declare class EagleJS extends Array<EventTarget> {
    *
    * @see EventTarget on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget MDN}.
    * @param {*} value The value to be checked.
-   * @returns {boolean} `true` if the value is a `EventTarget`; otherwise,
-   * `false`.
+   * @returns {boolean} `true` if the value is an `EventTarget`; otherwise, `false`.
    */
   static isEventTarget (value: any): value is EventTarget;
   /**
    * Add one or more class names to each `Element` in the collection.
    *
    * @example
-   * $(element).addClass('className');
-   * $(element).addClass('className', 'className');
+   * new EagleJS(element).addClass('className');
+   * new EagleJS(element).addClass('className', 'className');
    *
    * @see Element.classList.add() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add MDN}.
    * @param {...string} names One or more class names.
-   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
-   * the empty string.
-   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
-   * arguments contains any ASCII whitespace.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns {this} The current collection.
    */
   addClass (...names: string[]): this;
   /**
-   * Insert a set of `Node` or `DOMString` objects after each `ChildNode` in the
+   * Insert a set of `Node` or `DOMString` objects after each `ChildNode` in the collection.
+   * `DOMString` objects are inserted as equivalent `Text` nodes.
+   *
+   * @example
+   * new EagleJS(element).after('text');
+   * new EagleJS(element).after(Node);
+   * new EagleJS(element).after('text', Node);
+   * new EagleJS(element).after(Node, Node);
+   *
+   * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}.
+   * @param {...(Node|string)} nodes A set of `Node` or `DOMString` objects to insert.
+   * @returns {this} The current collection.
+   */
+  after (...nodes: Array<Node | string>): this;
+  /**
+   * Insert a set of `Node` or `DOMString` objects after the last child of each `ParentNode` in the
    * collection. `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
-   * $(element).after('text');
-   * $(element).after(Node);
-   * $(element).after('text', Node);
-   * $(element).after(Node, Node);
+   * new EagleJS(element).append('text');
+   * new EagleJS(element).append(Node);
+   * new EagleJS(element).append('text', Node);
+   * new EagleJS(element).append(Node, Node);
    *
-   * @see ChildNode.after() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after MDN}
-   * (Simulated).
-   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
-   * insert.
+   * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}.
+   * @param {...(Node|string)} nodes A set of `Node` or `DOMString` objects to insert.
    * @returns {this} The current collection.
    */
-  after (...nodes: Array<string | Node>): this;
+  append (...nodes: Array<Node | string>): this;
   /**
-   * Insert a set of `Node` or `DOMString` objects before the first child of
-   * each `ParentNode` in the collection. `DOMString` objects are inserted as
-   * equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects before each `ChildNode` in the collection.
+   * `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
-   * $(element).append('text');
-   * $(element).append(Node);
-   * $(element).append('text', Node);
-   * $(element).append(Node, Node);
+   * new EagleJS(element).before('text');
+   * new EagleJS(element).before(Node);
+   * new EagleJS(element).before('text', Node);
+   * new EagleJS(element).before(Node, Node);
    *
-   * @see ParentNode.append() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append MDN}
-   * (Simulated).
-   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
-   * insert.
+   * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}.
+   * @param {...(Node|string)} nodes A set of `Node` or `DOMString` objects to insert.
    * @returns {this} The current collection.
    */
-  append (...nodes: Array<string | Node>): this;
+  before (...nodes: Array<Node | string>): this;
   /**
-   * Insert a set of `Node` or `DOMString` objects before each `ChildNode` in
-   * the collection. `DOMString` objects are inserted as equivalent `Text`
-   * nodes.
+   * Get the `children` property of each `ParentNode` in the collection, optionally filtered by a
+   * selector.
    *
    * @example
-   * $(element).before('text');
-   * $(element).before(Node);
-   * $(element).before('text', Node);
-   * $(element).before(Node, Node);
-   *
-   * @see ChildNode.before() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before MDN}
-   * (Simulated).
-   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
-   * insert.
-   * @returns {this} The current collection.
-   */
-  before (...nodes: Array<string | Node>): this;
-  /**
-   * Get the `children` property of each `ParentNode` in the collection,
-   * optionally filtered by a selector.
-   *
-   * @example
-   * $(element).children();
-   * $(element).children('selectors');
+   * new EagleJS(element).children();
+   * new EagleJS(element).children('selectors');
    *
    * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children MDN}.
    * @param {?string} [filter=null] One or more selectors to filter.
@@ -140,29 +130,27 @@ declare class EagleJS extends Array<EventTarget> {
    * Create a clone of each `Node` in the collection.
    *
    * @example
-   * $(element).clone();
-   * $(element).clone(true);
-   * $(element).clone(false);
+   * new EagleJS(element).clone();
+   * new EagleJS(element).clone(true);
+   * new EagleJS(element).clone(false);
    *
    * @see Node.cloneNode() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode MDN}.
-   * @param {boolean} [deep=false] If `true`, then `Node` and its whole
-   * subtree—including text that may be in child `Text` nodes—is also copied.
-   * @throws {DOMException} Throws a `NotSupportedError` if `Node` is a
-   * ShadowRoot.
+   * @param {boolean} [deep=false] If `true`, then `Node` and its whole subtree—including text that
+   * may be in child `Text` nodes—is also copied.
+   * @throws {DOMException} Throws a `NotSupportedError` if `Node` is a ShadowRoot.
    * @returns {EagleJS} A new collection of `Node`s.
    */
   clone (deep?: boolean): EagleJS;
   /**
-   * Get the closest ancestor of each `Element` in the collection that matches
-   * selectors.
+   * Get the closest ancestor of each `Element` in the collection that matches selectors.
    *
    * @example
-   * $(element).closest('selectors');
+   * new EagleJS(element).closest('selectors');
    *
    * @see Element.closest() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest MDN}.
    * @param {string} selectors One or more selectors to match.
-   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
-   * specified `selectors` is not valid.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   closest (selectors: string): EagleJS;
@@ -170,19 +158,18 @@ declare class EagleJS extends Array<EventTarget> {
    * Merge two or more collections.
    *
    * @example
-   * $(element).concat(EagleJS, EagleJS, EagleJS);
+   * new EagleJS(element).concat(EagleJS, EagleJS, EagleJS);
    *
    * @see Array.prototype.concat() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat MDN}.
-   * @param {...(EventTarget|Array<EventTarget>)} items Values to concatenate
-   * into a new collection.
-   * @returns {EagleJS} A new collection.
+   * @param {...(Array<EventTarget>|EventTarget)} items Values to concatenate into a new collection.
+   * @returns {this} A new collection.
    */
-  concat (...items: Array<EventTarget | ConcatArray<EventTarget>>): EagleJS;
+  concat (...items: Array<ConcatArray<EventTarget> | EventTarget>): this;
   /**
    * Get the `childNodes` property of each `Node` in the collection.
    *
    * @example
-   * $(element).contents();
+   * new EagleJS(element).contents();
    *
    * @see Node.childNodes on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes MDN}.
    * @returns {EagleJS} A new collection of `ChildNode`s.
@@ -192,7 +179,7 @@ declare class EagleJS extends Array<EventTarget> {
    * Remove all child nodes of each `Node` in the collection from the DOM.
    *
    * @example
-   * $(element).empty();
+   * new EagleJS(element).empty();
    *
    * @see Node.removeChild() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild MDN}.
    * @returns {this} The current collection.
@@ -202,7 +189,7 @@ declare class EagleJS extends Array<EventTarget> {
    * Reduce the collection with the given selector.
    *
    * @example
-   * $(element).filterWith('selectors');
+   * new EagleJS(element).filterWith('selectors');
    *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}.
    * @param {string} selectors A selector to match.
@@ -214,47 +201,44 @@ declare class EagleJS extends Array<EventTarget> {
    * Check if any collection `Element` has the specified attribute.
    *
    * @example
-   * $(element).hasAttr('attributeName');
+   * new EagleJS(element).hasAttr('attributeName');
    *
    * @see Element.hasAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute MDN}
    * @param {string} name The attribute to search.
-   * @returns {boolean} `true` if any `Element` has the given attribute;
-   * otherwise, `false`.
+   * @returns {boolean} `true` if any `Element` has the given attribute; otherwise, `false`.
    */
   hasAttr (name: string): boolean;
   /**
    * Check if any collection `Element` has the specified class name.
    *
    * @example
-   * $(element).hasClass('className');
+   * new EagleJS(element).hasClass('className');
    *
    * @see Element.classList.contains() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains MDN}.
    * @param {string} name The class name to search.
-   * @returns {boolean} `true` if any `Element` has the given class name;
-   * otherwise, `false`.
+   * @returns {boolean} `true` if any `Element` has the given class name; otherwise, `false`.
    */
   hasClass (name: string): boolean;
   /**
    * Check any `Element` in the collection that matches selectors.
    *
    * @example
-   * $(element).matches('selectors');
+   * new EagleJS(element).matches('selectors');
    *
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches MDN}.
    * @param {string} selectors One or more selectors to match.
-   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
-   * specified `selectors` is not valid.
-   * @returns {boolean} `true` if any `Element` matches the given selectors;
-   * otherwise, `false`.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
+   * @returns {boolean} `true` if any `Element` matches the given selectors; otherwise, `false`.
    */
   matches (selectors: string): boolean;
   /**
-   * Get the `nextElementSibling` of each `Node` in the collection, optionally
-   * filtered by a selector.
+   * Get the `nextElementSibling` of each `Node` in the collection, optionally filtered by a
+   * selector.
    *
    * @example
-   * $(element).next();
-   * $(element).next('selectors');
+   * new EagleJS(element).next();
+   * new EagleJS(element).next('selectors');
    *
    * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling MDN}.
    * @param {?string} [filter=null] One or more selectors to filter.
@@ -265,25 +249,24 @@ declare class EagleJS extends Array<EventTarget> {
    * Remove the `EventListener` from each item in the collection.
    *
    * @example
-   * $(element).off('click', handler);
+   * new EagleJS(element).off('click', handler);
    *
    * @see EventTarget.removeEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener MDN}.
-   * @param {string} event A string that specifies the type of event for which
-   * to remove an event listener.
-   * @param {EventListener|EventListenerObject} listener The `EventListener`
-   * function of the event handler to remove from the event target.
-   * @param {boolean|EventListenerOptions} [options=false] An options object
-   * specifies the characteristics of the event listener.
+   * @param {string} type A string that specifies the type of event for which to remove an event
+   * listener.
+   * @param {EventListener|EventListenerObject} listener The `EventListener` function of the event
+   * handler to remove from the event target.
+   * @param {EventListenerOptions|boolean} [options=false] An options object specifies the
+   * characteristics of the event listener.
    * @returns {this} The current collection.
    */
-  off (event: string, listener: EventListener | EventListenerObject, options?: boolean | EventListenerOptions): this;
+  off (type: string, listener: EventListener | EventListenerObject, options?: EventListenerOptions | boolean): this;
   /**
-   * Get the `parentNode` of each `Node` in the collection, optionally filtered
-   * by a selector.
+   * Get the `parentNode` of each `Node` in the collection, optionally filtered by a selector.
    *
    * @example
-   * $(element).parent();
-   * $(element).parent('selectors');
+   * new EagleJS(element).parent();
+   * new EagleJS(element).parent('selectors');
    *
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode MDN}.
    * @param {?string} [filter=null] One or more selectors to filter.
@@ -291,30 +274,27 @@ declare class EagleJS extends Array<EventTarget> {
    */
   parent (filter?: string | null): EagleJS;
   /**
-   * Insert a set of `Node` or `DOMString` objects after the last child of each
-   * `ParentNode` in the collection. `DOMString` objects are inserted as
-   * equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects before the first child of each `ParentNode` in
+   * the collection. `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
-   * $(element).prepend('text');
-   * $(element).prepend(Node);
-   * $(element).prepend('text', Node);
-   * $(element).prepend(Node, Node);
+   * new EagleJS(element).prepend('text');
+   * new EagleJS(element).prepend(Node);
+   * new EagleJS(element).prepend('text', Node);
+   * new EagleJS(element).prepend(Node, Node);
    *
-   * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}
-   * (Simulated).
-   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
-   * insert.
+   * @see ParentNode.prepend() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend MDN}.
+   * @param {...(Node|string)} nodes A set of `Node` or `DOMString` objects to insert.
    * @returns {this} The current collection.
    */
-  prepend (...nodes: Array<string | Node>): this;
+  prepend (...nodes: Array<Node | string>): this;
   /**
-   * Get the `previousElementSibling` of each `Node` in the collection,
-   * optionally filtered by a selector.
+   * Get the `previousElementSibling` of each `Node` in the collection, optionally filtered by a
+   * selector.
    *
    * @example
-   * $(element).prev();
-   * $(element).prev('selectors');
+   * new EagleJS(element).prev();
+   * new EagleJS(element).prev('selectors');
    *
    * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling MDN}.
    * @param {?string} [filter=null] One or more selectors to filter.
@@ -325,10 +305,10 @@ declare class EagleJS extends Array<EventTarget> {
    * Add one or more items to the end of the collection.
    *
    * @example
-   * $(element).push(EventTarget, EventTarget, EventTarget);
+   * new EagleJS(element).push(EventTarget, EventTarget, EventTarget);
    *
    * // Spread and push
-   * $(element).push(...EagleJS);
+   * new EagleJS(element).push(...EagleJS);
    *
    * @see Array.prototype.push() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push MDN}.
    * @param {...EventTarget} items Items to add to the end of the collection.
@@ -336,30 +316,29 @@ declare class EagleJS extends Array<EventTarget> {
    */
   push (...items: EventTarget[]): number;
   /**
-   * Get the first `Element` descendant of each `ParentNode` in the collection
-   * that matches selectors.
+   * Get the first `Element` descendant of each `ParentNode` in the collection that matches
+   * selectors.
    *
    * @example
-   * $(element).querySelector('selector');
+   * new EagleJS(element).querySelector('selector');
    *
    * @see ParentNode.querySelector() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector MDN}.
    * @param {string} selectors One or more selectors to match.
-   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
-   * specified `selectors` is not valid.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   querySelector (selectors: string): EagleJS;
   /**
-   * Get all `Element` descendants of each `ParentNode` in the collection that
-   * matches selectors.
+   * Get all `Element` descendants of each `ParentNode` in the collection that matches selectors.
    *
    * @example
-   * $(element).querySelectorAll('selector');
+   * new EagleJS(element).querySelectorAll('selector');
    *
    * @see ParentNode.querySelectorAll() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll MDN}.
    * @param {string} selectors One or more selectors to match.
-   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the
-   * specified `selectors` is not valid.
+   * @throws {DOMException} Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns {EagleJS} A new collection of `Element`s.
    */
   querySelectorAll (selectors: string): EagleJS;
@@ -367,7 +346,7 @@ declare class EagleJS extends Array<EventTarget> {
    * Specify a function to execute when the DOM is completely loaded.
    *
    * @example
-   * $(document).ready(function () {
+   * new EagleJS(document).ready(() => {
    *   // Call when DOM is completely loaded
    * });
    *
@@ -377,13 +356,12 @@ declare class EagleJS extends Array<EventTarget> {
    */
   ready (listener: EventListener): this;
   /**
-   * Remove each `Node` of the collection from the DOM.
+   * Remove each `ChildNode` of the collection from the DOM.
    *
    * @example
-   * $(element).remove();
+   * new EagleJS(element).remove();
    *
-   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}
-   * (Simulated).
+   * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove MDN}.
    * @returns {this} The current collection.
    */
   remove (): this;
@@ -391,8 +369,8 @@ declare class EagleJS extends Array<EventTarget> {
    * Remove one or more attributes from each `Element` in the collection.
    *
    * @example
-   * $(element).removeAttr('attributeName');
-   * $(element).removeAttr('attributeName', 'attributeName');
+   * new EagleJS(element).removeAttr('attributeName');
+   * new EagleJS(element).removeAttr('attributeName', 'attributeName');
    *
    * @see Element.removeAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute MDN}.
    * @param {...string} names One or more attribute names.
@@ -403,43 +381,38 @@ declare class EagleJS extends Array<EventTarget> {
    * Remove one or more class names from each `Element` in the collection.
    *
    * @example
-   * $(element).removeClass('className');
-   * $(element).removeClass('className', 'className');
+   * new EagleJS(element).removeClass('className');
+   * new EagleJS(element).removeClass('className', 'className');
    *
    * @see Element.classList.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove MDN}.
    * @param {...string} names One or more class names.
-   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
-   * the empty string.
-   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
-   * arguments contains any ASCII whitespace.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns {this} The current collection.
    */
   removeClass (...names: string[]): this;
   /**
-   * Replace each `ChildNode` in the collection with a set of `Node` or
-   * `DOMString` objects. `DOMString` objects are inserted as equivalent `Text`
-   * nodes.
+   * Replace each `ChildNode` in the collection with a set of `Node` or `DOMString` objects.
+   * `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
-   * $(element).replaceWith('text');
-   * $(element).replaceWith(Node);
-   * $(element).replaceWith('text', Node);
-   * $(element).replaceWith(Node, Node);
+   * new EagleJS(element).replaceWith('text');
+   * new EagleJS(element).replaceWith(Node);
+   * new EagleJS(element).replaceWith('text', Node);
+   * new EagleJS(element).replaceWith(Node, Node);
    *
-   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}
-   * (Simulated).
-   * @param {...(string|Node)} nodes A set of `Node` or `DOMString` objects to
-   * replace.
+   * @see ChildNode.replaceWith() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/replaceWith MDN}.
+   * @param {...(Node|string)} nodes A set of `Node` or `DOMString` objects to replace.
    * @returns {this} The current collection.
    */
-  replaceWith (...nodes: Array<string | Node>): this;
+  replaceWith (...nodes: Array<Node | string>): this;
   /**
-   * Get the siblings of each `Node` in the collection, optionally filtered by a
-   * selector.
+   * Get the siblings of each `Node` in the collection, optionally filtered by a selector.
    *
    * @example
-   * $(element).siblings();
-   * $(element).siblings('selectors');
+   * new EagleJS(element).siblings();
+   * new EagleJS(element).siblings('selectors');
    *
    * @param {?string} [filter=null] One or more selectors to filter.
    * @returns {EagleJS} A new collection of `Element`s.
@@ -449,15 +422,15 @@ declare class EagleJS extends Array<EventTarget> {
    * Toggle the attribute to each `Element` in the collection.
    *
    * @example
-   * $(element).toggleAttr('attributeName');
-   * $(element).toggleAttr('attributeName', true);
-   * $(element).toggleAttr('attributeName', false);
+   * new EagleJS(element).toggleAttr('attributeName');
+   * new EagleJS(element).toggleAttr('attributeName', true);
+   * new EagleJS(element).toggleAttr('attributeName', false);
    *
    * @see Element.toggleAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute MDN}
    * (Simulated).
    * @param {string} name The name of the attribute.
-   * @param {boolean} [force] A boolean value to determine whether the attribute
-   * should be added or removed.
+   * @param {boolean} [force] A boolean value to determine whether the attribute should be added or
+   * removed.
    * @returns {this} The current collection.
    */
   toggleAttr (name: string, force?: boolean): this;
@@ -465,18 +438,17 @@ declare class EagleJS extends Array<EventTarget> {
    * Toggle the class name to each `Element` in the collection.
    *
    * @example
-   * $(element).toggleClass('className');
-   * $(element).toggleClass('className', true);
-   * $(element).toggleClass('className', false);
+   * new EagleJS(element).toggleClass('className');
+   * new EagleJS(element).toggleClass('className', true);
+   * new EagleJS(element).toggleClass('className', false);
    *
    * @see Element.classList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle MDN}.
    * @param {string} name The class name to toggle.
-   * @param {boolean} [force] A boolean value to determine whether the class
-   * should be added or removed.
-   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is
-   * the empty string.
-   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the
-   * arguments contains any ASCII whitespace.
+   * @param {boolean} [force] A boolean value to determine whether the class should be added or
+   * removed.
+   * @throws {DOMException} Throws a `SyntaxError` if one of the arguments is the empty string.
+   * @throws {DOMException} Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns {this} The current collection.
    */
   toggleClass (name: string, force?: boolean): this;
@@ -484,25 +456,24 @@ declare class EagleJS extends Array<EventTarget> {
    * Trigger the specified `Event` on each item in the collection.
    *
    * @example
-   * $(element).trigger('click');
-   * $(element).trigger('click', data);
+   * new EagleJS(element).trigger('click');
+   * new EagleJS(element).trigger('click', data);
    *
    * @see CustomEvent on {@link https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent MDN}.
    * @see EventTarget.dispatchEvent() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent MDN}.
-   * @param {string} event The name of the event.
-   * @param {?object} [data=null] Additional data to pass along to the event
-   * handler.
+   * @param {Event|string} event The `Event` object to be triggered or name of the event.
+   * @param {?object} [data=null] Additional data to pass along to the event handler.
    * @returns {this} The current collection.
    */
-  trigger (event: string, data?: object | null): this;
+  trigger (event: Event | string, data?: object | null): this;
   /**
    * Add one or more items to the beginning of the collection.
    *
    * @example
-   * $(element).unshift(EventTarget, EventTarget, EventTarget);
+   * new EagleJS(element).unshift(EventTarget, EventTarget, EventTarget);
    *
    * // Spread and unshift
-   * $(element).unshift(...EagleJS);
+   * new EagleJS(element).unshift(...EagleJS);
    *
    * @see Array.prototype.unshift() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift MDN}.
    * @param {...EventTarget} items Items to add to the front of the collection.
@@ -516,18 +487,16 @@ declare class EagleJS extends Array<EventTarget> {
  * @example <caption>Usage (Ecmascript 6 Module)</caption>
  * import { EagleJSProxy as $ } from 'eaglejs.esm.js';
  *
- * $(document).ready(function () {
+ * $(document).ready(() => {
  *   // Call when DOM is completely loaded
  * });
  *
- * @param {?(string|EventTarget|EventTarget[])} [selector=null] A selector to
- * match.
- * @param {string|EventTarget|EventTarget[]} [context=document] A selector to
- * use as context.
+ * @param {EventTarget|EventTarget[]|string} [selector] A selector to match.
+ * @param {EventTarget|EventTarget[]|string} [context=document] A selector to use as context.
  * @returns {EagleJS} A new collection.
  */
 declare const EagleJSProxy: {
-  (selector?: string | EventTarget | EventTarget[] | null, context?: string | EventTarget | EventTarget[]): EagleJS
+  (selector?: string | EventTarget | EventTarget[] | undefined, context?: EventTarget | EventTarget[] | string): EagleJS
   prototype: EagleJS
 };
 export { EagleJS, EagleJSProxy };
@@ -539,7 +508,7 @@ interface EagleJS {
   data(key: string, value: string): this
   html(): string
   html(value: string): this
-  on<K extends keyof GlobalEventHandlersEventMap>(type: K, listener: (this: GlobalEventHandlers, ev: GlobalEventHandlersEventMap[K]) => any, options?: boolean | AddEventListenerOptions): this
+  on<K extends keyof GlobalEventHandlersEventMap>(type: K, listener: (this: GlobalEventHandlers, event: GlobalEventHandlersEventMap[K]) => any, options?: AddEventListenerOptions | boolean): this
   text(): string | null
   text(value: string): this
   filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: any): this

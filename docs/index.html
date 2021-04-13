@@ -64,7 +64,7 @@
     <section class="readme usertext">
         <article><h1>EagleJS</h1>
 <p><a href="https://www.npmjs.com/package/@demirkartal/eaglejs"><img src="https://badgen.net/npm/v/@demirkartal/eaglejs" alt="NPM"></a>
-<a href="https://www.jsdelivr.com/package/npm/@demirkartal/eaglejs"><img src="https://data.jsdelivr.com/v1/package/npm/@demirkartal/eaglejs/badge?style=rounded" alt=""></a>
+<a href="https://www.jsdelivr.com/package/npm/@demirkartal/eaglejs"><img src="https://data.jsdelivr.com/v1/package/npm/@demirkartal/eaglejs/badge?style=rounded" alt="jsDelivr"></a>
 <a href="https://deepscan.io/dashboard#view=project&amp;tid=12532&amp;pid=16494&amp;bid=356366"><img src="https://deepscan.io/api/teams/12532/projects/16494/branches/356366/badge/grade.svg" alt="DeepScan grade"></a>
 <a href="https://lgtm.com/projects/g/demirkartal/eaglejs/alerts/"><img src="https://img.shields.io/lgtm/alerts/g/demirkartal/eaglejs.svg?logo=lgtm&amp;logoWidth=18" alt="Total alerts"></a>
 <a href="https://lgtm.com/projects/g/demirkartal/eaglejs/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/g/demirkartal/eaglejs.svg?logo=lgtm&amp;logoWidth=18" alt="Language grade: JavaScript"></a>
@@ -91,7 +91,7 @@
 <pre class="prettyprint source lang-html"><code>&lt;script src=&quot;eaglejs.min.js&quot;>&lt;/script>
 &lt;script>
   const $ = EagleJSProxy;
-  $(document).ready(function () {
+  $(document).ready(() => {
     // Call when DOM is completely loaded
   });
 &lt;/script>
@@ -99,16 +99,16 @@
 <h3>ES6 Module</h3>
 <pre class="prettyprint source lang-js"><code>import { EagleJSProxy as $ } from 'eaglejs.esm.js';
 
-$(document).ready(function () {
+$(document).ready(() => {
   // Call when DOM is completely loaded
 });
 </code></pre>
 <h2>Browser Support</h2>
-<p>For a detailed view, please check the table on <a href="https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,es6,array-includes">caniuse.com</a>.</p>
+<p>For a detailed view, please check the table on <a href="https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,dom-manip-convenience,es6,array-includes">caniuse.com</a>.</p>
 <h3>Desktop (Last two versions)</h3>
 <ul>
 <li>Chrome</li>
-<li>Edge 16+</li>
+<li>Edge 17+</li>
 <li>Firefox</li>
 <li>Safari 10.1+</li>
 </ul>
