@@ -11,16 +11,18 @@
     // "noImplicitAny": true,
     // "strictNullChecks": true,
     // "strictFunctionTypes": true,
-    // "strictPropertyInitialization": true,
     // "strictBindCallApply": true,
+    // "strictPropertyInitialization": true,
     // "noImplicitThis": true,
     // "alwaysStrict": true,
 
     /* Linter Checks */
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
 
     /* Style */
     "newLine": "lf"
