@@ -4,17 +4,12 @@
     "browser": true,
     "es6": true
   },
-  "extends": [
-    "airbnb-base",
-    "standard",
-    "plugin:jsdoc/recommended",
-    "plugin:markdown/recommended"
-  ],
+  "extends": ["airbnb-base", "standard", "plugin:jsdoc/recommended"],
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
-  "plugins": ["jsdoc", "markdown", "@typescript-eslint"],
+  "plugins": ["jsdoc", "@typescript-eslint"],
   "rules": {
     "strict": "off",
     "semi": ["error", "always"],
