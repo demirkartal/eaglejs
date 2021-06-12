@@ -1,7 +1,7 @@
 {
   "name": "@demirkartal/eaglejs",
   "description": "EagleJS is a jQuery-Like DOM manipulation library for modern browsers",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "Cem Demirkartal",
   "license": "MIT",
   "homepage": "https://demirkartal.github.io/eaglejs",
@@ -32,21 +32,16 @@
   "sideEffects": false,
   "dependencies": {},
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.23.0",
-    "@typescript-eslint/parser": "^4.23.0",
     "docdash": "^1.2.0",
-    "eslint": "^7.26.0",
+    "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard": "^16.0.3",
     "eslint-config-standard-with-typescript": "^20.0.0",
-    "eslint-plugin-import": "^2.23.1",
-    "eslint-plugin-jsdoc": "^34.3.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-jsdoc": "^35.1.3",
     "jsdoc": "^3.6.7",
     "rimraf": "^3.0.2",
     "terser": "^5.7.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.2"
   },
   "scripts": {
     "build": "npm run build:tsc && npm run build:minified",

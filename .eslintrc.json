@@ -9,7 +9,7 @@
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
-  "plugins": ["jsdoc", "@typescript-eslint"],
+  "plugins": ["jsdoc"],
   "rules": {
     "strict": "off",
     "semi": ["error", "always"],
@@ -21,9 +21,12 @@
     "jsdoc/check-syntax": 1,
     "jsdoc/match-description": 1,
     "jsdoc/no-bad-blocks": 1,
+    "jsdoc/require-asterisk-prefix": 1,
     "jsdoc/require-description": 1,
     "jsdoc/require-description-complete-sentence": 1,
-    "jsdoc/require-example": 1
+    "jsdoc/require-example": 1,
+    "jsdoc/require-hyphen-before-param-description": 1,
+    "jsdoc/require-throws": 1
   },
   "settings": {
     "jsdoc": {
@@ -39,15 +42,22 @@
     {
       // TypeScript
       "files": ["**/*.ts", "**/*.tsx"],
-      "extends": ["standard-with-typescript"],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "standard-with-typescript"
+      ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": "./tsconfig.base.json"
       },
+      "plugins": ["@typescript-eslint"],
       "rules": {
         "max-len": "warn",
         "@typescript-eslint/semi": ["error", "always"],
-        "@typescript-eslint/method-signature-style": ["error", "method"]
+        "@typescript-eslint/method-signature-style": ["error", "method"],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-inferrable-types": "off"
       }
     }
   ]
