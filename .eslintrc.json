@@ -1,42 +1,16 @@
 {
   "root": true,
   "env": {
-    "browser": true,
     "es6": true
   },
-  "extends": ["airbnb-base", "standard", "plugin:jsdoc/recommended"],
+  "extends": ["eslint:recommended", "standard"],
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
-  "plugins": ["jsdoc"],
   "rules": {
-    "strict": "off",
     "semi": ["error", "always"],
-    "arrow-body-style": "off",
-    "no-param-reassign": ["error", { "props": false }],
-    "jsdoc/check-examples": 1,
-    "jsdoc/check-indentation": 1,
-    "jsdoc/check-line-alignment": 1,
-    "jsdoc/check-syntax": 1,
-    "jsdoc/match-description": 1,
-    "jsdoc/no-bad-blocks": 1,
-    "jsdoc/require-asterisk-prefix": 1,
-    "jsdoc/require-description": 1,
-    "jsdoc/require-description-complete-sentence": 1,
-    "jsdoc/require-example": 1,
-    "jsdoc/require-hyphen-before-param-description": 1,
-    "jsdoc/require-throws": 1
-  },
-  "settings": {
-    "jsdoc": {
-      "preferredTypes": [
-        "AddEventListenerOptions",
-        "EventListener",
-        "EventListenerObject",
-        "EventListenerOptions"
-      ]
-    }
+    "max-len": ["warn", { "code": 100, "ignoreUrls": true }]
   },
   "overrides": [
     {
@@ -44,20 +18,15 @@
       "files": ["**/*.ts", "**/*.tsx"],
       "extends": [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "standard-with-typescript"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": "./tsconfig.base.json"
       },
-      "plugins": ["@typescript-eslint"],
+      "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
       "rules": {
-        "max-len": "warn",
-        "@typescript-eslint/semi": ["error", "always"],
-        "@typescript-eslint/method-signature-style": ["error", "method"],
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-inferrable-types": "off"
+        "tsdoc/syntax": "warn"
       }
     }
   ]
