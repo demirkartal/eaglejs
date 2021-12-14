@@ -10,7 +10,7 @@
   },
   "rules": {
     "semi": ["error", "always"],
-    "max-len": ["warn", { "code": 100, "ignoreUrls": true }]
+    "max-len": ["warn", { "ignoreUrls": true }]
   },
   "overrides": [
     {
