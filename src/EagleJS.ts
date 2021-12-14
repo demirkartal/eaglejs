@@ -7,16 +7,12 @@
  * EagleJS.
  */
 class EagleJS extends Array<EventTarget> {
-  public static EventTarget: { new(): EventTarget, prototype: EventTarget, };
+  public static EventTarget: { new(): EventTarget, prototype: EventTarget };
 
   /**
    * Return a collection of given items.
    *
-   * @example <caption>constructor ()</caption>
-   * ```
-   * const example = new EagleJS();
-   * ```
-   * @example <caption>constructor (...items: EventTarget[])</caption>
+   * @example
    * ```
    * const example = new EagleJS(document);
    * ```
@@ -40,7 +36,8 @@ class EagleJS extends Array<EventTarget> {
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
    * Throws a `SyntaxError` if one of the arguments is the empty string.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws an `InvalidCharacterError` if one of the arguments contains any ASCII whitespace.
+   * Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns The current collection.
    */
   public addClass (...names: string[]): this {
@@ -53,8 +50,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Insert a set of `Node` or `DOMString` objects after each `ChildNode` in the collection.
-   * `DOMString` objects are inserted as equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects after each `ChildNode` in the
+   * collection. `DOMString` objects are inserted as equivalent `Text` nodes.
    *
    * @example
    * ```
@@ -85,8 +82,9 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Insert a set of `Node` or `DOMString` objects after the last child of each `ParentNode` in the
-   * collection. `DOMString` objects are inserted as equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects after the last child of each
+   * `ParentNode` in the collection. `DOMString` objects are inserted as
+   * equivalent `Text` nodes.
    *
    * @example
    * ```
@@ -126,8 +124,8 @@ class EagleJS extends Array<EventTarget> {
    * @see Element.getAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute | MDN}.
    * @param name - The name of the attribute.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws an `InvalidCharacterError` if the specified attribute name contains one or more
-   * characters that are not valid in attribute names.
+   * Throws an `InvalidCharacterError` if the specified attribute name contains
+   * one or more characters that are not valid in attribute names.
    * @returns The attribute value of the first `Element`.
    */
   public attr (name: string): string | null;
@@ -143,8 +141,8 @@ class EagleJS extends Array<EventTarget> {
    * @param name - The name of the attribute.
    * @param value - The value for the attribute.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws an `InvalidCharacterError` if the specified attribute name contains one or more
-   * characters that are not valid in attribute names.
+   * Throws an `InvalidCharacterError` if the specified attribute name contains
+   * one or more characters that are not valid in attribute names.
    * @returns Returns the current collection.
    */
   public attr (name: string, value: string): this;
@@ -170,8 +168,9 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Insert a set of `Node` or `DOMString` objects before each `ChildNode` in the collection.
-   * `DOMString` objects are inserted as equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects before each `ChildNode` in
+   * the collection. `DOMString` objects are inserted as equivalent `Text`
+   * nodes.
    *
    * @example
    * ```
@@ -202,8 +201,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `children` property of each `ParentNode` in the collection, optionally filtered by a
-   * selector.
+   * Get the `children` property of each `ParentNode` in the collection,
+   * optionally filtered by a selector.
    *
    * @example
    * ```
@@ -254,7 +253,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the closest ancestor of each `Element` in the collection that matches selectors.
+   * Get the closest ancestor of each `Element` in the collection that matches
+   * selectors.
    *
    * @example
    * ```
@@ -263,7 +263,8 @@ class EagleJS extends Array<EventTarget> {
    * @see Element.closest() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest | MDN}.
    * @param selectors - One or more selectors to match.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not valid.
+   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns A new collection of `Element`s.
    */
   public closest (selectors: string): EagleJS {
@@ -329,7 +330,8 @@ class EagleJS extends Array<EventTarget> {
   public data (): DOMStringMap;
 
   /**
-   * Get the data attribute value of first `HTMLElement` or `SVGElement` in the collection.
+   * Get the data attribute value of first `HTMLElement` or `SVGElement` in the
+   * collection.
    *
    * @example
    * ```
@@ -337,12 +339,14 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @see HTMLOrForeignElement.dataset on {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset | MDN}.
    * @param key - The name of the data.
-   * @returns Returns the data attribute value of the first `HTMLElement` or `SVGElement`.
+   * @returns Returns the data attribute value of the first `HTMLElement` or
+   * `SVGElement`.
    */
   public data (key: string): string | undefined;
 
   /**
-   * Set the data attribute value of each `HTMLElement` and `SVGElement` in the collection.
+   * Set the data attribute value of each `HTMLElement` and `SVGElement` in the
+   * collection.
    *
    * @example
    * ```
@@ -435,7 +439,8 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @see Element.hasAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute | MDN}
    * @param name - The attribute to search.
-   * @returns `true` if any `Element` has the given attribute; otherwise, `false`.
+   * @returns `true` if any `Element` has the given attribute; otherwise,
+   * `false`.
    */
   public hasAttr (name: string): boolean {
     return this.some((item: Element | EventTarget) => {
@@ -452,7 +457,8 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @see Element.classList.contains() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains | MDN}.
    * @param name - The class name to search.
-   * @returns `true` if any `Element` has the given class name; otherwise, `false`.
+   * @returns `true` if any `Element` has the given class name; otherwise,
+   * `false`.
    */
   public hasClass (name: string): boolean {
     return this.some((item: Element | EventTarget) => {
@@ -515,8 +521,10 @@ class EagleJS extends Array<EventTarget> {
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches | MDN}.
    * @param selectors - One or more selectors to match.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not valid.
-   * @returns `true` if any `Element` matches the given selectors; otherwise, `false`.
+   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
+   * @returns `true` if any `Element` matches the given selectors; otherwise,
+   * `false`.
    */
   public matches (selectors: string): boolean {
     return this.some((item: Element | EventTarget) => {
@@ -525,8 +533,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `nextElementSibling` of each `Node` in the collection, optionally filtered by a
-   * selector.
+   * Get the `nextElementSibling` of each `Node` in the collection, optionally
+   * filtered by a selector.
    *
    * @example
    * ```
@@ -572,10 +580,13 @@ class EagleJS extends Array<EventTarget> {
    * new EagleJS(element).off('click', handler);
    * ```
    * @see EventTarget.removeEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener | MDN}.
-   * @param type - A string that specifies the type of event for which to remove an event listener.
-   * @param listener - The `EventListener` function of the event handler to remove from the event
+   * @param type - A string that specifies the type of event for which to remove
+   * an event listener.
+   * @param listener - The `EventListener` function of the event handler to
+   * remove from the event
    * target.
-   * @param options - An options object specifies the* characteristics of the event listener.
+   * @param options - An options object specifies the* characteristics of the
+   * event listener.
    * @returns The current collection.
    */
   public off (
@@ -613,9 +624,11 @@ class EagleJS extends Array<EventTarget> {
    * });
    * ```
    * @see EventTarget.addEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener | MDN}.
-   * @param type - A case-sensitive string representing the event type to listen for.
+   * @param type - A case-sensitive string representing the event type to listen
+   * for.
    * @param listener - The handler function for the event.
-   * @param options - An options object specifies the characteristics of the event listener.
+   * @param options - An options object specifies the characteristics of the
+   * event listener.
    * @returns The current collection.
    */
   public on (
@@ -630,7 +643,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `parentNode` of each `Node` in the collection, optionally filtered by a selector.
+   * Get the `parentNode` of each `Node` in the collection, optionally filtered
+   * by a selector.
    *
    * @example
    * ```
@@ -655,8 +669,9 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Insert a set of `Node` or `DOMString` objects before the first child of each `ParentNode` in
-   * the collection. `DOMString` objects are inserted as equivalent `Text` nodes.
+   * Insert a set of `Node` or `DOMString` objects before the first child of
+   * each `ParentNode` in the collection. `DOMString` objects are inserted as
+   * equivalent `Text` nodes.
    *
    * @example
    * ```
@@ -687,8 +702,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `previousElementSibling` of each `Node` in the collection, optionally filtered by a
-   * selector.
+   * Get the `previousElementSibling` of each `Node` in the collection,
+   * optionally filtered by a selector.
    *
    * @example
    * ```
@@ -733,8 +748,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the first `Element` descendant of each `ParentNode` in the collection that matches
-   * selectors.
+   * Get the first `Element` descendant of each `ParentNode` in the collection
+   * that matches selectors.
    *
    * @example
    * ```
@@ -743,7 +758,8 @@ class EagleJS extends Array<EventTarget> {
    * @see ParentNode.querySelector() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector | MDN}.
    * @param selectors - One or more selectors to match.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not valid.
+   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns A new collection of `Element`s.
    */
   public querySelector (selectors: string): EagleJS {
@@ -760,7 +776,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get all `Element` descendants of each `ParentNode` in the collection that matches selectors.
+   * Get all `Element` descendants of each `ParentNode` in the collection that
+   * matches selectors.
    *
    * @example
    * ```
@@ -769,7 +786,8 @@ class EagleJS extends Array<EventTarget> {
    * @see ParentNode.querySelectorAll() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll | MDN}.
    * @param selectors - One or more selectors to match.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not valid.
+   * Throws a `SyntaxError` if the syntax of the specified `selectors` is not
+   * valid.
    * @returns A new collection of `Element`s.
    */
   public querySelectorAll (selectors: string): EagleJS {
@@ -863,7 +881,8 @@ class EagleJS extends Array<EventTarget> {
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
    * Throws a `SyntaxError` if one of the arguments is the empty string.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws an `InvalidCharacterError` if one of the arguments contains any ASCII whitespace.
+   * Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns The current collection.
    */
   public removeClass (...names: string[]): this {
@@ -876,8 +895,9 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Replace each `ChildNode` in the collection with a set of `Node` or `DOMString` objects.
-   * `DOMString` objects are inserted as equivalent `Text` nodes.
+   * Replace each `ChildNode` in the collection with a set of `Node` or
+   * `DOMString` objects. `DOMString` objects are inserted as equivalent `Text`
+   * nodes.
    *
    * @example
    * ```
@@ -908,7 +928,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the siblings of each `Node` in the collection, optionally filtered by a selector.
+   * Get the siblings of each `Node` in the collection, optionally filtered by
+   * a selector.
    *
    * @example
    * ```
@@ -992,7 +1013,8 @@ class EagleJS extends Array<EventTarget> {
    * @see Element.toggleAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute | MDN}
    * (Simulated).
    * @param name - The name of the attribute.
-   * @param force - A boolean value to determine whether the attribute should be added or removed.
+   * @param force - A boolean value to determine whether the attribute should be
+   * added or removed.
    * @returns The current collection.
    */
   public toggleAttr (name: string, force?: boolean): this {
@@ -1025,11 +1047,13 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @see Element.classList.toggle() on {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle | MDN}.
    * @param name - The class name to toggle.
-   * @param force - A boolean value to determine whether the class should be added or removed.
+   * @param force - A boolean value to determine whether the class should be
+   * added or removed.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
    * Throws a `SyntaxError` if one of the arguments is the empty string.
    * @throws {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMException | DOMException}
-   * Throws an `InvalidCharacterError` if one of the arguments contains any ASCII whitespace.
+   * Throws an `InvalidCharacterError` if one of the arguments contains any
+   * ASCII whitespace.
    * @returns The current collection.
    */
   public toggleClass (name: string, force?: boolean): this {
