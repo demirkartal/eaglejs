@@ -7,7 +7,7 @@
  * EagleJS.
  */
 class EagleJS extends Array<EventTarget> {
-  public static EventTarget: { new(): EventTarget, prototype: EventTarget };
+  public static EventTarget = EventTarget;
 
   /**
    * Return a collection of given items.
@@ -1104,7 +1104,6 @@ class EagleJS extends Array<EventTarget> {
     }));
   }
 }
-EagleJS.EventTarget = EventTarget;
 export default EagleJS;
 
 interface EagleJS {
