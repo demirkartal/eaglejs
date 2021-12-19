@@ -21,7 +21,7 @@
   "author": "Cem Demirkartal",
   "sideEffects": false,
   "type": "module",
-  "main": "dist/EagleJS.ts",
+  "main": "dist/EagleJS.js",
   "types": "dist/EagleJS.d.ts",
   "directories": {
     "doc": "docs"
