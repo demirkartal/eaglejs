@@ -57,20 +57,20 @@ $(document).ready(() => {
 
 ## Browser Support
 
-For a detailed view, please check the table on [caniuse.com](https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,dom-manip-convenience,es6,es6-module,array-includes).
+For a detailed view, please check the table on [caniuse.com](https://caniuse.com/mdn-api_element_closest,mdn-api_element_matches,mdn-api_element_toggleattribute,dom-manip-convenience,es6,es6-module,array-includes).
 
 ### Desktop (Last two versions)
 
 - Chrome
-- Edge 17+
+- Edge
 - Firefox
-- Safari 11+
+- Safari 12+
 
 ### Mobile (Latest versions)
 
 - Chrome
 - Firefox
-- iOS Safari 11+
+- iOS Safari 12+
 
 ## Documentation
 
