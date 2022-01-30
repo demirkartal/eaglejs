@@ -1010,8 +1010,7 @@ class EagleJS extends Array<EventTarget> {
    * new EagleJS(element).toggleAttr('attributeName', true);
    * new EagleJS(element).toggleAttr('attributeName', false);
    * ```
-   * @see Element.toggleAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute | MDN}
-   * (Simulated).
+   * @see Element.toggleAttribute() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute | MDN}.
    * @param name - The name of the attribute.
    * @param force - A boolean value to determine whether the attribute should be
    * added or removed.
@@ -1019,18 +1018,8 @@ class EagleJS extends Array<EventTarget> {
    */
   public toggleAttr (name: string, force?: boolean): this {
     this.forEach((item: Element | EventTarget) => {
-      if ('setAttribute' in item) {
-        if (item.hasAttribute(name)) {
-          if (force === true) {
-            return;
-          }
-          item.removeAttribute(name);
-        } else {
-          if (force === false) {
-            return;
-          }
-          item.setAttribute(name, '');
-        }
+      if ('toggleAttribute' in item) {
+        item.toggleAttribute(name, force);
       }
     });
     return this;
