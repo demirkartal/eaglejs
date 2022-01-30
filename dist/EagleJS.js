@@ -425,18 +425,8 @@ class EagleJS extends Array {
 
   toggleAttr (name, force) {
     this.forEach((item) => {
-      if ('setAttribute' in item) {
-        if (item.hasAttribute(name)) {
-          if (force === true) {
-            return;
-          }
-          item.removeAttribute(name);
-        } else {
-          if (force === false) {
-            return;
-          }
-          item.setAttribute(name, '');
-        }
+      if ('toggleAttribute' in item) {
+        item.toggleAttribute(name, force);
       }
     });
     return this;
