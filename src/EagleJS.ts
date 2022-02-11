@@ -1,6 +1,6 @@
 /*!
  * EagleJS 0.8.0 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2021 Cem Demirkartal
+ * Copyright 2020-2022 Cem Demirkartal
  * Licensed under MIT
  */
 /**
@@ -318,7 +318,8 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get `dataset` of the first `HTMLElement` or `SVGElement` in the collection.
+   * Get the `dataset` of the first `HTMLElement` or `SVGElement` in the
+   * collection.
    *
    * @example
    * ```
@@ -330,8 +331,8 @@ class EagleJS extends Array<EventTarget> {
   public data (): DOMStringMap;
 
   /**
-   * Get the data attribute value of first `HTMLElement` or `SVGElement` in the
-   * collection.
+   * Get the data attribute value of the first `HTMLElement` or `SVGElement` in
+   * the collection.
    *
    * @example
    * ```
@@ -421,7 +422,7 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @see Element.matches() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/matches | MDN}.
    * @param selectors - A selector to match.
-   * @param condition - A condition for test.
+   * @param condition - A condition for the test.
    * @returns A new collection with the items that pass the test.
    */
   public filterWith (selectors: string, condition = true): this {
@@ -467,7 +468,7 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `innerHTML` of first `Element` in the collection.
+   * Get the `innerHTML` of the first `Element` in the collection.
    *
    * @example
    * ```
@@ -624,7 +625,7 @@ class EagleJS extends Array<EventTarget> {
    * });
    * ```
    * @see EventTarget.addEventListener() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener | MDN}.
-   * @param type - A case-sensitive string representing the event type to listen
+   * @param type - A case-sensitive string represents the event type to listen
    * for.
    * @param listener - The handler function for the event.
    * @param options - An options object specifies the characteristics of the
@@ -819,7 +820,7 @@ class EagleJS extends Array<EventTarget> {
         if (item.readyState === 'loading') {
           item.addEventListener('DOMContentLoaded', listener);
         } else {
-          setTimeout(listener); // Async
+          setTimeout(listener, 0);
         }
       }
     });
@@ -957,7 +958,7 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `textContent` of first `Node` in the collection.
+   * Get the `textContent` of the first `Node` in the collection.
    *
    * @example
    * ```
@@ -1063,7 +1064,7 @@ class EagleJS extends Array<EventTarget> {
    * new EagleJS(element).trigger(event);
    * ```
    * @see EventTarget.dispatchEvent() on {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent | MDN}.
-   * @param event - The `Event` object to be triggered.
+   * @param event - The `Event` object to dispatch.
    * @returns The current collection.
    */
   public trigger (event: Event): this {
