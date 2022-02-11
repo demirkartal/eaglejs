@@ -1,6 +1,6 @@
 /*!
  * EagleJS 0.8.0 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2021 Cem Demirkartal
+ * Copyright 2020-2022 Cem Demirkartal
  * Licensed under MIT
  */
 class EagleJS extends Array {
@@ -333,7 +333,7 @@ class EagleJS extends Array {
         if (item.readyState === 'loading') {
           item.addEventListener('DOMContentLoaded', listener);
         } else {
-          setTimeout(listener);
+          setTimeout(listener, 0);
         }
       }
     });
