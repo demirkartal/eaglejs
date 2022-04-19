@@ -534,15 +534,15 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `nextElementSibling` of each `Node` in the collection, optionally
-   * filtered by a selector.
+   * Get the `nextElementSibling` of each `Element` in the collection,
+   * optionally filtered by a selector.
    *
    * @example
    * ```
    * new EagleJS(element).next();
    * new EagleJS(element).next('selectors');
    * ```
-   * @see NonDocumentTypeChildNode.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling | MDN}.
+   * @see Element.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling | MDN}.
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
@@ -703,7 +703,7 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `previousElementSibling` of each `Node` in the collection,
+   * Get the `previousElementSibling` of each `Element` in the collection,
    * optionally filtered by a selector.
    *
    * @example
@@ -711,7 +711,7 @@ class EagleJS extends Array<EventTarget> {
    * new EagleJS(element).prev();
    * new EagleJS(element).prev('selectors');
    * ```
-   * @see NonDocumentTypeChildNode.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/NonDocumentTypeChildNode/previousElementSibling | MDN}.
+   * @see Element.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling | MDN}.
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
