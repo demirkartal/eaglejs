@@ -13,9 +13,9 @@ EagleJS is a jQuery-Like DOM manipulation library for modern browsers.
 - Powered with EcmaScript 7 and Modern DOM functions
 - Subclass of Array for better collection management
 - Supports CSS3 selectors
-- Lightweight: Minified < 6 KB & Minified+Gzipped < 2 KB
+- Lightweight: Minified < 5 KB & Minified+Gzipped < 2 KB
 - [JavaScript Standard Style](https://standardjs.com "JavaScript Standard Style") codes
-- Documented with [JSDoc](https://jsdoc.app "JSDoc")
+- Documented with [TypeDoc](https://typedoc.org "TypeDoc")
 
 ## Installation
 
@@ -31,26 +31,29 @@ npm install @demirkartal/eaglejs
 
 ## Usage
 
-### Script tag
-
-Include the script file on top of other scripts that requires EagleJS.
-
-```html
-<script src="eaglejs.min.js"></script>
-<script>
-  const $ = EagleJSProxy;
-  $(document).ready(() => {
-    // Call when DOM is completely loaded
-  });
-</script>
-```
-
-### ES6 Module
+### Browser
 
 ```js
-import { EagleJSProxy as $ } from 'eaglejs.esm.js';
+import EagleJS from 'EagleJS.mjs';
 
-$(document).ready(() => {
+const doc = new EagleJS(document);
+
+doc.ready(() => {
+  // Call when DOM is completely loaded
+});
+```
+
+### Node.js
+
+```js
+import { JSDOM } from 'jsdom';
+import EagleJS from '@demirkartal/eaglejs';
+
+const jsdom = new JSDOM();
+
+const doc = new EagleJS(jsdom.window.document);
+
+doc.ready(() => {
   // Call when DOM is completely loaded
 });
 ```
