@@ -21,8 +21,8 @@
   "author": "Cem Demirkartal",
   "sideEffects": false,
   "type": "module",
-  "main": "dist/EagleJS.js",
-  "types": "dist/EagleJS.d.ts",
+  "main": "dist/EagleJS.mjs",
+  "types": "dist/EagleJS.d.mts",
   "directories": {
     "doc": "docs"
   },
@@ -36,26 +36,26 @@
     "build:tsc": "npm run lint:fix && npm run tsc:build && npm run lint:fix-build",
     "docs:build": "typedoc",
     "lint": "eslint src/",
-    "lint:build": "eslint dist/",
+    "lint:build": "eslint dist/ --ext .mjs,.mts",
     "lint:fix": "eslint --fix src/",
-    "lint:fix-build": "eslint --fix dist/",
-    "minify": "terser dist/EagleJS.js --module --compress --mangle --output dist/EagleJS.min.js",
+    "lint:fix-build": "eslint --fix dist/ --ext .mjs,.mts",
+    "minify": "terser dist/EagleJS.mjs --module --compress --mangle --source-map \"content=dist/EagleJS.mjs.map,includeSources,url=EagleJS.min.mjs.map\" --output dist/EagleJS.min.mjs",
     "test": "npm run test:lint",
     "test:lint": "npm run lint && npm run lint:build",
     "tsc:build": "tsc"
   },
   "dependencies": {},
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "@typescript-eslint/parser": "^5.20.0",
-    "eslint": "^8.13.0",
-    "eslint-config-standard": "^17.0.0-1",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^14.0.0",
+    "eslint-plugin-n": "^15.2.2",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-tsdoc": "^0.2.16",
-    "terser": "^5.12.1",
-    "typedoc": "^0.22.15",
-    "typescript": "^4.6.3"
+    "terser": "^5.14.1",
+    "typedoc": "^0.22.17",
+    "typescript": "^4.7.3"
   }
 }
