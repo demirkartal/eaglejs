@@ -9,6 +9,10 @@ class EagleJS extends Array {
     this.push(...items);
   }
 
+  static isEventTarget (value) {
+    return value instanceof Object && 'addEventListener' in value;
+  }
+
   addClass (...names) {
     this.forEach((item) => {
       if ('classList' in item) {
@@ -127,7 +131,7 @@ class EagleJS extends Array {
 
   concat (...items) {
     return super.concat(...items).filter((item, index, array) => {
-      return item instanceof EagleJS.EventTarget && array.indexOf(item) === index;
+      return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
     });
   }
 
@@ -300,7 +304,7 @@ class EagleJS extends Array {
 
   push (...items) {
     return super.push(...items.filter((item) => {
-      return item instanceof EagleJS.EventTarget && !this.includes(item);
+      return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
   }
 
@@ -450,9 +454,9 @@ class EagleJS extends Array {
 
   unshift (...items) {
     return super.unshift(...items.filter((item) => {
-      return item instanceof EagleJS.EventTarget && !this.includes(item);
+      return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
   }
 }
-EagleJS.EventTarget = EventTarget;
 export default EagleJS;
+// # sourceMappingURL=EagleJS.mjs.map

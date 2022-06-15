@@ -4,12 +4,8 @@
  * Licensed under MIT
  */
 declare class EagleJS extends Array<EventTarget> {
-  static EventTarget: {
-        new (): EventTarget;
-        prototype: EventTarget;
-    };
-
   constructor(...items: EventTarget[]);
+  static isEventTarget(value: unknown): value is EventTarget;
   addClass(...names: string[]): this;
   after(...nodes: Array<Node | string>): this;
   append(...nodes: Array<Node | string>): this;
@@ -60,3 +56,4 @@ interface EagleJS {
     filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): this;
     slice(start?: number, end?: number): this;
 }
+// # sourceMappingURL=EagleJS.d.mts.map
