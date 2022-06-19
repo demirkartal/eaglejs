@@ -1,10 +1,16 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
+    "target": "ES2016",
+    "module": "ES2015",
+
+    // Directories
     "outDir": "dist",
     "rootDir": "src",
+
+    // Output settings
+    "declaration": true,
+    "declarationMap": true,
     "removeComments": true,
     "sourceMap": true
   }
