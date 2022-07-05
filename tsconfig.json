@@ -1,14 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    // Directories
-    "outDir": "dist",
-    "rootDir": "src",
-
-    // Output settings
     "declaration": true,
     "declarationMap": true,
+    "outDir": "dist",
     "removeComments": true,
+    "rootDir": "src",
     "sourceMap": true
   }
 }
