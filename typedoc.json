@@ -2,8 +2,8 @@
   "$schema": "https://typedoc.org/schema.json",
   "cleanOutputDir": true,
   "disableSources": true,
-  "entryPoints": "src",
-  "entryPointStrategy": "Expand",
+  "entryPoints": ["src"],
+  "entryPointStrategy": "expand",
   "includeVersion": true,
   "out": "docs"
 }
