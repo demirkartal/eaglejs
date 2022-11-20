@@ -1,6 +1,6 @@
 {
   "name": "@demirkartal/eaglejs",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "EagleJS is a jQuery-Like DOM manipulation library for modern browsers",
   "keywords": [
     "javascript",
