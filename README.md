@@ -2,9 +2,6 @@
 
 [![NPM](https://badgen.net/npm/v/@demirkartal/eaglejs)](https://www.npmjs.com/package/@demirkartal/eaglejs)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@demirkartal/eaglejs/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@demirkartal/eaglejs)
-[![DeepScan grade](https://deepscan.io/api/teams/12532/projects/16494/branches/356366/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12532&pid=16494&bid=356366)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/demirkartal/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/demirkartal/eaglejs/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/demirkartal/eaglejs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/demirkartal/eaglejs/context:javascript)
 [![Minified](https://badgen.net/bundlephobia/min/@demirkartal/eaglejs)](https://bundlephobia.com/result?p=@demirkartal/eaglejs)
 [![Minified+Gzipped](https://badgen.net/bundlephobia/minzip/@demirkartal/eaglejs)](https://bundlephobia.com/result?p=@demirkartal/eaglejs)
 
