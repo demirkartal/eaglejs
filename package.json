@@ -45,17 +45,17 @@
     "tsc:build": "tsc"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "eslint": "^8.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.32.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "terser": "^5.15.1",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.8.4"
+    "terser": "^5.16.1",
+    "typedoc": "^0.23.24",
+    "typescript": "^4.9.4"
   },
   "dependencies": {}
 }
