@@ -1,19 +1,19 @@
 /*!
- * EagleJS 0.8.0 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2022 Cem Demirkartal
+ * EagleJS 0.8.2 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2024 Cem Demirkartal
  * Licensed under MIT
  */
 class EagleJS extends Array {
-  constructor (...items) {
+  constructor(...items) {
     super();
     this.push(...items);
   }
 
-  static isEventTarget (value) {
+  static isEventTarget(value) {
     return value instanceof Object && 'addEventListener' in value;
   }
 
-  addClass (...names) {
+  addClass(...names) {
     this.forEach((item) => {
       if ('classList' in item) {
         item.classList.add(...names);
@@ -22,14 +22,15 @@ class EagleJS extends Array {
     return this;
   }
 
-  after (...nodes) {
+  after(...nodes) {
     let isFirst = true;
     this.slice().reverse().forEach((item) => {
       if ('after' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.after(node);
-          } else {
+          }
+          else {
             item.after(node.cloneNode(true));
           }
         });
@@ -39,14 +40,15 @@ class EagleJS extends Array {
     return this;
   }
 
-  append (...nodes) {
+  append(...nodes) {
     let isFirst = true;
     this.slice().reverse().forEach((item) => {
       if ('append' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.append(node);
-          } else {
+          }
+          else {
             item.append(node.cloneNode(true));
           }
         });
@@ -56,7 +58,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  attr (name, value) {
+  attr(name, value) {
     if (typeof value !== 'undefined') {
       this.forEach((item) => {
         if ('setAttribute' in item) {
@@ -76,14 +78,15 @@ class EagleJS extends Array {
     return returnValue;
   }
 
-  before (...nodes) {
+  before(...nodes) {
     let isFirst = true;
     this.slice().reverse().forEach((item) => {
       if ('before' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.before(node);
-          } else {
+          }
+          else {
             item.before(node.cloneNode(true));
           }
         });
@@ -93,7 +96,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  children (filter = null) {
+  children(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('children' in item) {
@@ -106,7 +109,7 @@ class EagleJS extends Array {
     return elements;
   }
 
-  clone (deep = false) {
+  clone(deep = false) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('cloneNode' in item) {
@@ -116,7 +119,7 @@ class EagleJS extends Array {
     return elements;
   }
 
-  closest (selectors) {
+  closest(selectors) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('closest' in item) {
@@ -129,13 +132,13 @@ class EagleJS extends Array {
     return elements;
   }
 
-  concat (...items) {
+  concat(...items) {
     return super.concat(...items).filter((item, index, array) => {
       return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
     });
   }
 
-  contents () {
+  contents() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('childNodes' in item) {
@@ -145,7 +148,7 @@ class EagleJS extends Array {
     return elements;
   }
 
-  data (key, value) {
+  data(key, value) {
     if (typeof key !== 'undefined') {
       const dataKey = key.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
       if (typeof value !== 'undefined') {
@@ -177,7 +180,7 @@ class EagleJS extends Array {
     return returnValue;
   }
 
-  empty () {
+  empty() {
     this.forEach((item) => {
       if ('firstChild' in item) {
         while (item.firstChild !== null) {
@@ -188,25 +191,25 @@ class EagleJS extends Array {
     return this;
   }
 
-  filterWith (selectors, condition = true) {
+  filterWith(selectors, condition = true) {
     return this.filter((item) => {
       return 'matches' in item && item.matches(selectors) === condition;
     });
   }
 
-  hasAttr (name) {
+  hasAttr(name) {
     return this.some((item) => {
       return 'hasAttribute' in item && item.hasAttribute(name);
     });
   }
 
-  hasClass (name) {
+  hasClass(name) {
     return this.some((item) => {
       return 'classList' in item && item.classList.contains(name);
     });
   }
 
-  html (value) {
+  html(value) {
     if (typeof value !== 'undefined') {
       this.forEach((item) => {
         if ('innerHTML' in item) {
@@ -226,13 +229,13 @@ class EagleJS extends Array {
     return returnValue;
   }
 
-  matches (selectors) {
+  matches(selectors) {
     return this.some((item) => {
       return 'matches' in item && item.matches(selectors);
     });
   }
 
-  next (filter = null) {
+  next(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('nextElementSibling' in item && item.nextElementSibling !== null) {
@@ -245,21 +248,21 @@ class EagleJS extends Array {
     return elements;
   }
 
-  off (type, listener, options = false) {
+  off(type, listener, options = false) {
     this.forEach((item) => {
       item.removeEventListener(type, listener, options);
     });
     return this;
   }
 
-  on (type, listener, options = false) {
+  on(type, listener, options = false) {
     this.forEach((item) => {
       item.addEventListener(type, listener, options);
     });
     return this;
   }
 
-  parent (filter = null) {
+  parent(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -272,14 +275,15 @@ class EagleJS extends Array {
     return elements;
   }
 
-  prepend (...nodes) {
+  prepend(...nodes) {
     let isFirst = true;
     this.slice().reverse().forEach((item) => {
       if ('prepend' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.prepend(node);
-          } else {
+          }
+          else {
             item.prepend(node.cloneNode(true));
           }
         });
@@ -289,7 +293,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  prev (filter = null) {
+  prev(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('previousElementSibling' in item && item.previousElementSibling !== null) {
@@ -302,13 +306,13 @@ class EagleJS extends Array {
     return elements;
   }
 
-  push (...items) {
+  push(...items) {
     return super.push(...items.filter((item) => {
       return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
   }
 
-  querySelector (selectors) {
+  querySelector(selectors) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('querySelector' in item) {
@@ -321,7 +325,7 @@ class EagleJS extends Array {
     return elements;
   }
 
-  querySelectorAll (selectors) {
+  querySelectorAll(selectors) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('querySelectorAll' in item) {
@@ -331,12 +335,13 @@ class EagleJS extends Array {
     return elements;
   }
 
-  ready (listener) {
+  ready(listener) {
     this.forEach((item) => {
       if ('readyState' in item) {
         if (item.readyState === 'loading') {
           item.addEventListener('DOMContentLoaded', listener);
-        } else {
+        }
+        else {
           setTimeout(listener, 0);
         }
       }
@@ -344,7 +349,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  remove () {
+  remove() {
     this.forEach((item) => {
       if ('remove' in item) {
         item.remove();
@@ -353,7 +358,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  removeAttr (...names) {
+  removeAttr(...names) {
     this.forEach((item) => {
       if ('removeAttribute' in item) {
         names.forEach((name) => {
@@ -364,7 +369,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  removeClass (...names) {
+  removeClass(...names) {
     this.forEach((item) => {
       if ('classList' in item) {
         item.classList.remove(...names);
@@ -373,14 +378,15 @@ class EagleJS extends Array {
     return this;
   }
 
-  replaceWith (...nodes) {
+  replaceWith(...nodes) {
     let isFirst = true;
     this.slice().reverse().forEach((item) => {
       if ('replaceWith' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.replaceWith(node);
-          } else {
+          }
+          else {
             item.replaceWith(node.cloneNode(true));
           }
         });
@@ -390,7 +396,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  siblings (filter = null) {
+  siblings(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -407,7 +413,7 @@ class EagleJS extends Array {
     return elements;
   }
 
-  text (value) {
+  text(value) {
     if (typeof value !== 'undefined') {
       this.forEach((item) => {
         if ('textContent' in item) {
@@ -427,7 +433,7 @@ class EagleJS extends Array {
     return returnValue;
   }
 
-  toggleAttr (name, force) {
+  toggleAttr(name, force) {
     this.forEach((item) => {
       if ('toggleAttribute' in item) {
         item.toggleAttribute(name, force);
@@ -436,7 +442,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  toggleClass (name, force) {
+  toggleClass(name, force) {
     this.forEach((item) => {
       if ('classList' in item) {
         item.classList.toggle(name, force);
@@ -445,14 +451,14 @@ class EagleJS extends Array {
     return this;
   }
 
-  trigger (event) {
+  trigger(event) {
     this.forEach((item) => {
       item.dispatchEvent(event);
     });
     return this;
   }
 
-  unshift (...items) {
+  unshift(...items) {
     return super.unshift(...items.filter((item) => {
       return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
