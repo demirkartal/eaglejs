@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.0 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2022 Cem Demirkartal
+ * EagleJS 0.8.2 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2024 Cem Demirkartal
  * Licensed under MIT
  */
 /**
@@ -16,7 +16,7 @@ class EagleJS extends Array<EventTarget> {
    * ```
    * @param items - Items to add to the collection.
    */
-  public constructor (...items: EventTarget[]) {
+  public constructor(...items: EventTarget[]) {
     super();
     this.push(...items);
   }
@@ -29,7 +29,7 @@ class EagleJS extends Array<EventTarget> {
    * @returns `true` if the given value is an instance of `EventTarget`;
    * otherwise, `false`.
    */
-  public static isEventTarget (value: unknown): value is EventTarget {
+  public static isEventTarget(value: unknown): value is EventTarget {
     return value instanceof Object && 'addEventListener' in value;
   }
 
@@ -50,7 +50,7 @@ class EagleJS extends Array<EventTarget> {
    * ASCII whitespace.
    * @returns The current collection.
    */
-  public addClass (...names: string[]): this {
+  public addClass(...names: string[]): this {
     this.forEach((item: Element | EventTarget) => {
       if ('classList' in item) {
         item.classList.add(...names);
@@ -74,14 +74,15 @@ class EagleJS extends Array<EventTarget> {
    * @param nodes - A set of `Node` or `DOMString` objects to insert.
    * @returns The current collection.
    */
-  public after (...nodes: Array<Node | string>): this {
+  public after(...nodes: (Node | string)[]): this {
     let isFirst = true;
     this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
       if ('after' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.after(node);
-          } else {
+          }
+          else {
             item.after(node.cloneNode(true));
           }
         });
@@ -107,14 +108,15 @@ class EagleJS extends Array<EventTarget> {
    * @param nodes - A set of `Node` or `DOMString` objects to insert.
    * @returns The current collection.
    */
-  public append (...nodes: Array<Node | string>): this {
+  public append(...nodes: (Node | string)[]): this {
     let isFirst = true;
     this.slice().reverse().forEach((item: EventTarget | ParentNode) => {
       if ('append' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.append(node);
-          } else {
+          }
+          else {
             item.append(node.cloneNode(true));
           }
         });
@@ -157,7 +159,7 @@ class EagleJS extends Array<EventTarget> {
    */
   public attr(name: string, value: string): this;
 
-  public attr (name: string, value?: string): string | this | null {
+  public attr(name: string, value?: string): string | this | null {
     if (typeof value !== 'undefined') {
       this.forEach((item: Element | EventTarget) => {
         if ('setAttribute' in item) {
@@ -193,14 +195,15 @@ class EagleJS extends Array<EventTarget> {
    * @param nodes - A set of `Node` or `DOMString` objects to insert.
    * @returns The current collection.
    */
-  public before (...nodes: Array<Node | string>): this {
+  public before(...nodes: (Node | string)[]): this {
     let isFirst = true;
     this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
       if ('before' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.before(node);
-          } else {
+          }
+          else {
             item.before(node.cloneNode(true));
           }
         });
@@ -223,7 +226,7 @@ class EagleJS extends Array<EventTarget> {
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public children (filter: string | null = null): EagleJS {
+  public children(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | ParentNode) => {
       if ('children' in item) {
@@ -252,7 +255,7 @@ class EagleJS extends Array<EventTarget> {
    * Throws a `NotSupportedError` if `Node` is a ShadowRoot.
    * @returns A new collection of `Node`s.
    */
-  public clone (deep = false): EagleJS {
+  public clone(deep = false): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('cloneNode' in item) {
@@ -277,7 +280,7 @@ class EagleJS extends Array<EventTarget> {
    * valid.
    * @returns A new collection of `Element`s.
    */
-  public closest (selectors: string): EagleJS {
+  public closest(selectors: string): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: Element | EventTarget) => {
       if ('closest' in item) {
@@ -301,7 +304,7 @@ class EagleJS extends Array<EventTarget> {
    * @param items - Values to concatenate into a new collection.
    * @returns A new collection.
    */
-  public override concat (...items: Array<ConcatArray<EventTarget> | EventTarget>): this {
+  public override concat(...items: (ConcatArray<EventTarget> | EventTarget)[]): this {
     return super.concat(...items).filter((item, index, array) => {
       return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
     }) as this;
@@ -317,7 +320,7 @@ class EagleJS extends Array<EventTarget> {
    * @see Node.childNodes on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes | MDN}.
    * @returns A new collection of `ChildNode`s.
    */
-  public contents (): EagleJS {
+  public contents(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('childNodes' in item) {
@@ -370,7 +373,7 @@ class EagleJS extends Array<EventTarget> {
    */
   public data(key: string, value: string): this;
 
-  public data (key?: string, value?: string): DOMStringMap | string | this | undefined {
+  public data(key?: string, value?: string): DOMStringMap | string | this | undefined {
     if (typeof key !== 'undefined') {
       const dataKey = key.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase());
       if (typeof value !== 'undefined') {
@@ -412,7 +415,7 @@ class EagleJS extends Array<EventTarget> {
    * @see Node.removeChild() on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild | MDN}.
    * @returns The current collection.
    */
-  public empty (): this {
+  public empty(): this {
     this.forEach((item: EventTarget | Node) => {
       if ('firstChild' in item) {
         while (item.firstChild !== null) {
@@ -435,7 +438,7 @@ class EagleJS extends Array<EventTarget> {
    * @param condition - A condition for the test.
    * @returns A new collection with the items that pass the test.
    */
-  public filterWith (selectors: string, condition = true): this {
+  public filterWith(selectors: string, condition = true): this {
     return this.filter((item: Element | EventTarget) => {
       return 'matches' in item && item.matches(selectors) === condition;
     });
@@ -453,7 +456,7 @@ class EagleJS extends Array<EventTarget> {
    * @returns `true` if any `Element` has the given attribute; otherwise,
    * `false`.
    */
-  public hasAttr (name: string): boolean {
+  public hasAttr(name: string): boolean {
     return this.some((item: Element | EventTarget) => {
       return 'hasAttribute' in item && item.hasAttribute(name);
     });
@@ -471,7 +474,7 @@ class EagleJS extends Array<EventTarget> {
    * @returns `true` if any `Element` has the given class name; otherwise,
    * `false`.
    */
-  public hasClass (name: string): boolean {
+  public hasClass(name: string): boolean {
     return this.some((item: Element | EventTarget) => {
       return 'classList' in item && item.classList.contains(name);
     });
@@ -502,7 +505,7 @@ class EagleJS extends Array<EventTarget> {
    */
   public html(value: string): this;
 
-  public html (value?: string): string | this {
+  public html(value?: string): string | this {
     if (typeof value !== 'undefined') {
       this.forEach((item: Element | EventTarget) => {
         if ('innerHTML' in item) {
@@ -537,7 +540,7 @@ class EagleJS extends Array<EventTarget> {
    * @returns `true` if any `Element` matches the given selectors; otherwise,
    * `false`.
    */
-  public matches (selectors: string): boolean {
+  public matches(selectors: string): boolean {
     return this.some((item: Element | EventTarget) => {
       return 'matches' in item && item.matches(selectors);
     });
@@ -556,7 +559,7 @@ class EagleJS extends Array<EventTarget> {
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public next (filter: string | null = null): EagleJS {
+  public next(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
       if ('nextElementSibling' in item && item.nextElementSibling !== null) {
@@ -600,7 +603,7 @@ class EagleJS extends Array<EventTarget> {
    * event listener.
    * @returns The current collection.
    */
-  public off (
+  public off(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
     options: EventListenerOptions | boolean = false
@@ -642,7 +645,7 @@ class EagleJS extends Array<EventTarget> {
    * event listener.
    * @returns The current collection.
    */
-  public on (
+  public on(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
     options: AddEventListenerOptions | boolean = false
@@ -666,7 +669,7 @@ class EagleJS extends Array<EventTarget> {
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Node`s.
    */
-  public parent (filter: string | null = null): EagleJS {
+  public parent(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -695,14 +698,15 @@ class EagleJS extends Array<EventTarget> {
    * @param nodes - A set of `Node` or `DOMString` objects to insert.
    * @returns The current collection.
    */
-  public prepend (...nodes: Array<Node | string>): this {
+  public prepend(...nodes: (Node | string)[]): this {
     let isFirst = true;
     this.slice().reverse().forEach((item: EventTarget | ParentNode) => {
       if ('prepend' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.prepend(node);
-          } else {
+          }
+          else {
             item.prepend(node.cloneNode(true));
           }
         });
@@ -725,7 +729,7 @@ class EagleJS extends Array<EventTarget> {
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public prev (filter: string | null = null): EagleJS {
+  public prev(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
       if ('previousElementSibling' in item && item.previousElementSibling !== null) {
@@ -752,7 +756,7 @@ class EagleJS extends Array<EventTarget> {
    * @param items - Items to add to the end of the collection.
    * @returns The new length.
    */
-  public override push (...items: EventTarget[]): number {
+  public override push(...items: EventTarget[]): number {
     return super.push(...items.filter((item) => {
       return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
@@ -773,7 +777,7 @@ class EagleJS extends Array<EventTarget> {
    * valid.
    * @returns A new collection of `Element`s.
    */
-  public querySelector (selectors: string): EagleJS {
+  public querySelector(selectors: string): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | ParentNode) => {
       if ('querySelector' in item) {
@@ -801,7 +805,7 @@ class EagleJS extends Array<EventTarget> {
    * valid.
    * @returns A new collection of `Element`s.
    */
-  public querySelectorAll (selectors: string): EagleJS {
+  public querySelectorAll(selectors: string): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | ParentNode) => {
       if ('querySelectorAll' in item) {
@@ -824,12 +828,13 @@ class EagleJS extends Array<EventTarget> {
    * @param listener - The handler function for the event.
    * @returns The current collection.
    */
-  public ready (listener: EventListener): this {
+  public ready(listener: EventListener): this {
     this.forEach((item: Document | EventTarget) => {
       if ('readyState' in item) {
         if (item.readyState === 'loading') {
           item.addEventListener('DOMContentLoaded', listener);
-        } else {
+        }
+        else {
           setTimeout(listener, 0);
         }
       }
@@ -847,7 +852,7 @@ class EagleJS extends Array<EventTarget> {
    * @see ChildNode.remove() on {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove | MDN}.
    * @returns The current collection.
    */
-  public remove (): this {
+  public remove(): this {
     this.forEach((item: ChildNode | EventTarget) => {
       if ('remove' in item) {
         item.remove();
@@ -868,7 +873,7 @@ class EagleJS extends Array<EventTarget> {
    * @param names - One or more attribute names.
    * @returns The current collection.
    */
-  public removeAttr (...names: string[]): this {
+  public removeAttr(...names: string[]): this {
     this.forEach((item: Element | EventTarget) => {
       if ('removeAttribute' in item) {
         names.forEach((name) => {
@@ -896,7 +901,7 @@ class EagleJS extends Array<EventTarget> {
    * ASCII whitespace.
    * @returns The current collection.
    */
-  public removeClass (...names: string[]): this {
+  public removeClass(...names: string[]): this {
     this.forEach((item: Element | EventTarget) => {
       if ('classList' in item) {
         item.classList.remove(...names);
@@ -921,14 +926,15 @@ class EagleJS extends Array<EventTarget> {
    * @param nodes - A set of `Node` or `DOMString` objects to replace.
    * @returns The current collection.
    */
-  public replaceWith (...nodes: Array<Node | string>): this {
+  public replaceWith(...nodes: (Node | string)[]): this {
     let isFirst = true;
     this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
       if ('replaceWith' in item) {
         nodes.forEach((node) => {
           if (typeof node === 'string' || isFirst) {
             item.replaceWith(node);
-          } else {
+          }
+          else {
             item.replaceWith(node.cloneNode(true));
           }
         });
@@ -950,7 +956,7 @@ class EagleJS extends Array<EventTarget> {
    * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public siblings (filter: string | null = null): EagleJS {
+  public siblings(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -992,7 +998,7 @@ class EagleJS extends Array<EventTarget> {
    */
   public text(value: string): this;
 
-  public text (value?: string): string | this | null {
+  public text(value?: string): string | this | null {
     if (typeof value !== 'undefined') {
       this.forEach((item: EventTarget | Node) => {
         if ('textContent' in item) {
@@ -1027,7 +1033,7 @@ class EagleJS extends Array<EventTarget> {
    * added or removed.
    * @returns The current collection.
    */
-  public toggleAttr (name: string, force?: boolean): this {
+  public toggleAttr(name: string, force?: boolean): this {
     this.forEach((item: Element | EventTarget) => {
       if ('toggleAttribute' in item) {
         item.toggleAttribute(name, force);
@@ -1056,7 +1062,7 @@ class EagleJS extends Array<EventTarget> {
    * ASCII whitespace.
    * @returns The current collection.
    */
-  public toggleClass (name: string, force?: boolean): this {
+  public toggleClass(name: string, force?: boolean): this {
     this.forEach((item: Element | EventTarget) => {
       if ('classList' in item) {
         item.classList.toggle(name, force);
@@ -1077,7 +1083,7 @@ class EagleJS extends Array<EventTarget> {
    * @param event - The `Event` object to dispatch.
    * @returns The current collection.
    */
-  public trigger (event: Event): this {
+  public trigger(event: Event): this {
     this.forEach((item) => {
       item.dispatchEvent(event);
     });
@@ -1098,7 +1104,7 @@ class EagleJS extends Array<EventTarget> {
    * @param items - Items to add to the front of the collection.
    * @returns The new length.
    */
-  public override unshift (...items: EventTarget[]): number {
+  public override unshift(...items: EventTarget[]): number {
     return super.unshift(...items.filter((item) => {
       return EagleJS.isEventTarget(item) && !this.includes(item);
     }));
@@ -1107,6 +1113,8 @@ class EagleJS extends Array<EventTarget> {
 export default EagleJS;
 
 interface EagleJS {
-  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): this;
-  slice(start?: number, end?: number): this;
+  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): this
+  slice(start?: number, end?: number): this
+  splice(start: number, deleteCount?: number): this
+  splice(start: number, deleteCount: number, ...items: EventTarget[]): this
 }
