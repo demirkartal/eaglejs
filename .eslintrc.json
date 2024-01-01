@@ -4,22 +4,23 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["eslint:recommended", "standard"],
+  "extends": ["plugin:@stylistic/recommended-extends"],
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module"
   },
+  "plugins": ["@stylistic"],
   "rules": {
-    "semi": ["error", "always"],
-    "max-len": ["warn", { "ignoreUrls": true }]
+    "@stylistic/semi": ["error", "always"],
+    "@stylistic/max-len": ["warn", { "ignoreUrls": true }]
   },
   "overrides": [
     {
       // TypeScript
-      "files": ["**/*.ts", "**/*.tsx", "**/*.mts"],
+      "files": ["*.ts", "*.cts", "*.mts", "*.tsx"],
       "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/strict-type-checked",
+        "plugin:@typescript-eslint/stylistic-type-checked"
       ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
@@ -28,7 +29,8 @@
       "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
       "rules": {
         "tsdoc/syntax": "warn",
-        "@typescript-eslint/no-unsafe-declaration-merging": "warn"
+        "@typescript-eslint/no-unsafe-declaration-merging": "warn",
+        "@typescript-eslint/unified-signatures": "warn"
       }
     }
   ]
