@@ -15,13 +15,13 @@ declare class EagleJS extends Array<EventTarget> {
   children(filter?: string | null): EagleJS;
   clone(deep?: boolean): EagleJS;
   closest(selectors: string): EagleJS;
-  concat(...items: (ConcatArray<EventTarget> | EventTarget)[]): this;
+  concat(...items: (ConcatArray<EventTarget> | EventTarget)[]): EagleJS;
   contents(): EagleJS;
   data(): DOMStringMap;
   data(key: string): string | undefined;
   data(key: string, value: string): this;
   empty(): this;
-  filterWith(selectors: string, condition?: boolean): this;
+  filterWith(selectors: string, condition?: boolean): EagleJS;
   hasAttr(name: string): boolean;
   hasClass(name: string): boolean;
   html(): string;
@@ -53,9 +53,10 @@ declare class EagleJS extends Array<EventTarget> {
 }
 export default EagleJS;
 interface EagleJS {
-  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): this
-  slice(start?: number, end?: number): this
-  splice(start: number, deleteCount?: number): this
-  splice(start: number, deleteCount: number, ...items: EventTarget[]): this
+  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): EagleJS
+  reverse(): this
+  slice(start?: number, end?: number): EagleJS
+  splice(start: number, deleteCount?: number): EagleJS
+  splice(start: number, deleteCount: number, ...items: EventTarget[]): EagleJS
 }
 // # sourceMappingURL=EagleJS.d.mts.map

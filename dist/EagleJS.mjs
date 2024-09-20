@@ -296,7 +296,8 @@ class EagleJS extends Array {
   prev(filter = null) {
     const elements = new EagleJS();
     this.forEach((item) => {
-      if ('previousElementSibling' in item && item.previousElementSibling !== null) {
+      if ('previousElementSibling' in item
+        && item.previousElementSibling !== null) {
         elements.push(item.previousElementSibling);
       }
     });

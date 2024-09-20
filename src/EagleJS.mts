@@ -304,10 +304,12 @@ class EagleJS extends Array<EventTarget> {
    * @param items - Values to concatenate into a new collection.
    * @returns A new collection.
    */
-  public override concat(...items: (ConcatArray<EventTarget> | EventTarget)[]): this {
+  public override concat(
+    ...items: (ConcatArray<EventTarget> | EventTarget)[]
+  ): EagleJS {
     return super.concat(...items).filter((item, index, array) => {
       return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
-    }) as this;
+    }) as EagleJS;
   }
 
   /**
@@ -373,9 +375,15 @@ class EagleJS extends Array<EventTarget> {
    */
   public data(key: string, value: string): this;
 
-  public data(key?: string, value?: string): DOMStringMap | string | this | undefined {
+  public data(
+    key?: string,
+    value?: string
+  ): DOMStringMap | string | this | undefined {
     if (typeof key !== 'undefined') {
-      const dataKey = key.replace(/-([a-z])/g, (_match, letter: string) => letter.toUpperCase());
+      const dataKey = key.replace(
+        /-([a-z])/g,
+        (_match, letter: string) => letter.toUpperCase()
+      );
       if (typeof value !== 'undefined') {
         this.forEach((item: EventTarget | HTMLOrSVGElement) => {
           if ('dataset' in item) {
@@ -438,7 +446,7 @@ class EagleJS extends Array<EventTarget> {
    * @param condition - A condition for the test.
    * @returns A new collection with the items that pass the test.
    */
-  public filterWith(selectors: string, condition = true): this {
+  public filterWith(selectors: string, condition = true): EagleJS {
     return this.filter((item: Element | EventTarget) => {
       return 'matches' in item && item.matches(selectors) === condition;
     });
@@ -732,7 +740,8 @@ class EagleJS extends Array<EventTarget> {
   public prev(filter: string | null = null): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
-      if ('previousElementSibling' in item && item.previousElementSibling !== null) {
+      if ('previousElementSibling' in item
+        && item.previousElementSibling !== null) {
         elements.push(item.previousElementSibling);
       }
     });
@@ -1113,8 +1122,14 @@ class EagleJS extends Array<EventTarget> {
 export default EagleJS;
 
 interface EagleJS {
-  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): this
-  slice(start?: number, end?: number): this
-  splice(start: number, deleteCount?: number): this
-  splice(start: number, deleteCount: number, ...items: EventTarget[]): this
+  filter(
+    predicate: (
+      value: EventTarget, index: number, array: EventTarget[]
+    ) => unknown,
+    thisArg?: unknown
+  ): EagleJS
+  reverse(): this
+  slice(start?: number, end?: number): EagleJS
+  splice(start: number, deleteCount?: number): EagleJS
+  splice(start: number, deleteCount: number, ...items: EventTarget[]): EagleJS
 }
