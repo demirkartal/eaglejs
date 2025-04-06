@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.2 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2024 Cem Demirkartal
+ * EagleJS 0.8.3 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2025 Cem Demirkartal
  * Licensed under MIT
  */
 class EagleJS extends Array {
@@ -96,16 +96,13 @@ class EagleJS extends Array {
     return this;
   }
 
-  children(filter = null) {
+  children() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('children' in item) {
         elements.push(...item.children);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -133,9 +130,9 @@ class EagleJS extends Array {
   }
 
   concat(...items) {
-    return super.concat(...items).filter((item, index, array) => {
+    return new EagleJS(...super.concat(...items).filter((item, index, array) => {
       return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
-    });
+    }));
   }
 
   contents() {
@@ -191,6 +188,10 @@ class EagleJS extends Array {
     return this;
   }
 
+  filter(predicate, thisArg) {
+    return new EagleJS(...super.filter(predicate, thisArg));
+  }
+
   filterWith(selectors, condition = true) {
     return this.filter((item) => {
       return 'matches' in item && item.matches(selectors) === condition;
@@ -235,16 +236,13 @@ class EagleJS extends Array {
     });
   }
 
-  next(filter = null) {
+  next() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('nextElementSibling' in item && item.nextElementSibling !== null) {
         elements.push(item.nextElementSibling);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -262,16 +260,13 @@ class EagleJS extends Array {
     return this;
   }
 
-  parent(filter = null) {
+  parent() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('parentNode' in item && item.parentNode !== null) {
         elements.push(item.parentNode);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -293,7 +288,7 @@ class EagleJS extends Array {
     return this;
   }
 
-  prev(filter = null) {
+  prev() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('previousElementSibling' in item
@@ -301,9 +296,6 @@ class EagleJS extends Array {
         elements.push(item.previousElementSibling);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -397,7 +389,11 @@ class EagleJS extends Array {
     return this;
   }
 
-  siblings(filter = null) {
+  reverse() {
+    return super.reverse();
+  }
+
+  siblings() {
     const elements = new EagleJS();
     this.forEach((item) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -408,10 +404,18 @@ class EagleJS extends Array {
         });
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
+  }
+
+  slice(start, end) {
+    return new EagleJS(...super.slice(start, end));
+  }
+
+  splice(start, deleteCount, ...items) {
+    if (typeof deleteCount == 'undefined') {
+      return new EagleJS(...super.splice(start));
+    }
+    return new EagleJS(...super.splice(start, deleteCount, ...items));
   }
 
   text(value) {

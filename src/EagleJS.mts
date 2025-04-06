@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.2 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2024 Cem Demirkartal
+ * EagleJS 0.8.3 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2025 Cem Demirkartal
  * Licensed under MIT
  */
 /**
@@ -214,28 +214,22 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `children` property of each `ParentNode` in the collection,
-   * optionally filtered by a selector.
+   * Get the `children` property of each `ParentNode` in the collection.
    *
    * @example
    * ```
-   * new EagleJS(element).children();
-   * new EagleJS(element).children('selectors');
+   * new EagleJS(element).children();-
    * ```
-   * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children | MDN}.
-   * @param filter - One or more selectors to filter.
+   * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children | MDN}.-
    * @returns A new collection of `Element`s.
    */
-  public children(filter: string | null = null): EagleJS {
+  public children(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | ParentNode) => {
       if ('children' in item) {
         elements.push(...item.children);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -307,9 +301,11 @@ class EagleJS extends Array<EventTarget> {
   public override concat(
     ...items: (ConcatArray<EventTarget> | EventTarget)[]
   ): EagleJS {
-    return super.concat(...items).filter((item, index, array) => {
-      return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
-    }) as EagleJS;
+    return new EagleJS(
+      ...super.concat(...items).filter((item, index, array) => {
+        return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
+      })
+    );
   }
 
   /**
@@ -435,6 +431,32 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
+   * Returns the items of a collection that meet the condition specified in a
+   * callback function.
+   *
+   * @see Array.prototype.filter() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter | MDN}.
+   * @param predicate - A function that accepts up to three arguments. The
+   * filter method calls the predicate function one time for each item in
+   * the collection.
+   * @param thisArg - An object to which the this keyword can refer in the
+   * predicate function. If thisArg is omitted, undefined is used as the this
+   * value.
+   * @returns A shallow copy of the given collection containing just the items
+   * that pass the test. If no items pass the test, an empty collection is
+   * returned.
+   */
+  public override filter(
+    predicate: (
+      value: EventTarget,
+      index: number,
+      array: EventTarget[]
+    ) => unknown,
+    thisArg?: unknown
+  ): EagleJS {
+    return new EagleJS(...super.filter(predicate, thisArg));
+  }
+
+  /**
    * Reduce the collection with the given selector.
    *
    * @example
@@ -555,28 +577,22 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `nextElementSibling` of each `Element` in the collection,
-   * optionally filtered by a selector.
+   * Get the `nextElementSibling` of each `Element` in the collection.
    *
    * @example
    * ```
    * new EagleJS(element).next();
-   * new EagleJS(element).next('selectors');
    * ```
    * @see Element.nextElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling | MDN}.
-   * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public next(filter: string | null = null): EagleJS {
+  public next(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
       if ('nextElementSibling' in item && item.nextElementSibling !== null) {
         elements.push(item.nextElementSibling);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -592,7 +608,8 @@ class EagleJS extends Array<EventTarget> {
       this: GlobalEventHandlers,
       event: GlobalEventHandlersEventMap[K]
     ) => unknown,
-    options?: EventListenerOptions | boolean): this;
+    options?: EventListenerOptions | boolean
+  ): this;
 
   /**
    * Remove the `EventListener` from each item in the collection.
@@ -634,7 +651,8 @@ class EagleJS extends Array<EventTarget> {
       this: GlobalEventHandlers,
       event: GlobalEventHandlersEventMap[K]
     ) => unknown,
-    options?: AddEventListenerOptions | boolean): this;
+    options?: AddEventListenerOptions | boolean
+  ): this;
 
   /**
    * Attach the `EventListener` to each item in the collection.
@@ -665,28 +683,22 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `parentNode` of each `Node` in the collection, optionally filtered
-   * by a selector.
+   * Get the `parentNode` of each `Node` in the collection.
    *
    * @example
    * ```
    * new EagleJS(element).parent();
-   * new EagleJS(element).parent('selectors');
    * ```
    * @see Node.parentNode on {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode | MDN}.
-   * @param filter - One or more selectors to filter.
    * @returns A new collection of `Node`s.
    */
-  public parent(filter: string | null = null): EagleJS {
+  public parent(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('parentNode' in item && item.parentNode !== null) {
         elements.push(item.parentNode);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -725,19 +737,16 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the `previousElementSibling` of each `Element` in the collection,
-   * optionally filtered by a selector.
+   * Get the `previousElementSibling` of each `Element` in the collection.
    *
    * @example
    * ```
    * new EagleJS(element).prev();
-   * new EagleJS(element).prev('selectors');
    * ```
    * @see Element.previousElementSibling on {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling | MDN}.
-   * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public prev(filter: string | null = null): EagleJS {
+  public prev(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
       if ('previousElementSibling' in item
@@ -745,9 +754,6 @@ class EagleJS extends Array<EventTarget> {
         elements.push(item.previousElementSibling);
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
   }
 
@@ -954,18 +960,27 @@ class EagleJS extends Array<EventTarget> {
   }
 
   /**
-   * Get the siblings of each `Node` in the collection, optionally filtered by
-   * a selector.
+   * Reverses the items in a collection in place.
+   * This method mutates the collection and returns a reference to the same
+   * collection.
+   *
+   * @see Array.prototype.reverse() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse | MDN}.
+   * @returns The current collection.
+   */
+  public override reverse(): this {
+    return super.reverse() as this;
+  }
+
+  /**
+   * Get the siblings of each `Node` in the collection.
    *
    * @example
    * ```
    * new EagleJS(element).siblings();
-   * new EagleJS(element).siblings('selectors');
    * ```
-   * @param filter - One or more selectors to filter.
    * @returns A new collection of `Element`s.
    */
-  public siblings(filter: string | null = null): EagleJS {
+  public siblings(): EagleJS {
     const elements = new EagleJS();
     this.forEach((item: EventTarget | Node) => {
       if ('parentNode' in item && item.parentNode !== null) {
@@ -976,10 +991,47 @@ class EagleJS extends Array<EventTarget> {
         });
       }
     });
-    if (filter !== null) {
-      return elements.filterWith(filter);
-    }
     return elements;
+  }
+
+  /**
+   * Returns a copy of a section of a collection.
+   * For both start and end, a negative index can be used to indicate an offset
+   * from the end of the collection.
+   *
+   * @see Array.prototype.slice() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice | MDN}.
+   * @param start - The beginning index of the specified portion of the
+   * collection. If start is undefined, then the slice begins at index 0.
+   * @param end - The end index of the specified portion of the collection. This
+   * is exclusive of the element at the index 'end'.
+   * If end is undefined, then the slice extends to the end of the collection.
+   * @returns A new collection containing the extracted items.
+   */
+  public override slice(start?: number, end?: number): EagleJS {
+    return new EagleJS(...super.slice(start, end));
+  }
+
+  /**
+   * Removes item from a collection and, if necessary, inserts new items in
+   * their place, returning the deleted items.
+   *
+   * @see Array.prototype.splice() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | MDN}.
+   * @param start - The zero-based location in the collection from which to
+   * start removing items.
+   * @param deleteCount - The number of items to remove.
+   * @param items - Items to insert into the collection in place of the deleted
+   * items.
+   * @returns A new collection containing the items that were deleted.
+   */
+  public override splice(
+    start: number,
+    deleteCount?: number,
+    ...items: EventTarget[]
+  ): EagleJS {
+    if (typeof deleteCount == 'undefined') {
+      return new EagleJS(...super.splice(start));
+    }
+    return new EagleJS(...super.splice(start, deleteCount, ...items));
   }
 
   /**
@@ -1120,16 +1172,3 @@ class EagleJS extends Array<EventTarget> {
   }
 }
 export default EagleJS;
-
-interface EagleJS {
-  filter(
-    predicate: (
-      value: EventTarget, index: number, array: EventTarget[]
-    ) => unknown,
-    thisArg?: unknown
-  ): EagleJS
-  reverse(): this
-  slice(start?: number, end?: number): EagleJS
-  splice(start: number, deleteCount?: number): EagleJS
-  splice(start: number, deleteCount: number, ...items: EventTarget[]): EagleJS
-}

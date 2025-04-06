@@ -1,4 +1,4 @@
-# demirkartal/editorconfig v0.1
+# demirkartal/editorconfig v0.2
 root = true
 
 [*]
@@ -17,3 +17,6 @@ trim_trailing_whitespace = false
 
 [*.php]
 indent_size = 4
+
+[*.svg]
+insert_final_newline = false

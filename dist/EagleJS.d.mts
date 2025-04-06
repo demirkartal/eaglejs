@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.2 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2024 Cem Demirkartal
+ * EagleJS 0.8.3 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2025 Cem Demirkartal
  * Licensed under MIT
  */
 declare class EagleJS extends Array<EventTarget> {
@@ -12,7 +12,7 @@ declare class EagleJS extends Array<EventTarget> {
   attr(name: string): string | null;
   attr(name: string, value: string): this;
   before(...nodes: (Node | string)[]): this;
-  children(filter?: string | null): EagleJS;
+  children(): EagleJS;
   clone(deep?: boolean): EagleJS;
   closest(selectors: string): EagleJS;
   concat(...items: (ConcatArray<EventTarget> | EventTarget)[]): EagleJS;
@@ -21,20 +21,21 @@ declare class EagleJS extends Array<EventTarget> {
   data(key: string): string | undefined;
   data(key: string, value: string): this;
   empty(): this;
+  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): EagleJS;
   filterWith(selectors: string, condition?: boolean): EagleJS;
   hasAttr(name: string): boolean;
   hasClass(name: string): boolean;
   html(): string;
   html(value: string): this;
   matches(selectors: string): boolean;
-  next(filter?: string | null): EagleJS;
+  next(): EagleJS;
   off(type: string, listener: EventListenerOrEventListenerObject | null, options?: EventListenerOptions | boolean): this;
   off<K extends keyof GlobalEventHandlersEventMap>(type: K, listener: (this: GlobalEventHandlers, event: GlobalEventHandlersEventMap[K]) => unknown, options?: EventListenerOptions | boolean): this;
   on(type: string, listener: EventListenerOrEventListenerObject | null, options?: AddEventListenerOptions | boolean): this;
   on<K extends keyof GlobalEventHandlersEventMap>(type: K, listener: (this: GlobalEventHandlers, event: GlobalEventHandlersEventMap[K]) => unknown, options?: AddEventListenerOptions | boolean): this;
-  parent(filter?: string | null): EagleJS;
+  parent(): EagleJS;
   prepend(...nodes: (Node | string)[]): this;
-  prev(filter?: string | null): EagleJS;
+  prev(): EagleJS;
   push(...items: EventTarget[]): number;
   querySelector(selectors: string): EagleJS;
   querySelectorAll(selectors: string): EagleJS;
@@ -43,7 +44,10 @@ declare class EagleJS extends Array<EventTarget> {
   removeAttr(...names: string[]): this;
   removeClass(...names: string[]): this;
   replaceWith(...nodes: (Node | string)[]): this;
-  siblings(filter?: string | null): EagleJS;
+  reverse(): this;
+  siblings(): EagleJS;
+  slice(start?: number, end?: number): EagleJS;
+  splice(start: number, deleteCount?: number, ...items: EventTarget[]): EagleJS;
   text(): string | null;
   text(value: string): this;
   toggleAttr(name: string, force?: boolean): this;
@@ -52,11 +56,4 @@ declare class EagleJS extends Array<EventTarget> {
   unshift(...items: EventTarget[]): number;
 }
 export default EagleJS;
-interface EagleJS {
-  filter(predicate: (value: EventTarget, index: number, array: EventTarget[]) => unknown, thisArg?: unknown): EagleJS
-  reverse(): this
-  slice(start?: number, end?: number): EagleJS
-  splice(start: number, deleteCount?: number): EagleJS
-  splice(start: number, deleteCount: number, ...items: EventTarget[]): EagleJS
-}
 // # sourceMappingURL=EagleJS.d.mts.map

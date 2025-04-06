@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 
 export default [
   eslint.configs.recommended,
-  stylistic.configs['recommended-flat'],
+  stylistic.configs['recommended'],
   {
     ignores: ['node_modules/*', 'docs/*', '**/*.min.js', '**/*.min.mjs'],
   },
@@ -42,8 +42,6 @@ export default [
       ...tseslint.configs.strictTypeChecked[2].rules,
       ...tseslint.configs.stylisticTypeChecked[2].rules,
       'tsdoc/syntax': 'warn',
-      '@typescript-eslint/no-unsafe-declaration-merging': 'warn',
-      '@typescript-eslint/unified-signatures': 'warn',
     },
   },
 ];
