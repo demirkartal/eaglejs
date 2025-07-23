@@ -45,7 +45,7 @@
     "tsc:build": "tsc"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^4.2.0",
+    "@stylistic/eslint-plugin": "^5.2.2",
     "eslint": "^9.24.0",
     "eslint-plugin-tsdoc": "^0.4.0",
     "terser": "^5.39.0",
