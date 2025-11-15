@@ -2,6 +2,17 @@
   "name": "@demirkartal/eaglejs",
   "version": "0.8.3",
   "description": "EagleJS is a jQuery-Like DOM manipulation library for modern browsers",
+  "author": "Cem Demirkartal",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://demirkartal.github.io/eaglejs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demirkartal/eaglejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/demirkartal/eaglejs/issues"
+  },
   "keywords": [
     "javascript",
     "jquery",
@@ -9,18 +20,7 @@
     "module",
     "dom-manipulation"
   ],
-  "homepage": "https://demirkartal.github.io/eaglejs",
-  "bugs": {
-    "url": "https://github.com/demirkartal/eaglejs/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/demirkartal/eaglejs.git"
-  },
-  "license": "MIT",
-  "author": "Cem Demirkartal",
   "sideEffects": false,
-  "type": "module",
   "main": "dist/EagleJS.mjs",
   "types": "dist/EagleJS.d.mts",
   "directories": {
@@ -47,10 +47,10 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.5.0",
     "eslint": "^9.39.1",
-    "eslint-plugin-tsdoc": "^0.4.0",
+    "eslint-plugin-tsdoc": "^0.5.0",
     "terser": "^5.44.1",
     "typedoc": "^0.28.14",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.3"
+    "typescript-eslint": "^8.46.4"
   }
 }
