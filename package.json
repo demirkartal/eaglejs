@@ -27,8 +27,7 @@
     "doc": "docs"
   },
   "files": [
-    "dist/",
-    "src/"
+    "dist/"
   ],
   "scripts": {
     "build": "npm run build:tsc && npm run build:minified",
