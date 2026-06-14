@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.3 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2025 Cem Demirkartal
+ * EagleJS 0.9.0 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2026 Cem Demirkartal
  * Licensed under MIT
  */
 /**
@@ -30,7 +30,9 @@ class EagleJS extends Array<EventTarget> {
    * otherwise, `false`.
    */
   public static isEventTarget(value: unknown): value is EventTarget {
-    return value instanceof Object && 'addEventListener' in value;
+    return (
+      value !== null && typeof value === 'object' && 'addEventListener' in value
+    );
   }
 
   /**
@@ -76,19 +78,17 @@ class EagleJS extends Array<EventTarget> {
    */
   public after(...nodes: (Node | string)[]): this {
     let isFirst = true;
-    this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
-      if ('after' in item) {
-        nodes.forEach((node) => {
-          if (typeof node === 'string' || isFirst) {
-            item.after(node);
-          }
-          else {
-            item.after(node.cloneNode(true));
-          }
-        });
-        isFirst = false;
-      }
-    });
+    this.slice()
+      .reverse()
+      .forEach((item: ChildNode | EventTarget) => {
+        if ('after' in item) {
+          const processedNodes = isFirst
+            ? nodes
+            : nodes.map(n => (typeof n === 'string' ? n : n.cloneNode(true)));
+          item.after(...processedNodes);
+          isFirst = false;
+        }
+      });
     return this;
   }
 
@@ -110,19 +110,17 @@ class EagleJS extends Array<EventTarget> {
    */
   public append(...nodes: (Node | string)[]): this {
     let isFirst = true;
-    this.slice().reverse().forEach((item: EventTarget | ParentNode) => {
-      if ('append' in item) {
-        nodes.forEach((node) => {
-          if (typeof node === 'string' || isFirst) {
-            item.append(node);
-          }
-          else {
-            item.append(node.cloneNode(true));
-          }
-        });
-        isFirst = false;
-      }
-    });
+    this.slice()
+      .reverse()
+      .forEach((item: EventTarget | ParentNode) => {
+        if ('append' in item) {
+          const processedNodes = isFirst
+            ? nodes
+            : nodes.map(n => (typeof n === 'string' ? n : n.cloneNode(true)));
+          item.append(...processedNodes);
+          isFirst = false;
+        }
+      });
     return this;
   }
 
@@ -168,15 +166,10 @@ class EagleJS extends Array<EventTarget> {
       });
       return this;
     }
-    let returnValue: string | null = null;
-    this.some((item: Element | EventTarget) => {
-      if ('getAttribute' in item) {
-        returnValue = item.getAttribute(name);
-        return true;
-      }
-      return false;
-    });
-    return returnValue;
+    const firstMatch = this.find(
+      (item): item is Element => 'getAttribute' in item,
+    );
+    return firstMatch?.getAttribute(name) ?? null;
   }
 
   /**
@@ -197,19 +190,21 @@ class EagleJS extends Array<EventTarget> {
    */
   public before(...nodes: (Node | string)[]): this {
     let isFirst = true;
-    this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
-      if ('before' in item) {
-        nodes.forEach((node) => {
-          if (typeof node === 'string' || isFirst) {
-            item.before(node);
-          }
-          else {
-            item.before(node.cloneNode(true));
-          }
-        });
-        isFirst = false;
-      }
-    });
+    this.slice()
+      .reverse()
+      .forEach((item: ChildNode | EventTarget) => {
+        if ('before' in item) {
+          nodes.forEach((node) => {
+            if (typeof node === 'string' || isFirst) {
+              item.before(node);
+            }
+            else {
+              item.before(node.cloneNode(true));
+            }
+          });
+          isFirst = false;
+        }
+      });
     return this;
   }
 
@@ -218,19 +213,18 @@ class EagleJS extends Array<EventTarget> {
    *
    * @example
    * ```
-   * new EagleJS(element).children();-
+   * new EagleJS(element).children();
    * ```
-   * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children | MDN}.-
-   * @returns A new collection of `Element`s.
+   * @see ParentNode.children on {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children | MDN}.
+   * @returns Returns a new collection containing the child elements of each
+   * `ParentNode`.
    */
   public children(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | ParentNode) => {
-      if ('children' in item) {
-        elements.push(...item.children);
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] =>
+        'children' in item ? [...(item as ParentNode).children] : [],
+      ),
+    );
   }
 
   /**
@@ -250,13 +244,14 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Node`s.
    */
   public clone(deep = false): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | Node) => {
-      if ('cloneNode' in item) {
-        elements.push(item.cloneNode(deep));
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        if ('cloneNode' in item) {
+          return [(item as Node).cloneNode(deep)];
+        }
+        return [];
+      }),
+    );
   }
 
   /**
@@ -275,16 +270,13 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public closest(selectors: string): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: Element | EventTarget) => {
-      if ('closest' in item) {
-        const closest = item.closest(selectors);
-        if (closest !== null) {
-          elements.push(closest);
-        }
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const result
+          = 'closest' in item ? (item as Element).closest(selectors) : null;
+        return result ? [result] : [];
+      }),
+    );
   }
 
   /**
@@ -304,7 +296,7 @@ class EagleJS extends Array<EventTarget> {
     return new EagleJS(
       ...super.concat(...items).filter((item, index, array) => {
         return EagleJS.isEventTarget(item) && array.indexOf(item) === index;
-      })
+      }),
     );
   }
 
@@ -319,13 +311,11 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `ChildNode`s.
    */
   public contents(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | Node) => {
-      if ('childNodes' in item) {
-        elements.push(...item.childNodes);
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] =>
+        'childNodes' in item ? [...(item as Node).childNodes] : [],
+      ),
+    );
   }
 
   /**
@@ -373,40 +363,29 @@ class EagleJS extends Array<EventTarget> {
 
   public data(
     key?: string,
-    value?: string
+    value?: string,
   ): DOMStringMap | string | this | undefined {
     if (typeof key !== 'undefined') {
-      const dataKey = key.replace(
-        /-([a-z])/g,
-        (_match, letter: string) => letter.toUpperCase()
+      const dataKey = key.replace(/-([a-z])/g, (_match, letter: string) =>
+        letter.toUpperCase(),
       );
       if (typeof value !== 'undefined') {
-        this.forEach((item: EventTarget | HTMLOrSVGElement) => {
+        this.forEach((item) => {
           if ('dataset' in item) {
-            item.dataset[dataKey] = value;
+            (item as HTMLElement).dataset[dataKey] = value;
           }
         });
         return this;
       }
-      let returnKeyValue: string | undefined;
-      this.some((item: EventTarget | HTMLOrSVGElement) => {
-        if ('dataset' in item) {
-          returnKeyValue = item.dataset[dataKey];
-          return true;
-        }
-        return false;
-      });
-      return returnKeyValue;
+      const firstMatch = this.find(
+        (item): item is HTMLElement => 'dataset' in item,
+      );
+      return firstMatch?.dataset[dataKey];
     }
-    let returnValue: DOMStringMap = {};
-    this.some((item: EventTarget | HTMLOrSVGElement) => {
-      if ('dataset' in item) {
-        returnValue = item.dataset;
-        return true;
-      }
-      return false;
-    });
-    return returnValue;
+    const firstMatch = this.find(
+      (item): item is HTMLElement => 'dataset' in item,
+    );
+    return firstMatch?.dataset ?? {};
   }
 
   /**
@@ -422,7 +401,7 @@ class EagleJS extends Array<EventTarget> {
   public empty(): this {
     this.forEach((item: EventTarget | Node) => {
       if ('firstChild' in item) {
-        while (item.firstChild !== null) {
+        while (item.firstChild) {
           item.removeChild(item.firstChild);
         }
       }
@@ -449,9 +428,9 @@ class EagleJS extends Array<EventTarget> {
     predicate: (
       value: EventTarget,
       index: number,
-      array: EventTarget[]
+      array: EventTarget[],
     ) => unknown,
-    thisArg?: unknown
+    thisArg?: unknown,
   ): EagleJS {
     return new EagleJS(...super.filter(predicate, thisArg));
   }
@@ -469,9 +448,11 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection with the items that pass the test.
    */
   public filterWith(selectors: string, condition = true): EagleJS {
-    return this.filter((item: Element | EventTarget) => {
-      return 'matches' in item && item.matches(selectors) === condition;
-    });
+    return this.filter(item =>
+      'matches' in item
+        ? (item as Element).matches(selectors) === condition
+        : !condition,
+    );
   }
 
   /**
@@ -487,9 +468,9 @@ class EagleJS extends Array<EventTarget> {
    * `false`.
    */
   public hasAttr(name: string): boolean {
-    return this.some((item: Element | EventTarget) => {
-      return 'hasAttribute' in item && item.hasAttribute(name);
-    });
+    return this.some(
+      item => 'hasAttribute' in item && (item as Element).hasAttribute(name),
+    );
   }
 
   /**
@@ -505,9 +486,10 @@ class EagleJS extends Array<EventTarget> {
    * `false`.
    */
   public hasClass(name: string): boolean {
-    return this.some((item: Element | EventTarget) => {
-      return 'classList' in item && item.classList.contains(name);
-    });
+    return this.some(
+      item =>
+        'classList' in item && (item as Element).classList.contains(name),
+    );
   }
 
   /**
@@ -544,15 +526,10 @@ class EagleJS extends Array<EventTarget> {
       });
       return this;
     }
-    let returnValue = '';
-    this.some((item: Element | EventTarget) => {
-      if ('innerHTML' in item) {
-        returnValue = item.innerHTML;
-        return true;
-      }
-      return false;
-    });
-    return returnValue;
+    const firstMatch = this.find(
+      (item): item is Element => 'innerHTML' in item,
+    );
+    return firstMatch?.innerHTML ?? '';
   }
 
   /**
@@ -571,9 +548,9 @@ class EagleJS extends Array<EventTarget> {
    * `false`.
    */
   public matches(selectors: string): boolean {
-    return this.some((item: Element | EventTarget) => {
-      return 'matches' in item && item.matches(selectors);
-    });
+    return this.some(
+      item => 'matches' in item && (item as Element).matches(selectors),
+    );
   }
 
   /**
@@ -587,28 +564,30 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public next(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
-      if ('nextElementSibling' in item && item.nextElementSibling !== null) {
-        elements.push(item.nextElementSibling);
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const next
+          = 'nextElementSibling' in item
+            ? (item as Element).nextElementSibling
+            : null;
+        return next ? [next] : [];
+      }),
+    );
   }
 
   public off(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
-    options?: EventListenerOptions | boolean
+    options?: EventListenerOptions | boolean,
   ): this;
 
   public off<K extends keyof GlobalEventHandlersEventMap>(
     type: K,
     listener: (
       this: GlobalEventHandlers,
-      event: GlobalEventHandlersEventMap[K]
+      event: GlobalEventHandlersEventMap[K],
     ) => unknown,
-    options?: EventListenerOptions | boolean
+    options?: EventListenerOptions | boolean,
   ): this;
 
   /**
@@ -631,7 +610,7 @@ class EagleJS extends Array<EventTarget> {
   public off(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
-    options: EventListenerOptions | boolean = false
+    options: EventListenerOptions | boolean = false,
   ): this {
     this.forEach((item) => {
       item.removeEventListener(type, listener, options);
@@ -642,16 +621,16 @@ class EagleJS extends Array<EventTarget> {
   public on(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
-    options?: AddEventListenerOptions | boolean
+    options?: AddEventListenerOptions | boolean,
   ): this;
 
   public on<K extends keyof GlobalEventHandlersEventMap>(
     type: K,
     listener: (
       this: GlobalEventHandlers,
-      event: GlobalEventHandlersEventMap[K]
+      event: GlobalEventHandlersEventMap[K],
     ) => unknown,
-    options?: AddEventListenerOptions | boolean
+    options?: AddEventListenerOptions | boolean,
   ): this;
 
   /**
@@ -674,7 +653,7 @@ class EagleJS extends Array<EventTarget> {
   public on(
     type: string,
     listener: EventListenerOrEventListenerObject | null,
-    options: AddEventListenerOptions | boolean = false
+    options: AddEventListenerOptions | boolean = false,
   ): this {
     this.forEach((item) => {
       item.addEventListener(type, listener, options);
@@ -693,13 +672,12 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Node`s.
    */
   public parent(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | Node) => {
-      if ('parentNode' in item && item.parentNode !== null) {
-        elements.push(item.parentNode);
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const parent = 'parentNode' in item ? item.parentNode : null;
+        return parent && EagleJS.isEventTarget(parent) ? [parent] : [];
+      }),
+    );
   }
 
   /**
@@ -720,19 +698,17 @@ class EagleJS extends Array<EventTarget> {
    */
   public prepend(...nodes: (Node | string)[]): this {
     let isFirst = true;
-    this.slice().reverse().forEach((item: EventTarget | ParentNode) => {
-      if ('prepend' in item) {
-        nodes.forEach((node) => {
-          if (typeof node === 'string' || isFirst) {
-            item.prepend(node);
-          }
-          else {
-            item.prepend(node.cloneNode(true));
-          }
-        });
-        isFirst = false;
-      }
-    });
+    this.slice()
+      .reverse()
+      .forEach((item: EventTarget | ParentNode) => {
+        if ('prepend' in item) {
+          const processedNodes = isFirst
+            ? nodes
+            : nodes.map(n => (typeof n === 'string' ? n : n.cloneNode(true)));
+          item.prepend(...processedNodes);
+          isFirst = false;
+        }
+      });
     return this;
   }
 
@@ -747,14 +723,15 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public prev(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | NonDocumentTypeChildNode) => {
-      if ('previousElementSibling' in item
-        && item.previousElementSibling !== null) {
-        elements.push(item.previousElementSibling);
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const prev
+          = 'previousElementSibling' in item
+            ? (item as Element).previousElementSibling
+            : null;
+        return prev ? [prev] : [];
+      }),
+    );
   }
 
   /**
@@ -762,19 +739,21 @@ class EagleJS extends Array<EventTarget> {
    *
    * @example
    * ```
-   * new EagleJS(element).push(EventTarget, EventTarget, EventTarget);
+   * const collection = new EagleJS(element);
+   * collection.push(document.body);
    *
    * // Spread and push
-   * new EagleJS(element).push(...EagleJS);
+   * collection.push(...otherCollection);
    * ```
    * @see Array.prototype.push() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push | MDN}.
    * @param items - Items to add to the end of the collection.
    * @returns The new length.
    */
   public override push(...items: EventTarget[]): number {
-    return super.push(...items.filter((item) => {
-      return EagleJS.isEventTarget(item) && !this.includes(item);
-    }));
+    const filtered = items.filter(
+      item => EagleJS.isEventTarget(item) && !this.includes(item),
+    );
+    return super.push(...filtered);
   }
 
   /**
@@ -793,16 +772,15 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public querySelector(selectors: string): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | ParentNode) => {
-      if ('querySelector' in item) {
-        const result = item.querySelector(selectors);
-        if (result !== null) {
-          elements.push(result);
-        }
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const result
+          = 'querySelector' in item && typeof item.querySelector === 'function'
+            ? (item as ParentNode).querySelector(selectors)
+            : null;
+        return result ? [result] : [];
+      }),
+    );
   }
 
   /**
@@ -821,13 +799,13 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public querySelectorAll(selectors: string): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | ParentNode) => {
-      if ('querySelectorAll' in item) {
-        elements.push(...item.querySelectorAll(selectors));
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] =>
+        'querySelectorAll' in item
+          ? [...(item as ParentNode).querySelectorAll(selectors)]
+          : [],
+      ),
+    );
   }
 
   /**
@@ -843,14 +821,22 @@ class EagleJS extends Array<EventTarget> {
    * @param listener - The handler function for the event.
    * @returns The current collection.
    */
-  public ready(listener: EventListener): this {
+  public ready(listener: EventListenerOrEventListenerObject): this {
     this.forEach((item: Document | EventTarget) => {
       if ('readyState' in item) {
         if (item.readyState === 'loading') {
           item.addEventListener('DOMContentLoaded', listener);
         }
         else {
-          setTimeout(listener, 0);
+          queueMicrotask(() => {
+            const event = new Event('DOMContentLoaded');
+            if (typeof listener === 'function') {
+              listener.call(item, event);
+            }
+            else if (typeof listener.handleEvent === 'function') {
+              listener.handleEvent(event);
+            }
+          });
         }
       }
     });
@@ -943,19 +929,17 @@ class EagleJS extends Array<EventTarget> {
    */
   public replaceWith(...nodes: (Node | string)[]): this {
     let isFirst = true;
-    this.slice().reverse().forEach((item: ChildNode | EventTarget) => {
-      if ('replaceWith' in item) {
-        nodes.forEach((node) => {
-          if (typeof node === 'string' || isFirst) {
-            item.replaceWith(node);
-          }
-          else {
-            item.replaceWith(node.cloneNode(true));
-          }
-        });
-        isFirst = false;
-      }
-    });
+    this.slice()
+      .reverse()
+      .forEach((item: ChildNode | EventTarget) => {
+        if ('replaceWith' in item) {
+          const processedNodes = isFirst
+            ? nodes
+            : nodes.map(n => (typeof n === 'string' ? n : n.cloneNode(true)));
+          item.replaceWith(...processedNodes);
+          isFirst = false;
+        }
+      });
     return this;
   }
 
@@ -981,17 +965,15 @@ class EagleJS extends Array<EventTarget> {
    * @returns A new collection of `Element`s.
    */
   public siblings(): EagleJS {
-    const elements = new EagleJS();
-    this.forEach((item: EventTarget | Node) => {
-      if ('parentNode' in item && item.parentNode !== null) {
-        [...item.parentNode.children].forEach((child) => {
-          if (child !== item) {
-            elements.push(child);
-          }
-        });
-      }
-    });
-    return elements;
+    return new EagleJS(
+      ...this.flatMap((item): EventTarget[] => {
+        const parent = 'parentNode' in item ? (item as Node).parentNode : null;
+        if (parent && 'children' in parent) {
+          return [...parent.children].filter(child => child !== item);
+        }
+        return [];
+      }),
+    );
   }
 
   /**
@@ -1068,15 +1050,8 @@ class EagleJS extends Array<EventTarget> {
       });
       return this;
     }
-    let returnValue: string | null = null;
-    this.some((item: EventTarget | Node) => {
-      if ('textContent' in item) {
-        returnValue = item.textContent;
-        return true;
-      }
-      return false;
-    });
-    return returnValue;
+    const firstMatch = this.find((item): item is Node => 'textContent' in item);
+    return firstMatch?.textContent ?? null;
   }
 
   /**
@@ -1156,19 +1131,21 @@ class EagleJS extends Array<EventTarget> {
    *
    * @example
    * ```
-   * new EagleJS(element).unshift(EventTarget, EventTarget, EventTarget);
+   * const collection = new EagleJS(element);
+   * collection.unshift(document.body);
    *
    * // Spread and unshift
-   * new EagleJS(element).unshift(...EagleJS);
+   * collection.unshift(...otherCollection);
    * ```
    * @see Array.prototype.unshift() on {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift | MDN}.
    * @param items - Items to add to the front of the collection.
    * @returns The new length.
    */
   public override unshift(...items: EventTarget[]): number {
-    return super.unshift(...items.filter((item) => {
-      return EagleJS.isEventTarget(item) && !this.includes(item);
-    }));
+    const filtered = items.filter(
+      item => EagleJS.isEventTarget(item) && !this.includes(item),
+    );
+    return super.unshift(...filtered);
   }
 }
 export default EagleJS;
