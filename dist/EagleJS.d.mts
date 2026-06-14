@@ -1,6 +1,6 @@
 /*!
- * EagleJS 0.8.3 (https://github.com/demirkartal/eaglejs)
- * Copyright 2020-2025 Cem Demirkartal
+ * EagleJS 0.9.0 (https://github.com/demirkartal/eaglejs)
+ * Copyright 2020-2026 Cem Demirkartal
  * Licensed under MIT
  */
 declare class EagleJS extends Array<EventTarget> {
@@ -39,7 +39,7 @@ declare class EagleJS extends Array<EventTarget> {
   push(...items: EventTarget[]): number;
   querySelector(selectors: string): EagleJS;
   querySelectorAll(selectors: string): EagleJS;
-  ready(listener: EventListener): this;
+  ready(listener: EventListenerOrEventListenerObject): this;
   remove(): this;
   removeAttr(...names: string[]): this;
   removeClass(...names: string[]): this;
