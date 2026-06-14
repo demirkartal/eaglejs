@@ -1,8 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2016",
-    "module": "ES2015",
+    /* Language and Environment */
+    "target": "es2020",
+    "module": "es2020",
+    "lib": ["DOM", "DOM.Iterable", "es2020"],
 
     /* Emit */
     "newLine": "lf",
@@ -13,20 +15,14 @@
 
     /* Type Checking */
     "strict": true,
-    // "noImplicitAny": true,
-    // "strictNullChecks": true,
-    // "strictFunctionTypes": true,
-    // "strictBindCallApply": true,
-    // "strictPropertyInitialization": true,
-    // "noImplicitThis": true,
-    // "useUnknownInCatchVariables": true,
-    // "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* Advanced Strictness */
     "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
